@@ -51,13 +51,15 @@
         $scope.closeModal = function() { // as data-dismissed stopped working because of the modal element
             $scope.ShowErrorModal = false; // use this function to close modal's
             $scope.ShowModal = false;
+            $scope.IncorrectFeilds = false;
         };
         
         $scope.CheckForError = function (){
             
-            $scope.error = "There are incorrect feilds";
+            if($scope.usercreate.password.$error.minlength === null)
+            $scope.error = ["password length error"];
            
-            $scope.ShowErrorModal = true;
+            $scope.IncorrectFeilds = true;
         };
 
         //initialising variables
@@ -65,6 +67,7 @@
         $scope.error = false;
         $scope.ShowModal = false;
         $scope.ShowErrorModal = false;
+        $scope.IncorrectFeilds = false;//y7k
         $scope.error = "";
 
     };
