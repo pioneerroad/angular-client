@@ -25,11 +25,20 @@
 <!-- Main app functions/content goes inside the <main> section -->
 <main>
     <div class="container">
+        <!-- Dismissable alert at the top of the page: to be displayed if there are errors with the form submission -->
         <!-- Display only if user can't be validated. Remember ng-show or ng-hide helps with this -->
-        <!-- <div class="alert alert-danger">
-            <p>Incorrect email and/or password.</p>
-            <p>If you forgot your username or password you may <a href="#" data-toggle="modal" data-target="#passwordResetModal">reset </a> it.</p>
-        </div> -->
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>Something went terribly, terribly wrong!</strong>
+            <ul>
+                <li>The first problem</li>
+                <li>The second catastrophe</li>
+                <li>The third disaster</li>
+            </ul>
+        </div>
+        <!-- End of dismissable alert at the top of the page -->
         <div class="container">
             <!-- Email address field -->
             <div class="form-group">
