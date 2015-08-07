@@ -1,20 +1,32 @@
 (function () {
-    var app = angular.module("pioneerRoad");
 
-    var userLoginController = function ($scope, $http) {
-        $scope.Login = function () {
-            //authenticate
-            $scope.authenticate();
-        };
-
-        var authenticate = function () {
-            userLoginController.login($scope.username, $scope.password); //some function to pass password and email too
-            // if successful return true, else false
-        };
-    };
+    angular.module('pioneerRoad')
+            .controller('userLoginController', ['$scope', '$http', 'userLoginService', function ($scope, $http, userLoginService) {
+                    $scope.messageBool = false;
 
 
+                    $scope.closeError = function () {
+                        $scope.messageBool = false;
+                    };
 
-    app.controller("userLoginController", userLoginController);
-    userLoginController.$inject = ['$scope', '$http'];
+                    $scope.authenticate = function () {
+                        userLoginService.Login($scope.username, $scope.password)
+                                .success(function (response) {
+                                    if (response.token) {
+                                        // add to the location storage
+                                        console.log("good");
+                                    }
+                                })
+                                .error(function (error) {
+                                    console.log(error);
+
+
+                                    // $timeout(function() {
+                                    //   $scope.messageBool = false;
+                                    // }, 2000);
+                                    // add a message saying unauthenticated
+                                });
+                    };
+                }]);
+
 }());

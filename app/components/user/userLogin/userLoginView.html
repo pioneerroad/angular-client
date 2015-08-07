@@ -57,7 +57,7 @@
                         <label class="cbx-label">Remember Me</label>
                     </div>
                     <!-- Login Button -->
-                    <button type="button" class="btn btn-warning btn-lg btn-fw">Login</button>
+                    <button type="button" class="btn btn-warning btn-lg btn-fw" ng-click="authenticate()">Login</button>
                 </div>
 
                 <!-- Functions to reset password/register new account goes here -->
@@ -65,7 +65,7 @@
                     <!-- Let's put the password reset form in a popup modal -->
                     <li><a href="#" data-toggle="modal" data-target="#passwordResetModal">Forgot Password?</a></li>
                     <!-- Navigate to the signup/registration page -->
-                    <li><a href="#">Not a member yet?</a></li> <!-- Link to signup/registration page -->
+                    <li><a href="#/register">Not a member yet?</a></li> <!-- Link to signup/registration page -->
                 </ul>
             </div>
         </main>
