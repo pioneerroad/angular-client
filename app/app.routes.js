@@ -7,8 +7,12 @@
                         templateUrl: "app/components/user/userRegister/userRegisterView.html", //redirect to user register page
                         controller: "userRegisterController"
                   })
+                   .when("/login", {
+                        templateUrl: "app/components/user/userLogin/userLoginView.html", //redirect to user register page
+                        controller: "userLoginController"
+                  })
                   .otherwise({
-                        redirectTo: "/register" //redirect 
+                        redirectTo: "/login" //redirect 
                   });
       });
 

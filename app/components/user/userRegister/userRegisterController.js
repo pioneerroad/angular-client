@@ -5,16 +5,13 @@
         $scope.check_pwd_match = function () { //checks if both passwords match
             if ($scope.password !== $scope.password2) {
                 $scope.passwordvalid = false; //if this is false the form cannot be submitted
-                $scope.perror = true; //used to show a 'passwords do not match' message in the html (possibly create a custom directive for better resuablitiy)
-
             }
             else {
                 $scope.passwordvalid = true;
-                $scope.perror = false;
             }
         };
         $scope.create_user = function () { //creates the structure in which the form data is loaded and post's it to the server
-
+            $scope.closeModal();
             if ($scope.passwordvalid) { //another check incase people manage to submit an ivalid form
 
                 var data = {//used to store form data
@@ -30,18 +27,19 @@
                         error(function (response, status, headers, config) {
                             $scope.error = response.message; //sets the error message for display in the failedmodal
                             if ($scope.error === "Validation error") {
-                                if (response.fields.username === null)
-                                    $scope.error = "The email " + response.fields.username + " already exsits";
-                                else if (response.fields.mobile === null)
-                                    $scope.error = "Mobile number already exsits";
+                                if ("username" === response.errors[0].path) {
+                                    $scope.errors.push("The email  already exsits");
+                                }
+                                else if ("mobile" === response.errors[0].path) {
+                                    $scope.errors.push("Mobile number already exsits");
+                                }
+                                
+                                $scope.IncorrectFeilds = true;
                             }
-                            console.log(response);
-                            $scope.ShowErrorModal = true; //displays failedmodal
-
                         });
             }
             else { //should only occur if an invalid form is submitted
-                
+
             }
 
         };
@@ -51,9 +49,10 @@
             $scope.IncorrectFeilds = false;
             $scope.errors = [];
             $scope.error = "";
+
         };
         $scope.CheckForError = function () {
-
+            $scope.closeModal();
             if ($scope.usercreate.password.$error.required) {
                 $scope.errors.push("You did not enter a password");
             }
@@ -64,7 +63,7 @@
 
                 if ($scope.usercreate.password.$error.minlength)
                     $scope.errors.push("Password too short, must be at least 8 characters");
-                if(!perror)
+                if (!$scope.passwordvalid)
                     $scope.errors.push("Passwords do not match");
             }
             if ($scope.usercreate.email.$error.required) {
@@ -92,10 +91,10 @@
         };
         //initialising variables
         $scope.passwordvalid = false;
-        var perror = false;
+
         $scope.ShowModal = false;
-       
-        $scope.IncorrectFeilds = false; 
+
+        $scope.IncorrectFeilds = false;
         $scope.error = "";
         $scope.errors = [];
     };
