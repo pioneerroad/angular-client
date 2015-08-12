@@ -1,7 +1,7 @@
 (function () {
     var app = angular.module("pioneerRoad");
-    var userRegisterController = function ($scope, $http) { //handels all of the functionality for creating users including error checking 
-
+    var userRegisterController = function ($scope, $http, $localStorage) { //handels all of the functionality for creating users including error checking 
+        
         $scope.check_pwd_match = function () { //checks if both passwords match
             if ($scope.password !== $scope.password2) {
                 $scope.passwordvalid = false; //if this is false the form cannot be submitted
@@ -99,5 +99,5 @@
         $scope.errors = [];
     };
     app.controller("userRegisterController", userRegisterController);
-    userRegisterController.$inject = ['$scope', '$http'];
+    userRegisterController.$inject = ['$scope', '$http', '$localStorage'];
 }());

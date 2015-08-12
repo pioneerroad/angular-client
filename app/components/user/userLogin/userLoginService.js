@@ -1,22 +1,23 @@
 (function () {
 
     angular.module('pioneerRoad')
-            .factory('userLoginService', ['Base64', '$http',
-                function (Base64, $http) {
+            .factory('userLoginService', ['Base64', '$http', '$localStorage',
+                function (Base64, $http, $localStorage) {
                     var service = {};
 
                     service.Login = function (username, password) {
                         /* Use this for real authentication
                          ----------------------------------------------*/
-                        var authData = Base64.encode(username + ':' + password);
-                        console.log(authData);
-                        console.log(username + " " + password);
-                        console.log('bWF0dGhld0BnbWFpbC5jb206TWF0dGhldzE=');
-                        $http.defaults.headers.common['Authorization'] = 'Basic ' + authData; // jshint ignore:line
+                        var authdata = Base64.encode(username + ':' + password);
+                        $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
+                        
                         return $http.post('http://pioneerroad.com.au:8081/api/v1/user/login'
                                 );
                     };
-
+                    
+                    service.Logout = function(){
+                        delete $localStorage.token;
+                    };
                     return service;
                 }
             ])
