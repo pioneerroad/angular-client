@@ -3,10 +3,11 @@
 
     app.controller('userLoginController', ['$scope', '$http', '$location', 'userLoginService', '$rootScope', '$localStorage','loginRedirect', function ($scope, $http, $location, userLoginService, $rootScope, $localStorage, loginRedirect) {
 
-
-
+            if(loginRedirect.checkLogin()){
+                $location.path("/login");
+                console.log("i'm logged in, change to /home");
+            }
             $scope.messageBool = false;
-            console.log($localStorage.token);
             $scope.closeError = function () {
                 $scope.messageBool = false;
             };
@@ -24,7 +25,7 @@
                                     id: response.data.user.id,
                                     username: response.data.user.username
                                 };
-                                console.log("good");
+                                console.log("logged in");
                                 console.log($localStorage.token.token);
                                 $location.path("/home");
                             }
@@ -39,18 +40,18 @@
             };
 
             $scope.tryGet = function () {
-
+                $localStorage.token.id;
+                console.log($localStorage.token.token);
+                
                 $http.get('http://pioneerroad.com.au:8081/api/v1/user/' + $localStorage.token.id + '/account/fetch'
                         ).success(function (response) {
-                    console.log("no error");
+                    console.log("got Account info");
+                    
                 }).error(function (response) {
-                    console.log("bad error");
+                    console.log("could not get Account info");
+                    console.log(response.message);
                 });
             };
-            
-            if(loginRedirect.checkLogin()){
-                $location.path("/home");
-            }
             
         }]);
 

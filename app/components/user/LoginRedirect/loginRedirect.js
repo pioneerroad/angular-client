@@ -2,24 +2,25 @@
     
     var loginRedirect = function($q, $location, $localStorage){
         
-        var lastPath = "/";
+        var lastPath = "/home"; //default path when login success
         
         var responseError = function (response){
             if(response.status == 400 || response.status == 401){
                 lastPath = $location.path();
+                delete $localStorage.token;
                 $location.path("/login");
             }
             return $q.reject(response);
         };
         
-        var redirectPostLogin = function(){
+        var redirectPostLogin = function(){ //redirects to where user wanted to go
             $location.path(lastPath);
-            lastPath = "/";
+            lastPath = "/home";
         };
         
         var checkLogin = function(){
           if($localStorage.token){
-              return true;
+              return true; //work out a way to check if token is valid
           } 
           else
               return false;
