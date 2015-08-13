@@ -5,7 +5,7 @@
         var lastPath = "/home"; //default path when login success
         
         var responseError = function (response){
-            if(response.status == 400 || response.status == 401){
+            if((response.status == 400 || response.status == 401) && checkLogin()){ //bad request or not authorised
                 lastPath = $location.path();
                 delete $localStorage.token;
                 $location.path("/login");
@@ -20,7 +20,8 @@
         
         var checkLogin = function(){
           if($localStorage.token){
-              return true; //work out a way to check if token is valid
+            //call check token
+            return true;
           } 
           else
               return false;

@@ -15,6 +15,12 @@
                 $scope.passwordvalid = true;
             }
         };
+        
+        $scope.goToLogin = function(){
+            $scope.closeModal();
+            $location.path("/login");
+        };
+        
         $scope.create_user = function () { //creates the structure in which the form data is loaded and post's it to the server
             $scope.closeModal();
             if ($scope.passwordvalid) { //another check incase people manage to submit an ivalid form

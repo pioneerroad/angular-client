@@ -1,19 +1,51 @@
 (function () {
     var app = angular.module("pioneerRoad");
 
-    app.controller('userLoginController', ['$scope', '$http', '$location', 'userLoginService', '$rootScope', '$localStorage','loginRedirect', function ($scope, $http, $location, userLoginService, $rootScope, $localStorage, loginRedirect) {
+    app.controller('userLoginController', ['$scope', '$http', '$location', 'userLoginService', '$rootScope', '$localStorage', 'loginRedirect', 'rememberMeService', function ($scope, $http, $location, userLoginService, $rootScope, $localStorage, loginRedirect, rememberMeService) {
 
-            if(loginRedirect.checkLogin()){
+            if (loginRedirect.checkLogin()) {
                 $location.path("/login");
-                console.log("i'm logged in, change to /home");
+                console.log("i'm logged in, change to /home"); //MAKE SURE TO CHANGE TO /HOME!!!!!
             }
-            $scope.messageBool = false;
-            $scope.closeError = function () {
-                $scope.messageBool = false;
+
+
+            $scope.email = "";
+            $scope.password = "";
+            $scope.Error = false;
+            $scope.Errors = [];
+            $scope.remember = false;
+
+
+            if (rememberMeService('username') && rememberMeService('password')) {
+                $scope.remember = true;
+                $scope.email = rememberMeService('username');
+                $scope.password = rememberMeService('password');
+            }
+            $scope.rememberMe = function () {
+                if ($scope.remember) {
+                    rememberMeService('username', $scope.email);
+                    rememberMeService('password', $scope.password);
+                } else {
+                    rememberMeService('username', '');
+                    rememberMeService('password', '');
+                }
             };
 
-            $scope.authenticate = function () {
-                //userLoginService.SetCredentials($scope.email, $scope.password);
+
+
+            $scope.authenticate = function () { //sends form data to userLoginService
+                $scope.closeError();
+                if (("" === $scope.email) || ("" === $scope.password)) {
+
+                    if ("" === $scope.password) {
+                        $scope.Errors.push("Please enter password");
+                    }
+                    if ("" === $scope.email) {
+                        $scope.Errors.push("Please enter Email");
+                    }
+                    $scope.Error = true;
+                    return false;
+                }
                 userLoginService.Login($scope.email.toLowerCase(), $scope.password)
                         .success(function (response) {
                             if (response) {
@@ -26,33 +58,24 @@
                                     username: response.data.user.username
                                 };
                                 console.log("logged in");
-                                console.log($localStorage.token.token);
                                 $location.path("/home");
                             }
                         })
                         .error(function (error) {
-                            console.log(error);
+                            $scope.Errors.push("Your Email or Password is incorrect!");
+                            $scope.Error = true;
+
                         });
+            };
+
+            $scope.closeError = function () { // closes error messages
+                $scope.Error = false;
+                $scope.Errors = [];
             };
 
             $scope.logOut = function () {
                 userLoginService.Logout();
             };
-
-            $scope.tryGet = function () {
-                $localStorage.token.id;
-                console.log($localStorage.token.token);
-                
-                $http.get('http://pioneerroad.com.au:8081/api/v1/user/' + $localStorage.token.id + '/account/fetch'
-                        ).success(function (response) {
-                    console.log("got Account info");
-                    
-                }).error(function (response) {
-                    console.log("could not get Account info");
-                    console.log(response.message);
-                });
-            };
-            
         }]);
 
 }());

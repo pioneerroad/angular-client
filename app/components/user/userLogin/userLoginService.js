@@ -1,13 +1,11 @@
 (function () {
 
     angular.module('pioneerRoad')
-            .factory('userLoginService', ['Base64', '$http', '$localStorage',
-                function (Base64, $http, $localStorage) {
+            .factory('userLoginService', ['Base64', '$http', '$localStorage', '$location',
+                function (Base64, $http, $localStorage, $location) {
                     var service = {};
 
                     service.Login = function (username, password) {
-                        /* Use this for real authentication
-                         ----------------------------------------------*/
                         var authdata = Base64.encode(username + ':' + password);
                         $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
                         
@@ -17,6 +15,7 @@
                     
                     service.Logout = function(){
                         delete $localStorage.token;
+                        $location.path("/login");
                     };
                     return service;
                 }

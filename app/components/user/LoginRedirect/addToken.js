@@ -2,9 +2,9 @@
     var addToken = function($localStorage, loginRedirect, $q){
         
       var request = function (config){
-          if(loginRedirect.checkLogin()){
+         if(loginRedirect.checkLogin()){
               config.headers['x-access-token'] = $localStorage.token.token;
-          }
+         }
           return $q.when(config);
       };
       

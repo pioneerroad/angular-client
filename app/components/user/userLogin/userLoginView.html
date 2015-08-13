@@ -27,15 +27,13 @@
             <div class="container">
                 <!-- Dismissable alert at the top of the page: to be displayed if there are errors with the form submission -->
                 <!-- Display only if user can't be validated. Remember ng-show or ng-hide helps with this -->
-                <div class="alert alert-danger" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <div ng-show="Error" class="alert alert-danger" role="alert">
+                    <button type="button" class="close"  ng-click="closeError()" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <strong>Something went terribly, terribly wrong!</strong>
                     <ul>
-                        <li>The first problem</li>
-                        <li>The second catastrophe</li>
-                        <li>The third disaster</li>
+                        <li ng-repeat="error in Errors">{{error}}</li>
                     </ul>
                 </div>
                 <!-- End of dismissable alert at the top of the page -->
@@ -53,7 +51,7 @@
                         <input type="password" class="form-control" placeholder="Password" aria-describedby="sizing-addon2" ng-model="password">
                     </div>
                     <div id="user-login-remember" class="form-group">
-                        <input id="user-login-remember-checkbox" type="checkbox">
+                        <input id="user-login-remember-checkbox" type="checkbox"ng-click="rememberMe()" ng-model="remember">
                         <label class="cbx-label">Remember Me</label>
                     </div>
                     <!-- Login Button -->
@@ -63,10 +61,10 @@
                 <!-- Functions to reset password/register new account goes here -->
                 <ul id="user-login-extra-options">
                     <!-- Let's put the password reset form in a popup modal -->
-                    <li><a href="" data-toggle="modal" data-target="#passwordResetModal" ng-click="logOut()">Forgot Password?</a></li>
+                    <li><a href="" data-toggle="modal" data-target="#passwordResetModal" >Forgot Password?</a></li>
                     <!-- Navigate to the signup/registration page -->
                     <li><a href="#/register">Not a member yet?</a></li> <!-- Link to signup/registration page -->
-                    <li><a href="" ng-click="tryGet()">run test</a></li>
+                    <li><a href="" ng-click="logOut()">Logout</a></li>
                 </ul>
             </div>
         </main>
