@@ -11,8 +11,9 @@
                         templateUrl: "app/components/user/userLogin/userLoginView.html", //redirect to user register page
                         controller: "userLoginController"
                   })
-                   .when("/home", {
+                   .when("/profile", {
                         templateUrl: "app/components/user/viewProfile/viewProfileView.html", //redirect to user register page
+                        controller: "viewProfileController"
                        
                   })
                   .otherwise({
