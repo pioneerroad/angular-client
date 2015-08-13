@@ -17,6 +17,7 @@
         <script src="/assets/libs/modernizr-2.8.3.min.js"></script>
     </head>
     <body>
+        
         <!--[if lt IE 8]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -34,7 +35,7 @@
                         </button>
                         <strong>Something went terribly, terribly wrong!</strong>
                         <ul>
-                            <li ng-repeat="errors in error" >{{errors}}</li>
+                            <li ng-repeat="error in errors" >{{error}}</li>
                         </ul>
                     </div>
                     <!-- End of dismissable alert at the top of the page -->
@@ -92,7 +93,7 @@
                     <div class="modal-body">
                         <h1 class="modal-title" id="myModalTitle">Success!</h1>
                         <p>Your account has been created!</p>
-                        <button type="button" class="btn btn-lg btn-success" data-dismiss="modal" ng-click='closeModal()'>OK</button>
+                        <button type="button" class="btn btn-lg btn-success" data-dismiss="modal" ng-click='goToLogin()'>OK</button>
                     </div>
                 </div>
             </div>
