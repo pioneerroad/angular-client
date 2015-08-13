@@ -1,9 +1,9 @@
 <!doctype html>
-<html class="no-js" lang="" ng-app="pioneerRoad">
+<html class="no-js" lang="">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>AngularJS Example Task</title>
+        <title>User Registration Page</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -11,43 +11,34 @@
         <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700' rel='stylesheet' type='text/css'>
         <!-- Place favicon.ico in the root directory -->
 
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/main.css">
-        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
-        <script src="js/angular.min.js"></script>
-        <script src="js/app.js"></script>
-        <script src="js/user_create_controller.js"></script>
-        <script src="js/angular-ui-bootstrap-modal.js"></script>
-
+        <link rel="stylesheet" href="/assets/css/normalize.css">
+        <link rel="stylesheet" href="/assets/css/main.css">
+        <link rel="stylesheet" href="/assets/css/style.css">
+        <script src="/assets/libs/modernizr-2.8.3.min.js"></script>
     </head>
-    <body ng-controller="UserCreateController">
-
+    <body>
+        
         <!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
         <!-- Add your site or application content here -->
         <div class="info-bar"><h1>Create an Account</h1></div>
         <main>
-            <div class="container"  >
+            <div class="container">
+                <!-- Dismissable alert at the top of the page: to be displayed if there are errors with the form submission -->
+                <!-- To conditionally display with ng-show if there are errors in the errors object on $scope -->
                 <form name="usercreate"ng-submit="((usercreate.$valid && passwordvalid)) && create_user()" novalidate>
-                    <div role="alert">
-                        <div  ng-show="usercreate.password.$touched">
-                            <span class="error" ng-show="usercreate.password.$error.minlength">
-                                Password Too short!<br/></span>
-                            <span class="error" ng-show="usercreate.password.$error.pattern">
-                                Must contain 1 digit and 1 uppercase letter!<br/></span>
-                        </div>
-                        <span ng-show="usercreate.email.$error.email && usercreate.email.$touched" >Invalid email address.<br/></span>
-                        <div  ng-show="usercreate.mobile.$touched">
-                            <span class="error" ng-show="usercreate.mobile.$error.pattern">
-                                Mobile number must be a whole number!<br/></span>
-                            <span class="error" ng-show="usercreate.mobile.$error.minlength">
-                                Mobile number must be at least 10 digits!<br/></span>
-
-                        </div>
+                    <div ng-show="IncorrectFeilds" class="alert alert-danger" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="closeModal()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <strong>Something went terribly, terribly wrong!</strong>
+                        <ul>
+                            <li ng-repeat="error in errors" >{{error}}</li>
+                        </ul>
                     </div>
-                    <div ng-show="error && usercreate.password2.$touched" >Password does not match</div>
+                    <!-- End of dismissable alert at the top of the page -->
                     <div class="form-group">
                         <div class="input-group input-group-lg">
                             <span class="input-group-addon" id="sizing-addon"><span class="glyphicon glyphicon-envelope"></span></span>
@@ -102,7 +93,7 @@
                     <div class="modal-body">
                         <h1 class="modal-title" id="myModalTitle">Success!</h1>
                         <p>Your account has been created!</p>
-                        <button type="button" class="btn btn-lg btn-success" data-dismiss="modal" ng-click='closeModal()'>OK</button>
+                        <button type="button" class="btn btn-lg btn-success" data-dismiss="modal" ng-click='goToLogin()'>OK</button>
                     </div>
                 </div>
             </div>
@@ -120,66 +111,24 @@
             </div>
         </div>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')</script>
-        <script src="js/plugins.js"></script>
-        <script src="js/main.js"></script>
-        <script src="js/modal.js"></script>
+
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
-                                    (function (b, o, i, l, e, r) {
-                                        b.GoogleAnalyticsObject = l;
-                                        b[l] || (b[l] =
-                                                function () {
-                                                    (b[l].q = b[l].q || []).push(arguments)
-                                                });
-                                        b[l].l = +new Date;
-                                        e = o.createElement(i);
-                                        r = o.getElementsByTagName(i)[0];
-                                        e.src = 'https://www.google-analytics.com/analytics.js';
-                                        r.parentNode.insertBefore(e, r)
-                                    }(window, document, 'script', 'ga'));
-                                    ga('create', 'UA-XXXXX-X', 'auto');
-                                    ga('send', 'pageview');
+            (function (b, o, i, l, e, r) {
+                b.GoogleAnalyticsObject = l;
+                b[l] || (b[l] =
+                        function () {
+                            (b[l].q = b[l].q || []).push(arguments)
+                        });
+                b[l].l = +new Date;
+                e = o.createElement(i);
+                r = o.getElementsByTagName(i)[0];
+                e.src = 'https://www.google-analytics.com/analytics.js';
+                r.parentNode.insertBefore(e, r)
+            }(window, document, 'script', 'ga'));
+            ga('create', 'UA-XXXXX-X', 'auto');
+            ga('send', 'pageview');
         </script>
     </body>
-</html>
-<html ng-app="pioneerRoad">
-
-    <head>
-
-
-        <link rel="stylesheet" href="assets/css/style.css" />
-        <link rel="stylesheet" href="assets/css/main.css">
-
-        <script src="assets/libs/angular/angular.min.js"></script>
-        <script src="assets/libs/angular/angular-route.min.js"></script>
-        <script src="assets/libs/angular/ngStorage.min.js"></script>
-        <script src="assets/libs/modernizr-2.8.3.min.js"></script>
-        <script src="assets/libs/angular-ui-bootstrap-modal.js"></script>
-        <script src="app/app.module.js"></script>
-        <script src="app/app.routes.js"></script>
-
-        <script src="app/components/user/userRegister/userRegisterController.js"></script>
-        <script src="app/components/user/userLogin/userLoginController.js"></script>
-        <script src="app/components/user/userLogin/userLoginService.js"></script>
-        <script src="app/components/user/LoginRedirect/LoginRedirect.js"></script>
-        <script src="app/components/user/LoginRedirect/addToken.js"></script>
-        <script src="app/components/user/LoginRedirect/rememberMeService.js"></script>
-
-    </head>
-
-    <body>
-        <h1>Place holder Index.html</h1>
-
-        <div ng-view></div>
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')</script>
-        <script src="/assets/js/plugins.js"></script>
-        <script src="/assets/js/main.js"></script>
-        <script src="/assets/libs/bootstrap/modal.js"></script>
-    </body>
-
 </html>
