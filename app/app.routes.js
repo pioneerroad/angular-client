@@ -16,6 +16,16 @@
                         controller: "viewProfileController"
                        
                   })
+                  .when("/home", {
+                        templateUrl: "app/components/user/viewProfile/viewProfileView.html", //redirect to user register page
+                        controller: "viewProfileController"
+                       
+                  })
+                  .when("/friends", {
+                        templateUrl: "app/components/user/viewProfile/viewProfileView.html", //redirect to user register page
+                        
+                       
+                  })
                   .otherwise({
                         redirectTo: "/login" //redirect 
                   });

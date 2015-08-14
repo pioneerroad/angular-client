@@ -1,25 +1,6 @@
 <!doctype html>
 <html class="no-js" lang="">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>User Profile Page</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-
-        <link rel="apple-touch-icon" href="apple-touch-icon.png">
-        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700' rel='stylesheet' type='text/css'>
-        <!-- Place favicon.ico in the root directory -->
-
-        <link rel="stylesheet" href="assets/css/normalize.css">
-        <link rel="stylesheet" href="assets/css/main.css">
-        <script src="/js/vendor/modernizr-2.8.3.min.js"></script>
-    </head>
     <body>
-
-
         <!-- Main app functions/content goes inside the <main> section -->
         <main>
             <div id="user-profile-photo-container">
@@ -31,8 +12,8 @@
                         <img ng-src="{{profilepic}}" />
                     </div>
                 </div>
-                <div class="user-profile-nickname">
-                    <h1>Paul and Patricia Partridge</h1>
+                <div class="user-profile-nickname" ng-show="nickName">
+                    <h1>{{profile.nickName}}</h1>
                 </div>
                 <div id="photo-edit-control">
                     <a href="#"><span class="glyphicon glyphicon-cog"></span></a> <!-- Link to profile edit page -->
@@ -60,15 +41,6 @@
                 </div>
             </div>
         </main>
-        <!-- End of main section -->
-
-        <div id="notification-panel">
-            <div class="title-panel">
-                <div class="nav-back"><button class="btn btn-default hidden"><span class="glyphicon glyphicon-chevron-left hidden"></span></button></div>
-                <div class="title"><h3>Notifications</h3></div>
-                <div class="close"><button class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button></div>
-                <div class="clearfix"></div>
-            </div>
             <div class="body-panel">
                 <h5>Friend Requests  <span class="badge badge-red">2</span></h5>
                 <div id="notificationsFriendRequestList" class="friend-list">

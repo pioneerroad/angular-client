@@ -10,8 +10,6 @@
                 viewProfileService.getData(userId).success(function (response) {
                     if (response) {
                         $scope.profile = response;
-
-                        console.log("worked");
                         setImages(response);
                         setNick(response);
 
@@ -44,7 +42,12 @@
             };
             
             var setNick = function(data){
-                
+                if(data.nickName === null){
+                    $scope.nickName = false;
+                }
+                else{
+                    $scope.nickName = true;
+                }
             };
 
             $scope.logOut = function () {
@@ -60,6 +63,8 @@
             else {
                 getProfile();
             }
+            
+            $scope.nickName = false;
 
         }]);
 }());
