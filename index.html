@@ -1,38 +1,70 @@
 <html ng-app="pioneerRoad">
 
-<head>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700' rel='stylesheet' type='text/css'>
+        <!-- Place favicon.ico in the root directory -->
 
-    <link rel="stylesheet" href="assets/css/style.css" />
-    <link rel="stylesheet" href="assets/css/main.css">
+        <link rel="stylesheet" href="assets/css/style.css" />
+        <link rel="stylesheet" href="assets/css/main.css">
+        <link rel="stylesheet" href="assets/css/normalize.css">
 
-    <script src="assets/libs/angular/angular.min.js"></script>
-    <script src="assets/libs/angular/angular-route.min.js"></script>
-    <script src="assets/libs/angular/ngStorage.min.js"></script>
-    <script src="assets/libs/modernizr-2.8.3.min.js"></script>
-    <script src="assets/libs/angular-ui-bootstrap-modal.js"></script>
-    <script src="app/app.module.js"></script>
-    <script src="app/app.routes.js"></script>
+        <script src="assets/libs/angular/angular.min.js"></script>
+        <script src="assets/libs/angular/angular-route.min.js"></script>
+        <script src="assets/libs/angular/ngStorage.min.js"></script>
+        <script src="assets/libs/modernizr-2.8.3.min.js"></script>
+        <script src="assets/libs/angular-ui-bootstrap-modal.js"></script>
+        <script src="app/app.module.js"></script>
+        <script src="app/app.routes.js"></script>
 
-    <script src="app/components/user/userRegister/userRegisterController.js"></script>
-    <script src="app/components/user/userLogin/userLoginController.js"></script>
-    <script src="app/components/user/userLogin/userLoginService.js"></script>
-    <script src="app/components/user/LoginRedirect/LoginRedirect.js"></script>
-    <script src="app/components/user/LoginRedirect/addToken.js"></script>
-    <script src="app/components/user/LoginRedirect/rememberMeService.js"></script>
+        <script src="app/components/user/userRegister/userRegisterController.js"></script>
+        <script src="app/components/user/userLogin/userLoginController.js"></script>
+        <script src="app/components/user/userLogin/userLoginService.js"></script>
+        <script src="app/components/user/LoginRedirect/LoginRedirect.js"></script>
+        <script src="app/components/user/LoginRedirect/addToken.js"></script>
+        <script src="app/components/user/LoginRedirect/rememberMeService.js"></script>
+        <script src="app/components/user/viewProfile/viewProfileController.js"></script>
+        <script src="app/components/user/viewProfile/viewProfileService.js"></script>
 
-</head>
+    </head>
 
-<body>
-<h1>Place holder Index.html</h1>
+    <body>
 
-<div ng-view></div>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+            <![endif]-->
+        <div ng-show="navbar" class="menu-bar top nav">
+            <ul id="navBarTop">
+                <li id="notificationPanelCtrl" class="notification"><span class="badge badge-red">5</span></li>
+                <li id="messagesPanelCtrl" class="messages"><span class="badge badge-red">10</span></li>
+            </ul>
+        </div> <!-- Info/status bar at top of screen. May also include some navigation aids eg. to messages -->
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')</script>
-<script src="/assets/js/plugins.js"></script>
-<script src="/assets/js/main.js"></script>
-<script src="/assets/libs/bootstrap/modal.js"></script>
-</body>
+        <div ng-view></div>
+
+        <!-- The menu bar a the bottom of the page -->
+        <div ng-show="navbar" class="menu-bar bottom">
+            <ul role="menu">
+                <li class="icon icon-home"><a href="#"></a></li>
+                <li class="icon icon-community"><a href="#"></a></li>
+                <li class="icon icon-places"><a href="#"></a></li>
+                <li class="icon icon-user"><a href="#"></a></li>
+            </ul>
+        </div>
+        <!-- End of menu bar -->
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')</script>
+        <script src="/assets/js/plugins.js"></script>
+        <script src="/assets/js/main.js"></script>
+        <script src="/assets/libs/bootstrap/modal.js"></script>
+    </body>
 
 </html>

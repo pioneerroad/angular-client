@@ -3,7 +3,7 @@
     var userRegisterController = function ($scope, $http, $localStorage, loginRedirect, $location) { //handels all of the functionality for creating users including error checking 
         
          if(loginRedirect.checkLogin()){
-                $location.path("/login");
+                $location.path("/profile");
                 console.log("i'm logged in, change to /home");
             }
         
