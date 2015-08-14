@@ -1,0 +1,8 @@
+/dist/jcarousel.* -diff
+
+/vendor/qunit export-ignore
+/test/unit export-ignore
+.gitattributes export-ignore
+.gitignore export-ignore
+.jshintrc export-ignore
+Gruntfile.js export-ignore
