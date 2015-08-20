@@ -1,0 +1,55 @@
+<main>
+    <div id="user-profile-photo-container">
+        <div id="user-profile-bg-photo">
+            <img ng-src="https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/mail%40mattclark.com.au/background-photos/1437178330803_540x200.jpg" />
+        </div>
+        <div id="user-profile-photo-inner-container">
+            <div id="user-profile-photo">
+                <img ng-src="https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/matthewc%40pioneerroad.com.au/1438748472805_200x200.jpg" />
+            </div>
+        </div>
+        <div class="user-profile-nickname" ng-show="nickName">
+            <h1>{{profile.nickName}}</h1>
+        </div>
+
+        <div id="photo-edit-control">
+            <a href="#"><span class="glyphicon glyphicon-cog"></span></a> <!-- Link to profile edit page -->
+            <button value="logout" ng-click="logOut()">logout</button>
+        </div>
+    </div>
+    <div>
+        <form>
+            <input type="text" placeholder="enter in nick name" name="nickname"  ng-model="nickname">
+            <button type="submit" ng-click="updateNickName()">Save</button>
+        </form>
+    </div>
+    <div class="container">
+        <div>
+            <form>
+                <input type="text" placeholder="enter in hometown" name="hometown"  ng-model="hometown" ng-keyup="getHomeTownSug()">
+                <button type="submit" ng-click="updateHomeTown()">Save</button>
+                <ul>
+                    <li ng-repeat="town in homeTownSuggestions" ng-model="town" ng-click="chosenTown(town)">{{town.label}}</li>
+                </ul>
+            </form>
+        </div>
+        <div class="well well-blue">
+            <h3>Hometown</h3>
+            <div class="left"><span class="glyphicon glyphicon-home large"></span></div>
+            <div class="right">
+                <h4>{{profile.homeTown}}</h4>
+                <h4>{{profile.region}}</h4>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="well well-orange">
+            <h3>Current Location</h3>
+            <div class="left"><span class="glyphicon glyphicon-map-marker large"></span></div>
+            <div class="right">
+                <h4>Near Cooma (2km)</h4>
+                <h4>Snowy Mountains NSW</h4>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</main>

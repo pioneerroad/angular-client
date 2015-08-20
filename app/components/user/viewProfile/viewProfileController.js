@@ -6,21 +6,20 @@
 
 
             var getProfile = function () { //get the users profile
-                var userId = $localStorage.token.id;
-                viewProfileService.getData(userId).success(function (response) {
-                    if (response) {
-                        $scope.profile = response;
-                        setImages(response);
-                        setNick(response);
+                
+                viewProfileService.getData()
+                    .success(function (response) {
+                        if (response) {
+                            $scope.profile = response;
+                            setImages(response);
+                            setNick(response);
 
-                    }
-                })
-                        .error(function (error) {
-                            console.log(error);
+                        }
+                    })
+                    .error(function (error) {
+                        console.log(error);
 
-                        });
-
-
+                    });
             };
 
             var setImages = function (data) {
@@ -53,9 +52,6 @@
             $scope.logOut = function () {
                 userLoginService.Logout();
             };
-
-
-
             if (!loginRedirect.checkLogin()) {
                 $location.path("/login");
                 console.log("i'm not logged in");

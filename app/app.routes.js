@@ -21,6 +21,11 @@
                         controller: "viewHomeController"
                        
                   })
+                  .when("/editprofile", {
+                        templateUrl: "app/components/user/editProfile/editProfileView.html", //redirect to user register page
+                        controller: "editProfileController"
+                       
+                  })
                   .when("/community", {
                         templateUrl: "app/components/user/viewProfile/viewProfileView.html" //redirect to user register page
                         
