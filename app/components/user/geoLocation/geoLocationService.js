@@ -11,6 +11,11 @@
                         getLocation();
                     };
                     
+                    service.returnLocation = function(){
+                        return $http.get('http://pioneerroad.com.au:8081/api/v1/user/' + $localStorage.token.id + '/current-location'
+                         );
+                    };
+                    
                     function updateLocation(){
                        $http.put('http://pioneerroad.com.au:8081/api/v1/user/' + $localStorage.token.id + '/profile/update/current-location',
                          locationData

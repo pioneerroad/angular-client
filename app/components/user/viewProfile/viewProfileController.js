@@ -13,12 +13,11 @@
                             $scope.profile = response;
                             setImages(response);
                             setNick(response);
-
+                            getCurrentLocation();
                         }
                     })
                     .error(function (error) {
                         console.log(error);
-
                     });
             };
 
@@ -60,7 +59,19 @@
                 getProfile();
             }
             
+            var getCurrentLocation = function(){
+                geoLocationService.returnLocation()
+                        .success(function(data, response){
+                            $scope.location = data[0]; //location data
+                            $scope.location.distance = Math.round($scope.location.distance * 100)/100;
+                        })
+                        .error(function(error){
+                            console.log(error);
+                        });
+            };
+            
             $scope.nickName = false;
+            $scope.location = "";
 
         }]);
 }());
