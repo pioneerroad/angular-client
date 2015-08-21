@@ -1,11 +1,11 @@
 <main>
     <div id="user-profile-photo-container">
         <div id="user-profile-bg-photo">
-            <img ng-src="https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/mail%40mattclark.com.au/background-photos/1437178330803_540x200.jpg" />
+            <img ng-src="{{background}}" />
         </div>
         <div id="user-profile-photo-inner-container">
             <div id="user-profile-photo">
-                <img ng-src="https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/matthewc%40pioneerroad.com.au/1438748472805_200x200.jpg" />
+                <img ng-src="{{profilepic}}" />
             </div>
         </div>
         <div class="user-profile-nickname" ng-show="nickName">
@@ -18,16 +18,16 @@
         </div>
     </div>
     <div>
-        <form>
+        <form ng-submit="updateNickName() && ng-valid">
             <input type="text" placeholder="enter in nick name" name="nickname"  ng-model="nickname">
-            <button type="submit" ng-click="updateNickName()">Save</button>
+            <button type="submit" >Save</button>
         </form>
     </div>
     <div class="container">
         <div>
-            <form>
-                <input type="text" placeholder="enter in hometown" name="hometown"  ng-model="hometown" ng-keyup="getHomeTownSug()">
-                <button type="submit" ng-click="updateHomeTown()">Save</button>
+            <form ng-submit="updateHomeTown() && ng-valid">
+                <input type="text" placeholder="enter in hometown" name="hometown"  ng-model="hometown" ng-keyup="getHomeTownSug()" required>
+                <button ng-show="showSave" type="submit" ng-click="">Save</button>
                 <ul>
                     <li ng-repeat="town in homeTownSuggestions | limitTo:5" ng-model="town" ng-click="chosenTown(town)">{{town.label}}</li>
                 </ul>
@@ -36,7 +36,7 @@
         <div>
             <form>
                 <p id="location" ng-model="location"></p>
-                <button type="submit" ng-click="checkIn()">Check In!</button>
+                <button type="submit" ng-click="updateLocation()">Check In!</button>
             </form>
          </div>
         <div class="well well-blue">

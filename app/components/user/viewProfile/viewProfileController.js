@@ -1,9 +1,9 @@
 (function () {
     var app = angular.module("pioneerRoad");
 
-    app.controller('viewProfileController', ['$scope', '$http', '$location', 'userLoginService', '$rootScope', '$localStorage', 'loginRedirect', 'viewProfileService', function ($scope, $http, $location, userLoginService, $rootScope, $localStorage, loginRedirect, viewProfileService) {
+    app.controller('viewProfileController', ['$scope', '$http', '$location', 'userLoginService', '$rootScope', '$localStorage', 'loginRedirect', 'viewProfileService','geoLocationService', function ($scope, $http, $location, userLoginService, $rootScope, $localStorage, loginRedirect, viewProfileService, geoLocationService) {
 
-
+            geoLocationService.begin();
 
             var getProfile = function () { //get the users profile
                 
