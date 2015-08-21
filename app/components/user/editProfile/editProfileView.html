@@ -29,16 +29,22 @@
                 <input type="text" placeholder="enter in hometown" name="hometown"  ng-model="hometown" ng-keyup="getHomeTownSug()">
                 <button type="submit" ng-click="updateHomeTown()">Save</button>
                 <ul>
-                    <li ng-repeat="town in homeTownSuggestions" ng-model="town" ng-click="chosenTown(town)">{{town.label}}</li>
+                    <li ng-repeat="town in homeTownSuggestions | limitTo:5" ng-model="town" ng-click="chosenTown(town)">{{town.label}}</li>
                 </ul>
             </form>
         </div>
+        <div>
+            <form>
+                <p id="location" ng-model="location"></p>
+                <button type="submit" ng-click="checkIn()">Check In!</button>
+            </form>
+         </div>
         <div class="well well-blue">
             <h3>Hometown</h3>
             <div class="left"><span class="glyphicon glyphicon-home large"></span></div>
             <div class="right">
-                <h4>{{profile.homeTown}}</h4>
-                <h4>{{profile.region}}</h4>
+                <h4>{{profile.dataSet_town.location}}, {{profile.dataSet_town.state}} </h4>
+                <h4>{{profile.dataSet_town.tourism_region}}</h4>
             </div>
             <div class="clearfix"></div>
         </div>
