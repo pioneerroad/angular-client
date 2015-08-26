@@ -35,6 +35,10 @@
         <script src="app/components/user/editProfile/editProfileController.js"></script>
         <script src="app/components/user/editProfile/editProfileService.js"></script>
         <script src="app/components/user/geoLocation/geoLocationService.js"></script>
+        <script src="app/global/filters/distanceFilter.js"></script>
+        <script src="app/global/filters/timeFilter.js"></script>
+        <script src="app/global/controllers/reEnableLocationController.js"></script>
+        <script src="app/global/services/deviceTypeService.js"></script>
 
     </head>
 
@@ -49,7 +53,15 @@
                 <li id="messagesPanelCtrl" class="messages"><span class="badge badge-red">10</span></li>
             </ul>
         </div> <!-- Info/status bar at top of screen. May also include some navigation aids eg. to messages -->
+        
+        <div ng-controller="reEnableLocationController">
+            <div  ng-show="navbar && locationOff" data-toggle="modal" class="alert alert-danger" role="alert" data-target="#locationModal">
+                <strong> Please enable location service! <br/></strong>
+                <a href="#locationModal">Help! </a>
+            </div>
+        </div>
 
+        <!-- this is where the main  content goes -->
         <div ng-view></div>
 
         <!-- The menu bar a the bottom of the page -->
@@ -272,6 +284,22 @@
 
         <!-- ************* End of dynamic panels *********** -->
 
+        <!--modal for location service -->
+        <div class="modal fade" id="locationModal" tabindex="-1" role="dialog" aria-labelledby="locationModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <h1 class="modal-title" id="myModalTitle"></h1>
+                        <p>follow these steps to allow location services</p>
+                        <ul>
+                            <li></li>
+                        </ul>
+                        <button type="button" class="btn btn-lg btn-success" data-dismiss="modal" >OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')</script>
         <script src="/assets/libs/jquery-mobile/jquery.mobile.custom.js"></script>

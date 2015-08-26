@@ -1,17 +1,23 @@
 (function (module){
     
-    var loginRedirect = function($q, $location, $localStorage){
+    var loginRedirect = function($q, $location, $localStorage, $rootScope){
         
         var lastPath = "/home"; //default path when login success
         
         var responseError = function (response){
-            if((response.status == 401) && checkLogin()){ //not authorised
+            if((response.status === 401) && checkLogin()){ //not authorised
                 lastPath = $location.path();
                 delete $localStorage.token;
+                $rootScope.navbar = false;
+                $rootScope.locationOff = false;
                 $location.path("/login");
             }
-            else if(response.status == 400 && checkLogin()){ //bad request
+            else if(response.status === 400 && checkLogin()){ //bad request
                 //work out what to do here, maybe let controllers handle this?
+            }
+             else if(response.status === 118 && checkLogin()){ //bad request
+                //work out what to do here, maybe let controllers handle this?
+                console.log('cant access server');
             }
             return $q.reject(response);
         };
@@ -25,6 +31,7 @@
           if($localStorage.token){
             //call check token or someother way to check authentication 
             return true;
+            $rootScope.navbar = true;
           } 
           else
               return false;

@@ -3,7 +3,7 @@
 
     app.controller('viewProfileController', ['$scope', '$http', '$location', 'userLoginService', '$rootScope', '$localStorage', 'loginRedirect', 'viewProfileService','geoLocationService', function ($scope, $http, $location, userLoginService, $rootScope, $localStorage, loginRedirect, viewProfileService, geoLocationService) {
 
-            geoLocationService.begin();
+            geoLocationService.begin(); //update location
 
             var getProfile = function () { //get the users profile
                 
@@ -63,7 +63,6 @@
                 geoLocationService.returnLocation()
                         .success(function(data, response){
                             $scope.location = data[0]; //location data
-                            $scope.location.distance = Math.round($scope.location.distance * 100)/100;
                         })
                         .error(function(error){
                             console.log(error);

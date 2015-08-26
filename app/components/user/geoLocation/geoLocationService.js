@@ -1,8 +1,8 @@
 (function () {
 
     angular.module('pioneerRoad')
-            .factory('geoLocationService', ['$http', '$localStorage',
-                function ($http, $localStorage) {
+            .factory('geoLocationService', ['$http', '$localStorage', '$rootScope',
+                function ($http, $localStorage, $rootScope) {
                     var service = {};
                     var locationData = {};
                     
@@ -36,6 +36,7 @@
                             lat: position.coords.latitude,
                             lon: position.coords.longitude
                         };
+                        $rootScope.locationOff = false;
                         updateLocation();
                     }
 
@@ -43,6 +44,7 @@
                         switch (error.code) {
                             case error.PERMISSION_DENIED:
                                 console.log("User denied the request for Geolocation.");
+                                $rootScope.locationOff = true;
                                 break;
                             case error.POSITION_UNAVAILABLE:
                                 console.log("Location information is unavailable.");
