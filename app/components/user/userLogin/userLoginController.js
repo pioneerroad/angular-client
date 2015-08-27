@@ -58,7 +58,7 @@
                                     username: response.data.user.username
                                 };
                                 console.log("logged in");
-                                $location.path("/home");
+                                $location.path("/profile"); //change /home
                                 $rootScope.navbar = true;
                             }
                         })

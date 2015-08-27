@@ -1,8 +1,8 @@
 (function () {
 
     angular.module('pioneerRoad')
-            .factory('userLoginService', ['Base64', '$http', '$localStorage', '$location',
-                function (Base64, $http, $localStorage, $location) {
+            .factory('userLoginService', ['Base64', '$http', '$localStorage', '$location', '$rootScope',
+                function (Base64, $http, $localStorage, $location, $rootScope) {
                     var service = {};
 
                     service.Login = function (username, password) {
@@ -16,6 +16,7 @@
                     service.Logout = function(){
                         delete $localStorage.token;
                         $location.path("/login");
+                        $rootScope.navbar = false;
                     };
                     return service;
                 }

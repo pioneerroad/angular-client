@@ -1,26 +1,24 @@
 (function () {
     var app = angular.module("pioneerRoad");
 
-    app.controller('viewProfileController', ['$scope', '$http', '$location', 'userLoginService', '$rootScope', '$localStorage', 'loginRedirect', 'viewProfileService', function ($scope, $http, $location, userLoginService, $rootScope, $localStorage, loginRedirect, viewProfileService) {
+    app.controller('viewProfileController', ['$scope', '$http', '$location', 'userLoginService', '$rootScope', '$localStorage', 'loginRedirect', 'viewProfileService','geoLocationService', function ($scope, $http, $location, userLoginService, $rootScope, $localStorage, loginRedirect, viewProfileService, geoLocationService) {
 
-
+            geoLocationService.begin(); //update location
 
             var getProfile = function () { //get the users profile
-                var userId = $localStorage.token.id;
-                viewProfileService.getData(userId).success(function (response) {
-                    if (response) {
-                        $scope.profile = response;
-                        setImages(response);
-                        setNick(response);
-
-                    }
-                })
-                        .error(function (error) {
-                            console.log(error);
-
-                        });
-
-
+                
+                viewProfileService.getData()
+                    .success(function (response) {
+                        if (response) {
+                            $scope.profile = response;
+                            setImages(response);
+                            setNick(response);
+                            getCurrentLocation();
+                        }
+                    })
+                    .error(function (error) {
+                        console.log(error);
+                    });
             };
 
             var setImages = function (data) {
@@ -53,9 +51,6 @@
             $scope.logOut = function () {
                 userLoginService.Logout();
             };
-
-
-
             if (!loginRedirect.checkLogin()) {
                 $location.path("/login");
                 console.log("i'm not logged in");
@@ -64,7 +59,18 @@
                 getProfile();
             }
             
+            var getCurrentLocation = function(){
+                geoLocationService.returnLocation()
+                        .success(function(data, response){
+                            $scope.location = data[0]; //location data
+                        })
+                        .error(function(error){
+                            console.log(error);
+                        });
+            };
+            
             $scope.nickName = false;
+            $scope.location = "";
 
         }]);
 }());
