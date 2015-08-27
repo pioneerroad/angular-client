@@ -30,7 +30,6 @@
             }
             interval = Math.floor(seconds / 60);
             if (interval > 5) {
-                console.log(interval);
                 interval = (5 * Math.ceil(interval / 5));
 
                 return interval + " minutes ago";

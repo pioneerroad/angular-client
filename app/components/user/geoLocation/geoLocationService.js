@@ -45,6 +45,7 @@
                             case error.PERMISSION_DENIED:
                                 console.log("User denied the request for Geolocation.");
                                 $rootScope.locationOff = true;
+                                
                                 break;
                             case error.POSITION_UNAVAILABLE:
                                 console.log("Location information is unavailable.");

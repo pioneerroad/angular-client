@@ -15,10 +15,18 @@
                             else if(agent.indexOf("Android") !== -1){
                                 device = "Android";
                             }
-                            else if(agent.indexOf("Blackberry") !== -1){
-                                device = "Blackberry";
+                            else if(agent.indexOf("Nokia") !== -1){
+                                device = "Nokia";
                             }
-                            console.log(device);
+                            else if(agent.indexOf("Linux") !== -1){
+                                device = "Linux";
+                            }
+                            else if(agent.indexOf("Windows") !== -1){
+                                device = "Windows";
+                            }
+                            else{
+                                device = "unknown"; 
+                            }
                             return device;
                         
                     };
