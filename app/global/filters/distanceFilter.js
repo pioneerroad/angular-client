@@ -8,8 +8,9 @@
                 return input;
             }
             else {
-                Math.round(input);
+                input = Math.round(input);
                 input += " km";
+                return input;
             }
         };
     });

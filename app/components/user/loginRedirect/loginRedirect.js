@@ -13,7 +13,7 @@
                 $location.path("/login");
             }
             else if(response.status === 400 && checkLogin()){ //bad request
-                //work out what to do here, maybe let controllers handle this?
+                //work out what to do here, maybe let controllers handle this? or redirect to server error page
             }
              else if(response.status === 118 && checkLogin()){ //bad request
                 //work out what to do here, maybe let controllers handle this?
@@ -33,8 +33,10 @@
             return true;
             $rootScope.navbar = true;
           } 
-          else
-              return false;
+          else{
+              $rootScope.navbar = false;
+              return false;   
+          }
         };
         
         return{
