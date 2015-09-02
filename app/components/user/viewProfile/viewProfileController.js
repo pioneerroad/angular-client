@@ -28,14 +28,14 @@
                     $scope.background = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/ui-images/bg-default-img.svg";
                 }
                 else {
-                    $scope.background = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/" + $localStorage.token.username + "/background-photos/" + data.profileBackgroundPhoto.medium;
+                    $scope.background = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/" + $localStorage.token.id + "/background-photos/" + data.profileBackgroundPhoto.medium;
                 }
 
                 if (data.profilePhoto === null) {
                        $scope.profilepic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/ui-images/user-profile-default-img.svg";
                 }
                 else {
-                    $scope.profilepic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/" + $localStorage.token.username + "/" + data.profilePhoto.large;
+                    $scope.profilepic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/" + $localStorage.token.id + "/" + data.profilePhoto.large;
                 }//ui-images/bg-deafult-img.svg
             };
             
@@ -62,7 +62,7 @@
             var getCurrentLocation = function(){
                 geoLocationService.returnLocation()
                         .success(function(data, response){
-                            $scope.location = data[0]; //location data
+                            $scope.location = data; //location data
                         })
                         .error(function(error){
                             console.log(error);

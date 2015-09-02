@@ -35,6 +35,10 @@
         <script src="app/components/user/editProfile/editProfileController.js"></script>
         <script src="app/components/user/editProfile/editProfileService.js"></script>
         <script src="app/components/user/geoLocation/geoLocationService.js"></script>
+        
+        <script src="app/components/relationships/friendRequest/friendRequestController.js"></script>
+        <script src="app/components/relationships/friendRequest/friendRequestService.js"></script>
+        
         <script src="app/global/filters/distanceFilter.js"></script>
         <script src="app/global/filters/timeFilter.js"></script>
         <script src="app/global/controllers/reEnableLocationController.js"></script>
@@ -49,7 +53,7 @@
             <![endif]-->
         <div ng-show="navbar" class="menu-bar top nav">
             <ul id="navBarTop">
-                <li id="notificationPanelCtrl" class="notification"><span class="badge badge-red">5</span></li>
+                <li id="notificationPanelCtrl" class="notification"><span class="badge badge-red">{{numfriendRequest}}</span></li>
                 <li id="messagesPanelCtrl" class="messages"><span class="badge badge-red">10</span></li>
             </ul>
         </div> <!-- Info/status bar at top of screen. May also include some navigation aids eg. to messages -->
@@ -85,38 +89,21 @@
                 <div class="close"><button class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button></div>
                 <div class="clearfix"></div>
             </div>
-            <div class="body-panel">
-                <h5>Friend Requests  <span class="badge badge-red">2</span></h5>
+            <div class="body-panel" ng-controller="friendRequestController">
+                <h5>Friend Requests  <span class="badge badge-red">{{numfriendRequest}}</span></h5>
                 <div id="notificationsFriendRequestList" class="friend-list">
-                    <div class="well well-grey">
+                    <div ng-repeat="friend in friends" class="well well-grey">
                         <div class="left">
                             <div class="profile-photo-container">
-                                <img src="https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/mattc%40pioneerroad.com.au/1438920974761_100x100.jpg" />
+                                <img ng-src="{{friend.profilePic}}" />
                             </div>
                         </div>
                         <div class="right">
-                            <h3>Michelle Smith</h3>
+                            <h3>{{friend.nickName}}</h3>
                             <div class="inline-form friend-action">
                                 <div class="input-group">
-                                    <button class="btn btn-success accept">Accept</button>
-                                    <button class="btn btn-danger decline">Decline</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="well well-grey">
-                        <div class="left">
-                            <div class="profile-photo-container">
-                                <img src="https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/mattc%40pioneerroad.com.au/1438919563253_100x100.jpg" />
-                            </div>
-                        </div>
-                        <div class="right">
-                            <h3>Ian and June Smith</h3>
-                            <div class="inline-form friend-action">
-                                <div class="input-group">
-                                    <button class="btn btn-success">Accept</button>
-                                    <button class="btn btn-danger">Decline</button>
+                                    <button class="btn btn-success accept" ng-click="accept(friend.requestId)">Accept</button>
+                                    <button class="btn btn-danger decline" ng-click="decline(friend.requestId)">Decline</button>
                                 </div>
                             </div>
                         </div>
@@ -164,7 +151,7 @@
                             <div class="msg-date">1 hour ago</div>
                         </div>
                         <div class="msg-status unread"><span class="glyphicon glyphicon-asterisk"></span></div>
-                        <div class="msg-user-profile-photo online"><img src="https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/mattc%40pioneerroad.com.au/1438919563253_30x30.jpg"/></div>
+                        <div class="msg-user-profile-photo online"><img src=""/></div>
                         <div class="msg-summary">
 
                             <p class="summary-text">Hi there Betty and Bill, just wanted...</p>
@@ -178,7 +165,7 @@
                             <div class="msg-date">2 days ago</div>
                         </div>
                         <div class="msg-status unread"><span class="glyphicon glyphicon-asterisk"></span></div>
-                        <div class="msg-user-profile-photo offline"><img src="https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/mattc%40pioneerroad.com.au/1438919563253_30x30.jpg"/></div>
+                        <div class="msg-user-profile-photo offline"><img src=""/></div>
                         <div class="msg-summary">
 
                             <p class="summary-text">We're at Port Fairy now...</p>
@@ -192,7 +179,7 @@
                             <div class="msg-date">3 days ago</div>
                         </div>
                         <div class="msg-status read"><span class="glyphicon glyphicon-asterisk"></span></div>
-                        <div class="msg-user-profile-photo away"><img src="https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/mattc%40pioneerroad.com.au/1438919563253_30x30.jpg"/></div>
+                        <div class="msg-user-profile-photo away"><img src=""/></div>
                         <div class="msg-summary">
                             <p class="summary-text">If you're going to be near the...</p>
                         </div>
@@ -207,7 +194,7 @@
                         <div class="message">
                             <p>Hey John and June, we're having a great time up here at the Sunshine Coast. Thanks for all your tips about places to stay along the way.</p>
                         </div>
-                        <img src="https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/mattc%40pioneerroad.com.au/1438919563253_30x30.jpg"/>
+                        <img src=""/>
                         <div class="clearfix"></div>
                         <p class="msg-status"><strong>Read</strong> 10 Aug 2015 09:15</p>
                         <div class="clearfix"></div>
@@ -216,7 +203,7 @@
                         <div class="message">
                             <p>You're welcome. We on our way to Mt Isa now. Weather is lovely out here.</p>
                         </div>
-                        <img src="https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/mail%40mattclark.com.au/1437178262889_30x30.jpg"/>
+                        <img src=""/>
                         <div class="clearfix"></div>
                         <p class="msg-status"><strong>Read</strong> 10 Aug 2015 09:15</p>
                         <div class="clearfix"></div>
@@ -227,7 +214,7 @@
                         <div class="message">
                             <p>Is it sunny?</p>
                         </div>
-                        <img src="https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/mail%40mattclark.com.au/1437178262889_30x30.jpg"/>
+                        <img src=""/>
                         <div class="clearfix"></div>
                         <p class="msg-status"><strong>Read</strong> 10 Aug 2015 09:15</p>
                         <div class="clearfix"></div>
@@ -236,7 +223,7 @@
                         <div class="message">
                             <p>Yes!</p>
                         </div>
-                        <img src="https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/mail%40mattclark.com.au/1437178262889_30x30.jpg"/>
+                        <img src=""/>
                         <div class="clearfix"></div>
                         <p class="msg-status"><strong>Read</strong> 10 Aug 2015 09:15</p>
                         <div class="clearfix"></div>
@@ -246,7 +233,7 @@
                         <div class="message">
                             <p>That's nice. It's raining really heavily over here on the coast.</p>
                         </div>
-                        <img src="https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/mattc%40pioneerroad.com.au/1438919563253_30x30.jpg"/>
+                        <img src=""/>
                         <div class="clearfix"></div>
                         <p class="msg-status"><strong>Read</strong> 10 Aug 2015 09:15</p>
                         <div class="clearfix"></div>
@@ -257,7 +244,7 @@
                             <p>I heard that. We think it will probably move inland in the next couple of days so we better enjoy this sunshine while it lasts.</p>
                         </div>
                         <div class="clearfix"></div>
-                        <img src="https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/mail%40mattclark.com.au/1437178262889_30x30.jpg"/>
+                        <img src=""/>
                         <p class="msg-status"><strong>Read</strong> 10 Aug 2015 09:15</p>
                         <div class="clearfix"></div>
                     </div>
@@ -267,7 +254,7 @@
                             <p>Careful out there in the rain. Some of those dirt tracks turn to clay when it's wet.</p>
                         </div>
                         <div class="clearfix"></div>
-                        <img src="https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/mattc%40pioneerroad.com.au/1438919563253_30x30.jpg"/>
+                        <img src=""/>
                         <p class="msg-status"><strong>Read</strong> 10 Aug 2015 09:15</p>
                         <div class="clearfix"></div>
                     </div>
