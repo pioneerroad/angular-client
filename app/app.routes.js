@@ -17,8 +17,8 @@
                        
                   })
                   .when("/home", {
-                        templateUrl: "app/components/user/viewProfile/viewProfileView.html", //redirect to user register page
-                        controller: "viewHomeController"
+                        templateUrl: "app/components/home/homepage.html", //redirect to user register page
+                        controller: "homePageController"
                        
                   })
                   .when("/editprofile", {

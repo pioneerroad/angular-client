@@ -18,19 +18,19 @@
         </div>
     </div>
     <div class="container">
-        <div class="well well-blue">
+        <div class="well well-blue" id="current-location">
             <h3>Hometown</h3>
-            <div class="left"><span class="glyphicon glyphicon-home large"></span></div>
-            <div class="right">
+            <div class="panel-left"><span class="glyphicon glyphicon-home large"></span></div>
+            <div class="panel-right">
                 <h4>{{profile.dataSet_town.location}}, {{profile.dataSet_town.state}}</h4>
                 <h4>{{profile.dataSet_town.tourism_region}}</h4>
             </div>
             <div class="clearfix"></div>
         </div>
-        <div class="well well-orange">
+        <div class="well well-orange" id="current-location">
             <h3>Current Location</h3>
-            <div class="left"><span class="glyphicon glyphicon-map-marker large"></span></div>
-            <div class="right">
+            <div class="panel-left"><span class="glyphicon glyphicon-map-marker large"></span></div>
+            <div class="panel-right">
                 <h4>Near {{location.location}} ({{location.distance | distanceFilter}})</h4>
                 <h4>{{location.tourism_region}} {{location.state}}</h4>
                  <h4>{{profile.checkinCoords.updatedAt | timeFilter}}</h4>

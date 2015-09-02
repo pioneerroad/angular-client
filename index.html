@@ -36,9 +36,15 @@
         <script src="app/components/user/editProfile/editProfileService.js"></script>
         <script src="app/components/user/geoLocation/geoLocationService.js"></script>
         
+        <script src="app/components/relationships/friendsNearMe/friendsNearMeService.js"></script>
+        <script src="app/components/relationships/friendsNearMe/friendsNearMeController.js"></script>
+        <script src="app/components/home/homePageService.js"></script>
+        <script src="app/components/home/homePageController.js"></script>
+
         <script src="app/components/relationships/friendRequest/friendRequestController.js"></script>
         <script src="app/components/relationships/friendRequest/friendRequestService.js"></script>
-        
+
+
         <script src="app/global/filters/distanceFilter.js"></script>
         <script src="app/global/filters/timeFilter.js"></script>
         <script src="app/global/controllers/reEnableLocationController.js"></script>
@@ -53,17 +59,17 @@
             <![endif]-->
         <div ng-show="navbar" class="menu-bar top nav">
             <ul id="navBarTop">
-                <li id="notificationPanelCtrl" class="notification"><span class="badge badge-red">{{numfriendRequest}}</span></li>
+                <li id="notificationPanelCtrl" class="notification" ng-show="areNotifications"><span class="badge badge-red">{{numfriendRequest}}</span></li>
                 <li id="messagesPanelCtrl" class="messages"><span class="badge badge-red">10</span></li>
             </ul>
         </div> <!-- Info/status bar at top of screen. May also include some navigation aids eg. to messages -->
-        
+
         <div ng-controller="reEnableLocationController">
             <div  ng-show="navbar && locationOff" data-toggle="modal" class="alert alert-danger" role="alert" data-target="#locationModal">
-                 <span class="glyphicon glyphicon-info-sign"></span>
+                <span class="glyphicon glyphicon-info-sign"></span>
                 <strong> Please enable location service! <br/></strong>
                 <a href="#locationModal"> Help!</a>
-                
+
             </div>
         </div>
 
@@ -288,7 +294,7 @@
                 </div>
             </div>
         </div>
-        
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')</script>
         <script src="/assets/libs/jquery-mobile/jquery.mobile.custom.js"></script>
