@@ -4,6 +4,10 @@
         
         $rootScope.navbar = true;
         $rootScope.numfriendRequest; //used to show number of friend requests
+        $rootScope.areNotifications = false;
+        if($rootScope.numfriendRequest > 0){
+            $rootScope.areNotifications = true;
+        }
     });
 
 

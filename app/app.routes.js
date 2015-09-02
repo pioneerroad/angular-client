@@ -18,7 +18,7 @@
                   })
                   .when("/home", {
                         templateUrl: "app/components/home/homepage.html", //redirect to user register page
-                       
+                        controller: "homePageController"
                        
                   })
                   .when("/editprofile", {
