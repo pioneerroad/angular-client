@@ -14,6 +14,7 @@
                                 for (i = 0; i < response.length; i++) { // for each request
                                     friend.nickName = response[i].nickName;
                                     friend.requestId = response[i].requestId;
+                                    
                                     if (response[i].profilePhoto === null) {
                                         friend.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/ui-images/user-profile-default-img.svg";
                                     }

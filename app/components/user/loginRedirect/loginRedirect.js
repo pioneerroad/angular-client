@@ -12,6 +12,13 @@
                 $rootScope.locationOff = false;
                 $location.path("/login");
             }
+            else if (response.status === 401){
+                lastPath = $location.path();
+                delete $localStorage.token;
+                $rootScope.navbar = false;
+                $rootScope.locationOff = false;
+                $location.path("/login");
+            }
             else if(response.status === 400 && checkLogin()){ //bad request
                 //work out what to do here, maybe let controllers handle this? or redirect to server error page
             }
