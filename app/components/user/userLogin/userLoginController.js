@@ -4,8 +4,8 @@
     app.controller('userLoginController', ['$scope', '$http', '$location', 'userLoginService', '$rootScope', '$localStorage', 'loginRedirect', 'rememberMeService', function ($scope, $http, $location, userLoginService, $rootScope, $localStorage, loginRedirect, rememberMeService) {
             
             if (loginRedirect.checkLogin()) {
-                $location.path("/profile");
-                console.log("i'm logged in, change to /home"); //MAKE SURE TO CHANGE TO /HOME!!!!!
+                $location.path("/home");
+                console.log("i'm logged in");
             }
 
 
@@ -58,7 +58,7 @@
                                     username: response.data.user.username
                                 };
                                 console.log("logged in");
-                                $location.path("/profile"); //change /home
+                                $location.path("/home");
                                 $rootScope.navbar = true;
                             }
                         })
