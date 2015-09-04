@@ -27,7 +27,7 @@
                        
                   })
                   .when("/community", {
-                        templateUrl: "app/components/user/viewProfile/viewProfileView.html" //redirect to user register page
+                        templateUrl: "app/components/relationships/relationships/relationshipsView.html" //redirect to user register page
                         
                        
                   })
