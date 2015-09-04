@@ -56,12 +56,7 @@ $(document).ready(function() {
         $('#nickname').val('');
     });
 
-    $('.toggle-collapsible-form-widget').on('tap', function(event) {
-        $(this).parents('.collapsible-form-widget').children('.body').toggleClass('show');
-        $(this).children('.glyphicon').toggleClass('glyphicon-plus');
-        $(this).children('.glyphicon').toggleClass('glyphicon-remove');
-        return false;
-    });
+    
 
     $('.msg-recipient-list').on('tap', '.recipient', function(e) {
         $(this).remove();
@@ -94,11 +89,6 @@ $(document).ready(function() {
         $('.subsection-panel').toggleClass('visible').toggleClass('hidden');
     });
 
-    $('.has-touch-control').on('swipeleft', function(event) {
-        $(this).children('.touch-control').removeClass('inactive');
-    });
-    $('.has-touch-control').on('swiperight', function(event) {
-        $(this).children('.touch-control').addClass('inactive');
-    });
+    
 
 });

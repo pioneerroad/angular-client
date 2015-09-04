@@ -15,9 +15,12 @@
         <link rel="stylesheet" href="assets/css/style.css" />
         <link rel="stylesheet" href="assets/css/main.css">
         <link rel="stylesheet" href="assets/css/normalize.css">
-
+        
+        
+        
         <script src="assets/libs/angular/angular.min.js"></script>
         <script src="assets/libs/angular/angular-route.min.js"></script>
+        <script src="assets/libs/angular/angular-touch.min.js"></script>
         <script src="assets/libs/angular/ngStorage.min.js"></script>
         <script src="assets/libs/modernizr-2.8.3.min.js"></script>
         <script src="assets/libs/angular-ui-bootstrap-modal.js"></script>
@@ -61,7 +64,7 @@
             <![endif]-->
         <div ng-show="navbar" class="menu-bar top nav">
             <ul id="navBarTop">
-                <li id="notificationPanelCtrl" class="notification" ng-show="areNotifications"><span class="badge badge-red">{{numfriendRequest}}</span></li>
+                <li id="notificationPanelCtrl" class="notification" ><span class="badge badge-red">{{numfriendRequest}}</span></li>
                 <li id="messagesPanelCtrl" class="messages"><span class="badge badge-red">10</span></li>
             </ul>
         </div> <!-- Info/status bar at top of screen. May also include some navigation aids eg. to messages -->

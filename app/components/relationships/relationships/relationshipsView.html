@@ -9,34 +9,37 @@
             </ul>
         </div>
         <div id="friend-panel" class="subsection-panel visible">
-            <div class="well well-orange collapsible-form-widget" id="add-friend">
+            <div class="well well-orange" id="add-friend">
                 <div class="heading widget-add-new">
                     <h4>Add a new friend</h4>
-                    <button class="btn btn-default toggle-collapsible-form-widget" id="startFriendRequest"><span class="glyphicon glyphicon-plus"></span></button>
+                    <p align="right">
+                        <button ng-click="addFriends()" class="btn btn-default" id="startFriendRequest"><span class="glyphicon {{symbol}}"></span></button>
+                    </p>
                     <div class="clearfix"></div>
                 </div>
-                <div class="body">
+                <div class="body" ng-show="addFriendsShow">
                     <div class="form-group">
                         <div class="input-group">
                             <label class="sr-only" for="searchUsers">Email Address</label>
-                            <input type="text" class="form-control" id="searchUsers"/>
-                            <span class="input-group-addon" id="executeSearch"><span class="glyphicon glyphicon-search"></span></span>
+                            <input type="text" class="form-control" id="searchUsers" ng-model="friendName"/>
+                            <span class="input-group-addon" id="executeSearch"><span ng-click="findFriend()" class="glyphicon glyphicon-search"></span></span>
                         </div>
                         <!-- Returned result of friend search -->
-                        <div class="well panel-list friends-list">
+                        <div class="well panel-list friends-list" ng-repeat="friend in addFriendNew">
+                            {{friend.error}}
                             <div class="panel-left">
                                 <div class="profile-photo-container">
-                                    <img src="https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/1/1441153449598_100x100.jpg" /></div>
+                                    <img ng-src="{{friend.profilePic}}" /></div>
                             </div>
                             <div class="panel-right">
-                                <h5>Anne and Andy Adams</h5>
+                                <h5>{{friend.nickName}}</h5>
                                 <div class="hometown">
                                     <div class="details left">
                                         <span class="glyphicon glyphicon-home"></span>
                                     </div>
                                     <div class="details right">
-                                        <p class="town">Fairy Meadow</p>
-                                        <p class="region">South Coast NSW</p>
+                                        <p class="town">{{friend.dataSet_town.location}}</p>
+                                        <p class="region">{{friend.dataSet_town.tourism_region}} {{friend.dataSet_town.state}}</p>
                                     </div>
                                 </div>
                                 <div class="current-location">
@@ -48,7 +51,7 @@
                                         <p class="region">Snowy Mountains NSW</p>
                                     </div>
                                 </div>
-                                <button class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Add Friend</button>
+                                <button class="btn btn-default" ng-click="addFriend({{friend.userAccountId}})"><span class="glyphicon glyphicon-plus"></span> Add Friend</button>
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -57,20 +60,20 @@
             </div>
             <div class="scrollable panel-list friends-list">
                 <!-- Beginning of block inside ng-repeat -->
-                <div class="well well-darker-green has-touch-control">
+                <div class="well well-darker-green has-touch-control" ng-swipe-left="blockFriendsOpen()" ng-swipe-right="blockFriendsClose()" ng-repeat="friend in friends">
                     <div class="panel-left">
                         <div class="profile-photo-container">
-                            <img src="https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/1/1441153449598_100x100.jpg" /></div>
+                            <img ng-src="{{friend.profilePic}}" /></div>
                     </div>
                     <div class="panel-right">
-                        <h5>Anne and Andy Adams</h5>
+                        <h5>{{friend.nickname}}</h5>
                         <div class="hometown">
                             <div class="details left">
                                 <span class="glyphicon glyphicon-home"></span>
                             </div>
                             <div class="details right">
-                                <p class="town">Fairy Meadow</p>
-                                <p class="region">South Coast NSW</p>
+                                <p class="town">{{friend.location}}</p>
+                                <p class="region">{{friend.tourism_region}} {{friend.state}}</p>
                             </div>
                         </div>
                         <div class="current-location">
@@ -78,13 +81,13 @@
                                 <span class="glyphicon glyphicon-map-marker"></span>
                             </div>
                             <div class="details right">
-                                <p class="town">Cooma</p>
-                                <p class="region">Snowy Mountains NSW</p>
+                                <p class="town">fairy medow</p>
+                                <p class="region">some region</p>
                             </div>
                         </div>
                     </div>
                     <div class="clearfix"></div>
-                    <div class="touch-control inactive">
+                    <div class="{{myclass}}">
                         <p data-toggle="modal" data-target="#blockFriendConfirmationModal">Block Friend</p>
                     </div>
                 </div>
@@ -120,66 +123,7 @@
                         <div class="clearfix"></div>
                     </div>
                 </a>
-                <a href="friend-user-profile.html"> <!-- Link to user's profile page -->
-                    <div class="well well-darker-green">
-                        <div class="panel-left">
-                            <div class="profile-photo-container">
-                                <img src="https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/1/1441153449598_100x100.jpg" /></div>
-                        </div>
-                        <div class="panel-right">
-                            <h5>Anne and Andy Adams</h5>
-                            <div class="hometown">
-                                <div class="details left">
-                                    <span class="glyphicon glyphicon-home"></span>
-                                </div>
-                                <div class="details right">
-                                    <p class="town">Fairy Meadow</p>
-                                    <p class="region">South Coast NSW</p>
-                                </div>
-                            </div>
-                            <div class="current-location">
-                                <div class="details left">
-                                    <span class="glyphicon glyphicon-map-marker"></span>
-                                </div>
-                                <div class="details right">
-                                    <p class="town">Cooma</p>
-                                    <p class="region">Snowy Mountains NSW</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-                <a href="friend-user-profile.html"> <!-- Link to user's profile page -->
-                    <div class="well well-darker-green">
-                        <div class="panel-left">
-                            <div class="profile-photo-container">
-                                <img src="https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/1/1441153449598_100x100.jpg" /></div>
-                        </div>
-                        <div class="panel-right">
-                            <h5>Anne and Andy Adams</h5>
-                            <div class="hometown">
-                                <div class="details left">
-                                    <span class="glyphicon glyphicon-home"></span>
-                                </div>
-                                <div class="details right">
-                                    <p class="town">Fairy Meadow</p>
-                                    <p class="region">South Coast NSW</p>
-                                </div>
-                            </div>
-                            <div class="current-location">
-                                <div class="details left">
-                                    <span class="glyphicon glyphicon-map-marker"></span>
-                                </div>
-                                <div class="details right">
-                                    <p class="town">Cooma</p>
-                                    <p class="region">Snowy Mountains NSW</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
+                
                 <!-- End of extras -->
 
             </div>

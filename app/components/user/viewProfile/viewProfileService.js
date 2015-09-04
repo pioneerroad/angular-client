@@ -7,7 +7,7 @@
 
                     service.getData = function () {
                         
-                        return $http.get('http://pioneerroad.com.au:8081/api/v1/user/'+$localStorage.token.id+'/profile/fetch'
+                        return $http.post('http://pioneerroad.com.au:8081/api/v1/user/'+$localStorage.token.id+'/profile/fetch'
                                 );
                     };
 
