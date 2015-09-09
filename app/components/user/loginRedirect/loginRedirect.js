@@ -26,6 +26,13 @@
                 //work out what to do here, maybe let controllers handle this?
                 console.log('cant access server');
             }
+            else{
+                lastPath = $location.path();
+                delete $localStorage.token;
+                $rootScope.navbar = false;
+                $rootScope.locationOff = false;
+                $location.path("/login");
+            }
             return $q.reject(response);
         };
         

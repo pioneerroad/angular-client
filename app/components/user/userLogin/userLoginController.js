@@ -52,10 +52,9 @@
                                 // add to the location storage
                                 $rootScope.token = response;
                                 $localStorage.token = {
-                                    token: response.data.token,
-                                    expire: response.data.expires,
-                                    id: response.data.user.id,
-                                    username: response.data.user.username
+                                    token: response.token,
+                                    id: response.user.id,
+                                    username: response.user.username
                                 };
                                 console.log("logged in");
                                 $location.path("/home");

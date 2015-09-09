@@ -1,17 +1,20 @@
 (function () {
     var app = angular.module("pioneerRoad");
-    app.controller('relationshipsController', ['$scope', 'relationshipsService', function ($scope, relationshipsService) {
+    app.controller('relationshipsController', ['$scope', 'relationshipsService', '$localStorage', function ($scope, relationshipsService, $localStorage) {
 
+            $scope.showblockFriendConfirmationModal = false;
+            $scope.showFriendConfirmationModal = false;
             $scope.addFriendsShow = false; //show the menu to add friends
             $scope.symbol = "glyphicon-plus"; //this class controls a glyphicon on the add user button
-            $scope.myclass = 'touch-control inactive'; //used for the delete styling
             $scope.friendName = ""; //friend to find
             $scope.friends = []; //array to hold list of friends
             $scope.addFriendNew = []; //lists all people matching searched name
             var friendId = ""; //id returned from findFriends() function in service
             var friend = {}; //used to hold each friend object and doubles as an error message store
-           
-
+            var friendId = null; //
+            var friendToBlock = null;
+            $scope.message = "";
+            $scope.okay = true;
 
 
             $scope.addFriends = function () {
@@ -25,19 +28,22 @@
                 }
             };
 
-            $scope.blockFriendsOpen = function () {
-
-                $scope.myclass = 'touch-control';
+            $scope.blockFriendsOpen = function (id) {
+                $('#' + id).addClass('active').removeClass('inactive');
             };
-            $scope.blockFriendsClose = function () {
-
-                $scope.myclass = 'touch-control inactive';
+            $scope.blockFriendsClose = function (id) {
+                $('#' + id).addClass('inactive').removeClass('active');
+            };
+            
+            $scope.blockFriendbtn = function(id){
+                friendToBlock = id;
+                $scope.showblockFriendConfirmationModal = true;
+                console.log(friendToBlock);
             };
 
             var listFriends = function () {
                 relationshipsService.getFriendList()
                         .success(function (response) {
-                            console.log(response);
                             for (i = 0; i < response.length; i++) { // for each request
                                 friend = response[i];
 
@@ -70,7 +76,6 @@
                 else {
                     relationshipsService.findFriend($scope.friendName)
                             .success(function (response) {
-                                console.log(response);
                                 getFriendProfile(response.id);
 
                             })
@@ -90,16 +95,40 @@
                 }
             };
 
-            $scope.addFriend = function (finalfriendId) {
-                
+            $scope.addFriendbtn = function (id) {
+                friendAddId = id;
+                $scope.showFriendConfirmationModal = true;
+                $scope.addFriendNew = null;
+            };
+
+            $scope.addFriend = function () {
+                finalfriendId = friendAddId;
                 console.log(finalfriendId);
-                
+
+                if ($localStorage.token.id === friendAddId) {
+                    $scope.message = "You cannot be friends with yourself";
+                    $scope.okay = false; //show error messages
+                }
+
+                if (friendAddId === null) {
+                    return;
+                    $scope.message = "please select friend to add";
+                    $scope.okay = false; //show error messages
+                }
                 relationshipsService.sendFriendRequest(finalfriendId)
                         .success(function (response) {
-                            alert("Friend request sent");
+                            $scope.message = "Friend request sent";
+                            $scope.okay = false;
+                            friendId = null;
+                            $scope.friends = [];
+                            listFriends();
+                            console.log("good");
                         })
                         .error(function (error) {
                             console.log(error);
+                            $scope.okay = false;
+                            $scope.message = "could not send request";
+                            friendId = null;
                         });
             };
 
@@ -110,7 +139,6 @@
                 else {
                     relationshipsService.getFriendProfile(friendId)
                             .success(function (response) {
-                                console.log(response);
                                 friend = response;
                                 if (response.profilePhoto === null) {
                                     friend.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/ui-images/user-profile-default-img.svg";
@@ -120,7 +148,6 @@
                                 }
                                 $scope.addFriendNew.push(friend);
                                 friend = {};
-
                             })
                             .error(function (error) {
                                 console.log(error);
@@ -129,6 +156,15 @@
             };
 
             listFriends();
+
+            $scope.close = function () {
+                $scope.showblockFriendConfirmationModal = false;
+                $scope.showFriendConfirmationModal = false;
+                $scope.addFriendNew = []; //lists all people matching searched name
+                friendAddId = null; // 
+                $scope.message = "";
+                $scope.okay = true;
+            };
 
         }]);
 }());

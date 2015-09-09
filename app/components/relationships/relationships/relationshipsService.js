@@ -24,6 +24,11 @@
                         return $http.post('http://pioneerroad.com.au:8081/api/v1/user/' + $localStorage.token.id + '/profile/fetch', data = {resourceOwnerId: uid}
                         );
                     };
+                    
+                    service.blockFriend = function (uid) {
+                        return $http.put('http://pioneerroad.com.au:8081/api/v1/user/' + $localStorage.token.id + '/friend/delete', data = {blockId: uid}
+                        );
+                    };
 
                     return service;
                 }
