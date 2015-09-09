@@ -15,9 +15,9 @@
         <link rel="stylesheet" href="assets/css/style.css" />
         <link rel="stylesheet" href="assets/css/main.css">
         <link rel="stylesheet" href="assets/css/normalize.css">
-        
-        
-        
+
+
+
         <script src="assets/libs/angular/angular.min.js"></script>
         <script src="assets/libs/angular/angular-route.min.js"></script>
         <script src="assets/libs/angular/angular-touch.min.js"></script>
@@ -38,7 +38,7 @@
         <script src="app/components/user/editProfile/editProfileController.js"></script>
         <script src="app/components/user/editProfile/editProfileService.js"></script>
         <script src="app/components/user/geoLocation/geoLocationService.js"></script>
-        
+
         <script src="app/components/relationships/friendsNearMe/friendsNearMeService.js"></script>
         <script src="app/components/relationships/friendsNearMe/friendsNearMeController.js"></script>
         <script src="app/components/home/homePageService.js"></script>
@@ -100,11 +100,11 @@
                 <div class="close"><button class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button></div>
                 <div class="clearfix"></div>
             </div>
-            <div class="body-panel" ng-controller="friendRequestController">
+            <div class="body-panel panel-list" id="pendingFriendRequests" ng-controller="friendRequestController">
                 <h5>Friend Requests  <span class="badge badge-red">{{numfriendRequest}}</span></h5>
                 <div id="notificationsFriendRequestList" class="friend-list">
                     <div ng-repeat="friend in friends" class="well well-grey">
-                        <div class="left">
+                        <div class="panel-left">
                             <div class="profile-photo-container">
                                 <img ng-src="{{friend.profilePic}}" />
                             </div>
