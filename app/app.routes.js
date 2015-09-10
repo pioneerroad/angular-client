@@ -37,8 +37,8 @@
                        
                   })
                   .when("/logout", {
-                        templateUrl: "app/components/user/viewProfile/viewProfileView.html" //redirect to user register page
-                        
+                        templateUrl: "app/components/user/logOut/viewlogOut.html", //redirect to user register page
+                        controller: "logOutController"
                        
                   })
                   .otherwise({
