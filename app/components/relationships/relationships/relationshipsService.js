@@ -26,7 +26,7 @@
                     };
                     
                     service.blockFriend = function (uid) {
-                        return $http.put('http://pioneerroad.com.au:8081/api/v1/user/' + $localStorage.token.id + '/friend/delete', data = {blockId: uid}
+                        return $http.put('http://pioneerroad.com.au:8081/api/v1/user/' + $localStorage.token.id + '/friends/block', data = {blockId: uid}
                         );
                     };
 

@@ -67,7 +67,7 @@
                     </div>
                     <div class="panel-right">
                         <h5>{{friend.nickname}}</h5>
-                        <div class="hometown">
+                        <div class="hometown" ng-show="friend.location">
                             <div class="details left">
                                 <span class="glyphicon glyphicon-home"></span>
                             </div>
@@ -76,13 +76,13 @@
                                 <p class="region">{{friend.tourism_region}} {{friend.state}}</p>
                             </div>
                         </div>
-                        <div class="current-location">
+                        <div class="current-location" ng-show="friend.currentLocation">
                             <div class="details left">
                                 <span class="glyphicon glyphicon-map-marker"></span>
                             </div>
-                            <div class="details right">
-                                <p class="town">fairy medow</p>
-                                <p class="region">some region</p>
+                            <div class="details right" >
+                                <p class="town">Near {{friend.currentLocation.nearestTown}}</p>
+                                <p class="region">{{friend.currentLocation.tourismRegion}}</p>
                             </div>
                         </div>
                     </div>
@@ -104,9 +104,11 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body">
-                <h4 class="modal-title">Do you really want to block this user?</h4>
-                <button type="button" class="btn btn-danger" ng-click="blockFriend()">Yes, please!</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="close()">No, Thanks!</button>
+                <h4 ng-hide="okay" class="modal-title">{{message}}</h4>
+                <h4 ng-show="okay" class="modal-title">Do you really want to block this user?</h4>
+                <button ng-show="okay" type="button" class="btn btn-danger" ng-click="blockFriend()">Yes, please!</button>
+                <button ng-show="okay" type="button" class="btn btn-default" data-dismiss="modal" ng-click="close()">No, Thanks!</button>
+                <button ng-hide="okay" type="button" class="btn btn-default" data-dismiss="modal" ng-click="close()">Okay</button>
             </div>
         </div>
     </div>

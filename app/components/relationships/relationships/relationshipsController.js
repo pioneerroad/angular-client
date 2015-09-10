@@ -11,7 +11,7 @@
             $scope.addFriendNew = []; //lists all people matching searched name
             var friendId = ""; //id returned from findFriends() function in service
             var friend = {}; //used to hold each friend object and doubles as an error message store
-            var friendId = null; //
+            var friendAddId = null; //
             var friendToBlock = null;
             $scope.message = "";
             $scope.okay = true;
@@ -34,19 +34,41 @@
             $scope.blockFriendsClose = function (id) {
                 $('#' + id).addClass('inactive').removeClass('active');
             };
-            
-            $scope.blockFriendbtn = function(id){
+
+            $scope.blockFriendbtn = function (id) {
                 friendToBlock = id;
                 $scope.showblockFriendConfirmationModal = true;
                 console.log(friendToBlock);
             };
 
+            $scope.blockFriend = function () {
+                if (friendToBlock === null) {
+                    $scope.message = "Could not block friend";
+                    $scope.okay = false;
+                    return;
+                }
+                relationshipsService.blockFriend(friendToBlock)
+                        .success(function (response) {
+                            $scope.message = "Friend Blocked";
+                            $scope.okay = false;
+                            friendToBlock = null;
+                            $scope.friends = null;
+                            listFriends();
+                        })
+                        .error(function (error) {
+                            $scope.message = "Could not block friend";
+                            $scope.okay = false;
+                            console.log(error);
+                        });
+
+            };
+
             var listFriends = function () {
+                $scope.friends = [];
                 relationshipsService.getFriendList()
                         .success(function (response) {
                             for (i = 0; i < response.length; i++) { // for each request
                                 friend = response[i];
-
 
                                 if (response[i].profilePhoto === null) {
                                     friend.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/ui-images/user-profile-default-img.svg";
@@ -54,7 +76,7 @@
                                 else {
                                     friend.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/" + response[i].friend + "/" + response[i].profilePhoto.medium;
                                 }
-
+                                friend.currentLocation = response[i].currentLocation;
                                 $scope.friends.push(friend);
                                 friend = {};
                             }
@@ -63,11 +85,12 @@
                             console.log(error);
                             friend.nickname = error.error;
                             $scope.friends.push(friend);
-                            friend = {};
+                            friend = null;
                         });
             };
 
             $scope.findFriend = function () {
+                $scope.addFriendNew = [];
                 if ($scope.friendName === "") {
                     friend.error = "Please enter a friends email!";
                     $scope.addFriendNew.push(friend);
@@ -76,8 +99,7 @@
                 else {
                     relationshipsService.findFriend($scope.friendName)
                             .success(function (response) {
-                                getFriendProfile(response.id);
-
+                                getFriendProfile(response.id);        
                             })
                             .error(function (error) {
                                 console.log(error);
@@ -102,7 +124,7 @@
             };
 
             $scope.addFriend = function () {
-                finalfriendId = friendAddId;
+                var finalfriendId = friendAddId;
                 console.log(finalfriendId);
 
                 if ($localStorage.token.id === friendAddId) {
@@ -115,20 +137,25 @@
                     $scope.message = "please select friend to add";
                     $scope.okay = false; //show error messages
                 }
-                relationshipsService.sendFriendRequest(finalfriendId)
+                relationshipsService.sendFriendRequest(friendAddId)
                         .success(function (response) {
                             $scope.message = "Friend request sent";
                             $scope.okay = false;
-                            friendId = null;
+                            friendAddId = null;
                             $scope.friends = [];
                             listFriends();
-                            console.log("good");
                         })
                         .error(function (error) {
-                            console.log(error);
-                            $scope.okay = false;
-                            $scope.message = "could not send request";
-                            friendId = null;
+                            if (error.message === "Validation error") {
+                                $scope.okay = false;
+                                $scope.message = "You have already sent a friend request";
+                                friendAddId = null;
+                            }
+                            else {
+                                $scope.okay = false;
+                                $scope.message = "could not send request";
+                                friendAddId = null;
+                            }
                         });
             };
 
@@ -161,7 +188,8 @@
                 $scope.showblockFriendConfirmationModal = false;
                 $scope.showFriendConfirmationModal = false;
                 $scope.addFriendNew = []; //lists all people matching searched name
-                friendAddId = null; // 
+                friendAddId = null; //
+                friendToBlock = null;
                 $scope.message = "";
                 $scope.okay = true;
             };

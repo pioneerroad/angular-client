@@ -36,6 +36,11 @@
                         
                        
                   })
+                  .when("/logout", {
+                        templateUrl: "app/components/user/viewProfile/viewProfileView.html" //redirect to user register page
+                        
+                       
+                  })
                   .otherwise({
                         redirectTo: "/login" //redirect 
                   });
