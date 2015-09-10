@@ -22,7 +22,6 @@
             };
 
             var setImages = function (data) {
-
                 if (data.profileBackgroundPhoto === null) {
 
                     $scope.background = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/ui-images/bg-default-img.svg";
