@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="assets/css/main.css">
         <link rel="stylesheet" href="assets/css/normalize.css">
 
-
+        
 
         <script src="assets/libs/angular/angular.min.js"></script>
         <script src="assets/libs/angular/angular-route.min.js"></script>
@@ -24,9 +24,11 @@
         <script src="assets/libs/angular/ngStorage.min.js"></script>
         <script src="assets/libs/modernizr-2.8.3.min.js"></script>
         <script src="assets/libs/angular-ui-bootstrap-modal.js"></script>
+        <script src="assets/libs/socket-io/socket.io.js"></script>
         <script src="app/app.module.js"></script>
         <script src="app/app.routes.js"></script>
 
+        <script src="app/global/socket/socketController.js"></script>
         <script src="app/components/user/userRegister/userRegisterController.js"></script>
         <script src="app/components/user/userLogin/userLoginController.js"></script>
         <script src="app/components/user/userLogin/userLoginService.js"></script>
@@ -55,10 +57,12 @@
         <script src="app/global/filters/timeFilter.js"></script>
         <script src="app/global/controllers/reEnableLocationController.js"></script>
         <script src="app/global/services/deviceTypeService.js"></script>
+        
+        
 
     </head>
 
-    <body>
+    <body ng-controller="socketController">
 
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>

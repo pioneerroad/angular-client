@@ -1,8 +1,8 @@
 (function () {
     var app = angular.module("pioneerRoad");
 
-    app.controller('friendsNearMeController', ['$scope', 'friendsNearMeService', function ($scope, friendsNearMeService) {
-
+    app.controller('friendsNearMeController', ['$scope', 'friendsNearMeService', '$rootScope', function ($scope, friendsNearMeService,$rootScope) {
+            $rootScope.startSocket();
             //get list of friends
             //store in array
             //ng -repeat
