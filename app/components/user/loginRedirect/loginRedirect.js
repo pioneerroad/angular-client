@@ -26,7 +26,7 @@
                 //work out what to do here, maybe let controllers handle this?
                 console.log('cant access server');
             }
-            else{
+            else if(response.status === 403 && checkLogin()){
                 lastPath = $location.path();
                 delete $localStorage.token;
                 $rootScope.navbar = false;
