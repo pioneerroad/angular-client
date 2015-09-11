@@ -5,8 +5,9 @@
 
             if (loginRedirect.checkLogin()) {
                 //get a current list of friend requests straight away
-                var getFriendRequests = function () {
+                $rootScope.getFriendRequests = function () {
                     //call the getFriendRequestList from fRS
+                    $rootScope.friends = [];
                     friendRequestService.getFriendRequestList()
                             .success(function (response) {
                                 $rootScope.numfriendRequest = response.length;//get number of friend requests
@@ -14,7 +15,7 @@
                                 for (i = 0; i < response.length; i++) { // for each request
                                     friend.nickName = response[i].nickName;
                                     friend.requestId = response[i].requestId;
-                                    
+
                                     if (response[i].profilePhoto === null) {
                                         friend.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/ui-images/user-profile-default-img.svg";
                                     }
@@ -22,14 +23,14 @@
                                         friend.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/" + response[i].userAccountId + "/" + response[i].profilePhoto.medium;
                                     }
 
-                                    $scope.friends.push(friend);
+                                    $rootScope.friends.push(friend);
                                     friend = {};
                                 }
                             })
                             .error(function (error) {
                                 console.log(error);
                             });
-
+                    setNotification();
                 };
 
                 // implemented functions to send accept or block request
@@ -37,9 +38,9 @@
 
                     friendRequestService.acceptRequest(friendId)
                             .success(function (response) {
-                                for (var i = $scope.friends.length - 1; i >= 0; i--) {
-                                    if ($scope.friends[i].requestId === friendId) {
-                                        $scope.friends.splice(i, 1);
+                                for (var i = $rootScope.friends.length - 1; i >= 0; i--) {
+                                    if ($rootScope.friends[i].requestId === friendId) {
+                                        $rootScope.friends.splice(i, 1);
                                     }
                                 }
                                 $rootScope.numfriendRequest--;
@@ -47,24 +48,44 @@
                             .error(function (error) {
                                 console.log(error);
                             });
+                    setNotification();
                 };
 
                 $scope.decline = function (friendId) {
                     friendRequestService.declineRequest(friendId)
                             .success(function (response) {
-
+                                for (var i = $rootScope.friends.length - 1; i >= 0; i--) {
+                                    if ($rootScope.friends[i].requestId === friendId) {
+                                        $rootScope.friends.splice(i, 1);
+                                    }
+                                }
+                                $rootScope.numfriendRequest--;
                             })
                             .error(function (error) {
                                 console.log(error);
                             });
+                    setNotification();
                 };
 
-                $scope.friends = []; //stores all  friend requests
+                var setNotification = function () {
+                    if ($rootScope.numfriendRequest > 0) {
+                        $rootScope.areNotifications = true;
+                    }
+                    else {
+                        $rootScope.areNotifications = false;
+                    }
+                };
+
+
+                $rootScope.friends = []; //stores all  friend requests
                 var friend = {}; //stores a single friend request
-                getFriendRequests(); //get friend request list
+                $rootScope.getFriendRequests(); //get friend request list
             }
             else { //not logged in
 
             }
+
+
+
         }]);
 }());

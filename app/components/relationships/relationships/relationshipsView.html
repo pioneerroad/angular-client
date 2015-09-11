@@ -31,27 +31,27 @@
                                 <div class="profile-photo-container">
                                     <img ng-src="{{friend.profilePic}}" /></div>
                             </div>
-                            <div class="panel-right">
+                            <div class="panel-right" ng-show="friend.nickName">
                                 <h5>{{friend.nickName}}</h5>
                                 <div class="hometown">
                                     <div class="details left">
                                         <span class="glyphicon glyphicon-home"></span>
                                     </div>
-                                    <div class="details right">
+                                    <div class="details right" >
                                         <p class="town">{{friend.dataSet_town.location}}</p>
                                         <p class="region">{{friend.dataSet_town.tourism_region}} {{friend.dataSet_town.state}}</p>
                                     </div>
                                 </div>
-                                <div class="current-location">
+                                <div class="current-location" ng-show="friend.currentLocation.nearestTown">
                                     <div class="details left">
                                         <span class="glyphicon glyphicon-map-marker"></span>
                                     </div>
-                                    <div class="details right">
-                                        <p class="town">Cooma</p>
-                                        <p class="region">Snowy Mountains NSW</p>
+                                    <div class="details right" >
+                                        <p class="town">{{friend.currentLocation.nearestTown}}</p>
+                                        <p class="region">{{friend.currentLocation.tourismRegion}}</p>
                                     </div>
                                 </div>
-                                <button class="btn btn-default" ng-click="addFriendbtn(friend.userAccountId)"><span class="glyphicon glyphicon-plus"></span> Add Friend</button>
+                                <button ng-show="friend.userAccountId" class="btn btn-default" ng-click="addFriendbtn(friend.userAccountId)"><span class="glyphicon glyphicon-plus"></span> Add Friend</button>
                             </div>
                             <div class="clearfix"></div>
                         </div>
