@@ -1,7 +1,7 @@
 (function () {
-    var app = angular.module("pioneerRoad");
+    var app = angular.module("pioneerRoad.viewProfile" , []);
 
-    app.controller('viewProfileController', ['$scope', '$http', '$location', 'userLoginService', '$rootScope', '$localStorage', 'loginRedirect', 'viewProfileService','geoLocationService', 'chatSocket', function ($scope, $http, $location, userLoginService, $rootScope, $localStorage, loginRedirect, viewProfileService, geoLocationService, chatSocket) {
+    app.controller('viewProfileController', ['$scope', '$http', '$location', 'userLoginService', '$rootScope', '$localStorage', 'loginRedirect', 'viewProfileService','geoLocationService', function ($scope, $http, $location, userLoginService, $rootScope, $localStorage, loginRedirect, viewProfileService, geoLocationService, chatSocket) {
 
             geoLocationService.begin(); //update location
 

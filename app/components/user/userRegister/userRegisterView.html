@@ -4,7 +4,7 @@
     <div class="container">
         <!-- Dismissable alert at the top of the page: to be displayed if there are errors with the form submission -->
         <!-- To conditionally display with ng-show if there are errors in the errors object on $scope -->
-        <form name="usercreate"ng-submit="((usercreate.$valid && passwordvalid)) && create_user()" novalidate>
+        <form name="usercreate"ng-submit="CheckForError()" novalidate>
             <div ng-show="IncorrectFeilds" class="alert alert-danger" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="closeModal()">
                     <span aria-hidden="true">&times;</span>
@@ -50,8 +50,9 @@
 
                 </div>
             </div>
+        
             <!-- #successModal -->
-            <button type="submit" class="btn btn-primary btn-lg" ng-click="(usercreate.$invalid || !passwordvalid) && CheckForError()">Join Now</button>
+            <button type="submit" class="btn btn-primary btn-lg">Join Now</button>
         </form>
     </div>
 </main>
