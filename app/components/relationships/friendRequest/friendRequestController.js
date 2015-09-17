@@ -2,7 +2,6 @@
     var app = angular.module("pioneerRoad");
 
     app.controller('friendRequestController', ['$scope', '$rootScope', '$http', '$localStorage', 'loginRedirect', 'friendRequestService', function ($scope, $rootScope, $http, $localStorage, loginRedirect, friendRequestService) {
-
             if (loginRedirect.checkLogin()) {
                 //get a current list of friend requests straight away
                 $rootScope.getFriendRequests = function () {

@@ -14,6 +14,7 @@
                     
                     service.Logout = function(){
                         delete $localStorage.token;
+                        $rootScope.user = {};
                         $location.path("/login");
                         $rootScope.navbar = false;
                     };
