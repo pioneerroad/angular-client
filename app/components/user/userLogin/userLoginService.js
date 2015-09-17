@@ -8,13 +8,13 @@
                     service.Login = function (username, password) {
                         var authdata = Base64.encode(username + ':' + password);
                         $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
-                        
                         return $http.post('http://pioneerroad.com.au:8081/api/v1/user/login'
                                 );
                     };
                     
                     service.Logout = function(){
                         delete $localStorage.token;
+                        $rootScope.user = {};
                         $location.path("/login");
                         $rootScope.navbar = false;
                     };

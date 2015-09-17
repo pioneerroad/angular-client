@@ -1,7 +1,6 @@
 (function(){
      var app = angular.module("pioneerRoad");
 
-    app.controller('homePageController', ['$scope', function ($scope) {
-            
+    app.controller('homePageController', ['$scope' ,'$rootScope', function ($scope,$rootScope) {
     }]);
 }());

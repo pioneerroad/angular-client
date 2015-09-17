@@ -24,9 +24,12 @@
         <script src="assets/libs/angular/ngStorage.min.js"></script>
         <script src="assets/libs/modernizr-2.8.3.min.js"></script>
         <script src="assets/libs/angular-ui-bootstrap-modal.js"></script>
+        <script src="assets/libs/socket-io/socket.io.js"></script>
+        <script src="assets/libs/angular-socket-io/socket.min.js"></script>
         <script src="app/app.module.js"></script>
         <script src="app/app.routes.js"></script>
 
+        <script src="app/global/socket/socketController.js"></script>
         <script src="app/components/user/userRegister/userRegisterController.js"></script>
         <script src="app/components/user/userLogin/userLoginController.js"></script>
         <script src="app/components/user/userLogin/userLoginService.js"></script>
@@ -54,237 +57,29 @@
         <script src="app/global/filters/distanceFilter.js"></script>
         <script src="app/global/filters/timeFilter.js"></script>
         <script src="app/global/controllers/reEnableLocationController.js"></script>
+        
         <script src="app/global/services/deviceTypeService.js"></script>
-
+        
+        <script src="app/global/partials/notificationBar/notificationBarController.js"></script>
+        
+        
     </head>
 
     <body>
-
+        <span ng-if="user.token">
+           <div ng-include="'/app/global/partials/notificationBar/notificationBar.html'"></div>
+        </span>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
             <![endif]-->
-        <div ng-show="navbar" class="menu-bar top nav">
-            <ul id="navBarTop">
-                <li id="notificationPanelCtrl" class="notification" ><span class="badge badge-red">{{numfriendRequest}}</span></li>
-                <li id="messagesPanelCtrl" class="messages"><span class="badge badge-red">10</span></li>
-            </ul>
-        </div> <!-- Info/status bar at top of screen. May also include some navigation aids eg. to messages -->
-
-        <div ng-controller="reEnableLocationController">
-            <div  ng-show="navbar && locationOff" data-toggle="modal" class="alert alert-danger" role="alert" data-target="#locationModal">
-                <span class="glyphicon glyphicon-info-sign"></span>
-                <strong> Please enable location service! <br/></strong>
-                <a href="#locationModal"> Help!</a>
-
-            </div>
-        </div>
+        
 
         <!-- this is where the main  content goes -->
-        <div ng-view></div>
+        <div ng-view></div>     
 
-        <!-- The menu bar a the bottom of the page -->
-        <div ng-show="navbar" class="menu-bar bottom">
-            <ul role="menu">
-                <li class="icon icon-home"><a href="#/home"></a></li>
-                <li class="icon icon-community"><a href="#/community"></a></li>
-                <li class="icon icon-places"><a href="#/home"></a></li>
-                <li class="icon icon-user"><a href="#/profile"></a></li>
-            </ul>
-        </div>
-        <!-- End of menu bar -->
-        <!-- *********** Beginning of dynamic panels ************* -->
-        <!-- *********** Beginning of Notification Panel ********* -->
-        <div class="overlay-panel" id="notification-panel">
-            <div class="title-panel">
-                <div class="nav-back"><button class="btn btn-default hidden"><span class="glyphicon glyphicon-chevron-left hidden"></span></button></div>
-                <div class="title"><h3>Notifications</h3></div>
-                <div class="close"><button class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button></div>
-                <div class="clearfix"></div>
-            </div>
-            <div class="body-panel panel-list" id="pendingFriendRequests" ng-controller="friendRequestController">
-                <h5>Friend Requests  <span class="badge badge-red">{{numfriendRequest}}</span></h5>
-                <div id="notificationsFriendRequestList" class="friend-list">
-                    <div ng-repeat="friend in friends" class="well well-grey">
-                        <div class="panel-left">
-                            <div class="profile-photo-container">
-                                <img ng-src="{{friend.profilePic}}" />
-                            </div>
-                        </div>
-                        <div class="right">
-                            <h3>{{friend.nickName}}</h3>
-                            <div class="inline-form friend-action">
-                                <div class="input-group">
-                                    <button class="btn btn-success accept" ng-click="accept(friend.requestId)">Accept</button>
-                                    <button class="btn btn-danger decline" ng-click="decline(friend.requestId)">Decline</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ********* Messages Panel ***************** -->
-        <div class="overlay-panel" id="messages-panel">
-            <div class="title-panel">
-                <div class="nav-back"><button class="btn btn-default hidden"><span class="glyphicon glyphicon-chevron-left hidden"></span></button></div>
-                <div class="title"><h3>Messages</h3></div>
-                <div class="close"><button class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button></div>
-                <div class="clearfix"></div>
-            </div>
-            <div id="msg-list-panel" class="msg-panel">
-                <div class="well well-orange" id="msg-new-conversation">
-                    <div class="heading">
-                        <h4>Start a new conversation</h4>
-                        <button class="btn btn-default" id="startNewConversation"><span class="glyphicon glyphicon-pencil"></span></button>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="body">
-                        <div class="form-group">
-                            <div class="input-group">
-                                <label class="sr-only" for="nickname">Nickname</label>
-                                <input type="text" class="form-control" id="nickname"/>
-                                <span class="input-group-addon" id="addRecipient"><span class="glyphicon glyphicon-plus"></span></span>
-                            </div>
-                            <div class="msg-recipient-list"><ul></ul><!-- Visual indicator of msg recipients; User Ids also need to be added to an array and sent to server--></div>
-                            <div class="input-group">
-                                <label class="sr-only" for="msg-body">Message Body</label>
-                                <textarea class="form-control" rows="5" id="msg-body"></textarea>
-                                <span type="submit" class="input-group-addon" id="postMessage"><span class="glyphicon glyphicon-share-alt"></span></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="msg-conversation-list">
-                    <div class="well well-blue" data-thread-id="425"> <!-- data-thread-id value is msg thread ID -->
-                        <div class="row">
-                            <div class="msg-user">Bill and Betty Burrows</div>
-                            <div class="msg-date">1 hour ago</div>
-                        </div>
-                        <div class="msg-status unread"><span class="glyphicon glyphicon-asterisk"></span></div>
-                        <div class="msg-user-profile-photo online"><img src=""/></div>
-                        <div class="msg-summary">
-
-                            <p class="summary-text">Hi there Betty and Bill, just wanted...</p>
-                        </div>
-                        <div class="msg-open-thread"><span class="glyphicon glyphicon-chevron-right"></span></div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="well well-blue" data-thread-id="425"> <!-- data-thread-id value is msg thread ID -->
-                        <div class="row">
-                            <div class="msg-user">Sid and Sheryl Smith</div>
-                            <div class="msg-date">2 days ago</div>
-                        </div>
-                        <div class="msg-status unread"><span class="glyphicon glyphicon-asterisk"></span></div>
-                        <div class="msg-user-profile-photo offline"><img src=""/></div>
-                        <div class="msg-summary">
-
-                            <p class="summary-text">We're at Port Fairy now...</p>
-                        </div>
-                        <div class="msg-open-thread"><span class="glyphicon glyphicon-chevron-right"></span></div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="well well-blue" data-thread-id="425"> <!-- data-thread-id value is msg thread ID -->
-                        <div class="row">
-                            <div class="msg-user">Jack and Jill James</div>
-                            <div class="msg-date">3 days ago</div>
-                        </div>
-                        <div class="msg-status read"><span class="glyphicon glyphicon-asterisk"></span></div>
-                        <div class="msg-user-profile-photo away"><img src=""/></div>
-                        <div class="msg-summary">
-                            <p class="summary-text">If you're going to be near the...</p>
-                        </div>
-                        <div class="msg-open-thread"><span class="glyphicon glyphicon-chevron-right"></span></div>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-            </div>
-            <div id="msg-thread-panel" class="msg-panel">
-                <section>
-                    <div class="msg-container from-them">
-                        <div class="message">
-                            <p>Hey John and June, we're having a great time up here at the Sunshine Coast. Thanks for all your tips about places to stay along the way.</p>
-                        </div>
-                        <img src=""/>
-                        <div class="clearfix"></div>
-                        <p class="msg-status"><strong>Read</strong> 10 Aug 2015 09:15</p>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="msg-container from-me">
-                        <div class="message">
-                            <p>You're welcome. We on our way to Mt Isa now. Weather is lovely out here.</p>
-                        </div>
-                        <img src=""/>
-                        <div class="clearfix"></div>
-                        <p class="msg-status"><strong>Read</strong> 10 Aug 2015 09:15</p>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="clear"></div>
-                    <div class="clear"></div>
-                    <div class="msg-container from-me">
-                        <div class="message">
-                            <p>Is it sunny?</p>
-                        </div>
-                        <img src=""/>
-                        <div class="clearfix"></div>
-                        <p class="msg-status"><strong>Read</strong> 10 Aug 2015 09:15</p>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="msg-container from-me">
-                        <div class="message">
-                            <p>Yes!</p>
-                        </div>
-                        <img src=""/>
-                        <div class="clearfix"></div>
-                        <p class="msg-status"><strong>Read</strong> 10 Aug 2015 09:15</p>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="clear"></div>
-                    <div class="msg-container from-them">
-                        <div class="message">
-                            <p>That's nice. It's raining really heavily over here on the coast.</p>
-                        </div>
-                        <img src=""/>
-                        <div class="clearfix"></div>
-                        <p class="msg-status"><strong>Read</strong> 10 Aug 2015 09:15</p>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="clear"></div>
-                    <div class="msg-container from-me">
-                        <div class="message">
-                            <p>I heard that. We think it will probably move inland in the next couple of days so we better enjoy this sunshine while it lasts.</p>
-                        </div>
-                        <div class="clearfix"></div>
-                        <img src=""/>
-                        <p class="msg-status"><strong>Read</strong> 10 Aug 2015 09:15</p>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="clear"></div>
-                    <div class="msg-container from-them">
-                        <div class="message">
-                            <p>Careful out there in the rain. Some of those dirt tracks turn to clay when it's wet.</p>
-                        </div>
-                        <div class="clearfix"></div>
-                        <img src=""/>
-                        <p class="msg-status"><strong>Read</strong> 10 Aug 2015 09:15</p>
-                        <div class="clearfix"></div>
-                    </div>
-                </section>
-                <div class="well well-orange msg-reply">
-                    <div class="form-group">
-                        <label class="sr-only" for="msgReply">Write your reply</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="msgReply">
-                            <div class="input-group-addon"><span class="glyphicon glyphicon-share-alt"></span></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ************* End of dynamic panels *********** -->
-
+         <span ng-if="user.token">
+           <div ng-include="'/app/global/partials/navigationBar/navigationBar.html'"></div>
+        </span>
         <!--modal for location service -->
         <div ng-controller="reEnableLocationController" class="modal fade" id="locationModal" tabindex="-1" role="dialog" aria-labelledby="locationModal">
             <div class="modal-dialog" role="document">

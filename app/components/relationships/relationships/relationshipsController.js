@@ -99,7 +99,13 @@
                 else {
                     relationshipsService.findFriend($scope.friendName)
                             .success(function (response) {
-                                getFriendProfile(response.id);        
+                                if (response.error === "NO_MATCHING_USER") { //no people found
+                                    friend.error = "Could not find any users by that email!";
+                                    $scope.addFriendNew.push(friend);
+                                    friend = {};
+                                    return;
+                                }
+                                getFriendProfile(response.id);
                             })
                             .error(function (error) {
                                 console.log(error);
@@ -124,12 +130,12 @@
             };
 
             $scope.addFriend = function () {
-                var finalfriendId = friendAddId;
-                console.log(finalfriendId);
+                friendAddId;
 
                 if ($localStorage.token.id === friendAddId) {
                     $scope.message = "You cannot be friends with yourself";
                     $scope.okay = false; //show error messages
+                    return;
                 }
 
                 if (friendAddId === null) {

@@ -9,6 +9,7 @@
                 lastPath = $location.path();
                 delete $localStorage.token;
                 $rootScope.navbar = false;
+                $rootScope.user = {};
                 $rootScope.locationOff = false;
                 $location.path("/login");
             }
@@ -16,6 +17,7 @@
                 lastPath = $location.path();
                 delete $localStorage.token;
                 $rootScope.navbar = false;
+                $rootScope.user = {};
                 $rootScope.locationOff = false;
                 $location.path("/login");
             }
@@ -30,6 +32,7 @@
                 lastPath = $location.path();
                 delete $localStorage.token;
                 $rootScope.navbar = false;
+                $rootScope.user = {};
                 $rootScope.locationOff = false;
                 $location.path("/login");
             }
@@ -44,10 +47,13 @@
         var checkLogin = function(){
           if($localStorage.token){
             //call check token or someother way to check authentication 
-            return true;
             $rootScope.navbar = true;
+            $rootScope.user = $localStorage.token;
+            return true;
+            
           } 
           else{
+              $rootScope.user = null;
               $rootScope.navbar = false;
               return false;   
           }
