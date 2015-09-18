@@ -5,7 +5,7 @@
         <div class="container">
             <!-- Dismissable alert at the top of the page: to be displayed if there are errors with the form submission -->
             <!-- Display only if user can't be validated. Remember ng-show or ng-hide helps with this -->
-            <div ng-show="Error" class="alert alert-danger" role="alert">
+            <div ng-show="Error" class="alert alert-danger" role="alert" ng-cloak>
                 <button type="button" class="close"  ng-click="closeError()" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

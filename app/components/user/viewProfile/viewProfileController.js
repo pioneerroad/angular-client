@@ -2,7 +2,9 @@
     var app = angular.module("pioneerRoad.Profile", []);
 
     app.controller('viewProfileController', ['$scope', '$http', '$location', '$rootScope', '$localStorage', 'loginRedirect', 'viewProfileService','geoLocationService', function ($scope, $http, $location, $rootScope, $localStorage, loginRedirect, viewProfileService, geoLocationService) {
-
+            $scope.nickName = false;
+            $scope.location = " ";
+            
             geoLocationService.begin(); //update location
 
             var getProfile = function () { //get the users profile
@@ -65,9 +67,6 @@
                             console.log(error);
                         });
             };
-            
-            $scope.nickName = false;
-            $scope.location = "";
 
         }]);
 }());

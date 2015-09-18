@@ -1,20 +1,20 @@
 <!-- Main app functions/content goes inside the <main> section -->
 <main ng-app="pioneerRoad.Profile">
-    <div id="user-profile-photo-container">
+    <div id="user-profile-photo-container" ng-cloak>
         <div id="user-profile-bg-photo">
             <img ng-src="{{background}}" />
         </div>
-        <div id="user-profile-photo-inner-container">
+        <div id="user-profile-photo-inner-container" ng-cloak>
             <div id="user-profile-photo">
                 <img ng-src="{{profilepic}}" />
             </div>
         </div>
-        <div class="user-profile-nickname" ng-show="nickName">
+        <div class="user-profile-nickname" ng-show="nickName" ng-cloak>
             <h1>{{profile.nickName}}</h1>
         </div>
     </div>
     <div class="container">
-        <div class="well well-blue" id="current-location">
+        <div class="well well-blue" id="current-location" ng-cloak>
             <h3>Hometown</h3>
             <div class="panel-left"><span class="glyphicon glyphicon-home large"></span></div>
             <div class="panel-right">
@@ -23,7 +23,7 @@
             </div>
             <div class="clearfix"></div>
         </div>
-        <div class="well well-orange" id="current-location">
+        <div class="well well-orange" id="current-location" ng-cloak>
             <h3>Current Location</h3>
             <div class="panel-left"><span class="glyphicon glyphicon-map-marker large"></span></div>
             <div class="panel-right">
