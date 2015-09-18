@@ -5,7 +5,6 @@
             
             if (loginRedirect.checkLogin()) {
                 $location.path("/home");
-                console.log("i'm logged in");
             }
 
 

@@ -1,7 +1,7 @@
 (function () {
     var app = angular.module("pioneerRoad");
 
-    app.controller('notificationBarController', ['$scope', '$rootScope', 'chatSocket', function ($scope, $rootScope, chatSocket) {
+    app.controller('notificationBarController', ['$scope', '$rootScope', 'NotificationService', function ($scope, $rootScope, chatSocket) {
             $scope.OpenFriend = function () {
                 $('#notification-panel').addClass('is-visible');
             };
