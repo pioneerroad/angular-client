@@ -5,10 +5,9 @@
         <div class="subsection-selector" role="group" aria-label="subsectionNavigation">
             <ul class="btn-group btn-group-justified">
                 <a class="btn active">Friends</a>
-                <a class="btn">Groups</a>
             </ul>
         </div>
-        <div id="friend-panel" class="subsection-panel visible">
+        <div id="friend-panel" class="subsection-panel visible" >
             <div class="well well-orange" id="add-friend">
                 <div class="heading widget-add-new">
                     <h4>Add a new friend</h4>
@@ -25,7 +24,7 @@
                             <span class="input-group-addon" id="executeSearch"><span ng-click="findFriend()" class="glyphicon glyphicon-search"></span></span>
                         </div>
                         <!-- Returned result of friend search -->
-                        <div class="well panel-list friends-list" ng-repeat="friend in addFriendNew">
+                        <div class="well panel-list friends-list" ng-repeat="friend in addFriendNew" ng-cloak>
                             {{friend.error}}
                             <div class="panel-left">
                                 <div class="profile-photo-container">
@@ -61,22 +60,22 @@
             <div class="scrollable panel-list friends-list">
                 <!-- Beginning of block inside ng-repeat -->
                 <div class="well well-darker-green has-touch-control" ng-swipe-left="blockFriendsOpen(friend.friend)" ng-swipe-right="blockFriendsClose(friend.friend)" ng-repeat="friend in friends">
-                    <div class="panel-left">
+                    <div class="panel-left" ng-cloak>
                         <div class="profile-photo-container">
                             <img ng-src="{{friend.profilePic}}" /></div>
                     </div>
-                    <div class="panel-right">
+                    <div class="panel-right" ng-cloak>
                         <h5>{{friend.nickname}}</h5>
                         <div class="hometown" ng-show="friend.location">
                             <div class="details left">
                                 <span class="glyphicon glyphicon-home"></span>
                             </div>
-                            <div class="details right">
+                            <div class="details right" ng-cloak>
                                 <p class="town">{{friend.location}}</p>
                                 <p class="region">{{friend.tourism_region}} {{friend.state}}</p>
                             </div>
                         </div>
-                        <div class="current-location" ng-show="friend.currentLocation.nearestTown">
+                        <div class="current-location" ng-show="friend.currentLocation.nearestTown" ng-cloak>
                             <div class="details left">
                                 <span class="glyphicon glyphicon-map-marker"></span>
                             </div>
@@ -87,7 +86,7 @@
                         </div>
                     </div>
                     <div class="clearfix"></div>
-                    <div class="touch-control inactive" id="{{friend.friend}}" ng-click="blockFriendbtn(friend.friend)">
+                    <div class="touch-control inactive" id="{{friend.friend}}" ng-click="blockFriendbtn(friend.friend)" ng-cloak>
                         <p data-toggle="modal" data-target="#blockFriendConfirmationModal"  >Block Friend</p>
                     </div>
                 </div>

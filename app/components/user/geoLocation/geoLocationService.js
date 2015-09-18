@@ -8,6 +8,7 @@
                     
                     
                     service.begin = function(){
+                        
                         getLocation();
                     };
                     
@@ -23,6 +24,7 @@
                     }
                     
                     function getLocation() {
+                        
                         if (navigator.geolocation) {
                             navigator.geolocation.getCurrentPosition(setPositionData, showError);
                         } else {
