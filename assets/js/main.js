@@ -1,25 +1,5 @@
+
 $(document).ready(function() {
-
-    /** Open the notification panel when user clicks on the notification icon */
-    $('#notificationPanelCtrl').on('tap', function(event) {
-        $('#notification-panel').toggleClass('is-visible');
-    });
-
-    /** Open the messages panel when user clicks on the messages icon */
-    $('#messagesPanelCtrl').click(function(event) {
-        $('#messages-panel').toggleClass('is-visible');
-        $('main').toggleClass('no-scroll');
-    });
-
-    $('.friend-actions #new-message').on('tap', function(event) {
-        $('#messages-panel').toggleClass('is-visible');
-        $('main').toggleClass('no-scroll');
-    });
-
-    $('#user-profile-rig-img').on('tap', function(event) {
-        $('#user-profile-rig-img-panel').addClass('is-visible');
-        $('main').toggleClass('no-scroll');
-    });
 
     /** Close any open panels and reset classes to default */
     $('.close').click(function(event) {

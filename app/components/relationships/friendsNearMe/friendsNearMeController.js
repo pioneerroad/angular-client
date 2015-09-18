@@ -1,8 +1,7 @@
 (function () {
     var app = angular.module("pioneerRoad");
 
-    app.controller('friendsNearMeController', ['$scope', 'friendsNearMeService', function ($scope, friendsNearMeService) {
-
+    app.controller('friendsNearMeController', ['$scope', 'friendsNearMeService', '$rootScope', function ($scope, friendsNearMeService,$rootScope) {
             //get list of friends
             //store in array
             //ng -repeat
@@ -13,12 +12,12 @@
                                 friend.nickName = response[i].nickname;
                                 friend.checkinTime = response[i].checkinTime;
                                 friend.distance = response[i].distance;
-                                friend.id = response[i].friend;
+                                friend.id = response[i].friendId;
                                 if (response[i].profilePhoto === null) {
                                     friend.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/ui-images/user-profile-default-img.svg";
                                 }
                                 else {
-                                    friend.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/" + response[i].friend + "/" + response[i].profilePhoto.medium;
+                                    friend.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/" + response[i].friendId + "/" + response[i].profilePhoto.medium;
                                 }
 
                                 $scope.friends.push(friend);

@@ -16,6 +16,7 @@
                     };
 
                     service.findFriend = function (reciver) {
+                        reciver = reciver.toLowerCase()
                         return $http.post('http://pioneerroad.com.au:8081/api/v1/user/' + $localStorage.token.id + '/friends/find', data = {username: reciver}
                         );
                     };

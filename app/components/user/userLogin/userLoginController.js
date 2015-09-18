@@ -57,8 +57,9 @@
                                     username: response.user.username
                                 };
                                 console.log("logged in");
-                                $location.path("/home");
                                 $rootScope.navbar = true;
+                                $location.path("/home");
+                                
                             }
                         })
                         .error(function (error) {
