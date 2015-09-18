@@ -36,7 +36,7 @@ $(document).ready(function() {
         $('#nickname').val('');
     });
 
-    
+
 
     $('.msg-recipient-list').on('tap', '.recipient', function(e) {
         $(this).remove();
@@ -69,6 +69,28 @@ $(document).ready(function() {
         $('.subsection-panel').toggleClass('visible').toggleClass('hidden');
     });
 
-    
+    /***** Popup menu display controls *****/
+    /*$('.menu-bar .icon').click(function(event) {
+        var target = $(this);
+        var targetMenu, activeItem;
+
+        $('.menu-bar .icon.active').each(function(index, e) {
+            if ($(e).is(target)) {
+                targetMenu = $('#'+target.data('menu')+'-menu');
+                $(e).removeClass('active');
+                targetMenu.removeClass('is-visible');
+                activeItem = true;
+            } else {
+                targetMenu = $('#'+$(e).data('menu')+'-menu');
+                $(e).removeClass('active');
+                targetMenu.removeClass('is-visible');
+            }
+        });
+        if (!activeItem) {
+            target.addClass('active');
+            $('#'+target.data('menu')+'-menu').addClass('is-visible');
+        }
+
+    });*/
 
 });
