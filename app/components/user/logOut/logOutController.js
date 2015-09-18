@@ -1,5 +1,5 @@
 (function () {
-    var app = angular.module("pioneerRoad.logOut", []);
+    var app = angular.module("pioneerRoad.userLogin");
 
     app.controller('logOutController', ['$scope', 'userLoginService', function ($scope,userLoginService) {
 

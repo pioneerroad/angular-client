@@ -1,7 +1,7 @@
 (function () {
-    var app = angular.module("pioneerRoad.viewProfile" , []);
+    var app = angular.module("pioneerRoad.Profile", ["ngTouch"]);
 
-    app.controller('viewProfileController', ['$scope', '$http', '$location', 'userLoginService', '$rootScope', '$localStorage', 'loginRedirect', 'viewProfileService','geoLocationService', function ($scope, $http, $location, userLoginService, $rootScope, $localStorage, loginRedirect, viewProfileService, geoLocationService, chatSocket) {
+    app.controller('viewProfileController', ['$scope', '$http', '$location', '$rootScope', '$localStorage', 'loginRedirect', 'viewProfileService','geoLocationService', function ($scope, $http, $location, $rootScope, $localStorage, loginRedirect, viewProfileService, geoLocationService) {
 
             geoLocationService.begin(); //update location
 
@@ -47,9 +47,7 @@
                 }
             };
 
-            $scope.logOut = function () {
-                userLoginService.Logout();
-            };
+            
             if (!loginRedirect.checkLogin()) {
                 $location.path("/login");
                 console.log("i'm not logged in");

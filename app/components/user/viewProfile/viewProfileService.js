@@ -1,6 +1,6 @@
 (function () {
 
-    angular.module('pioneerRoad.viewProfile')
+    angular.module("pioneerRoad.Profile")
             .factory('viewProfileService', ['$http', '$localStorage',
                 function ($http, $localStorage) {
                     var service = {};

@@ -1,5 +1,5 @@
 (function () {
-    var app = angular.module("pioneerRoad");
+    var app = angular.module('pioneerRoad.Profile');
 
     app.controller('editProfileController', ['$scope', '$localStorage', 'loginRedirect', '$location', 'editProfileService', 'viewProfileService', 'geoLocationService', function ($scope,$localStorage ,loginRedirect, $location, editProfileService, viewProfileService, geoLocationService) {
 

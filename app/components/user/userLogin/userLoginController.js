@@ -1,5 +1,5 @@
 (function () {
-    var app = angular.module("pioneerRoad.userLogin", []);
+    var app = angular.module("pioneerRoad.userLogin", ["ngRoute", "ngStorage"]);
 
     app.controller('userLoginController', ['$scope', '$http', '$location', 'userLoginService', '$rootScope', '$localStorage', 'loginRedirect', 'rememberMeService', function ($scope, $http, $location, userLoginService, $rootScope, $localStorage, loginRedirect, rememberMeService) {
             
