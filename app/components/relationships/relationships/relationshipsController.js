@@ -1,5 +1,5 @@
 (function () {
-    var app = angular.module("pioneerRoad");
+    var app = angular.module("pioneerRoad.RelationShips");
     app.controller('relationshipsController', ['$scope', 'relationshipsService', '$localStorage', function ($scope, relationshipsService, $localStorage) {
 
             $scope.showblockFriendConfirmationModal = false;

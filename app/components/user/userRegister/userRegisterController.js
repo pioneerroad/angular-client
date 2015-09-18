@@ -22,7 +22,6 @@
         };
 
         $scope.create_user = function () { //creates the structure in which the form data is loaded and post's it to the server
-            console.log("here");
             $scope.closeModal();
             if ($scope.passwordvalid) { //another check incase people manage to submit an ivalid form
 
@@ -64,7 +63,6 @@
 
         };
         $scope.CheckForError = function () {
-            console.log("in check for error");
             $scope.closeModal();
             if ($scope.usercreate.password.$error.required) {
                 $scope.errors.push("You did not enter a password");

@@ -1,5 +1,5 @@
 (function () {
-    var app = angular.module("pioneerRoad.Profile", ["ngTouch"]);
+    var app = angular.module("pioneerRoad.Profile", []);
 
     app.controller('viewProfileController', ['$scope', '$http', '$location', '$rootScope', '$localStorage', 'loginRedirect', 'viewProfileService','geoLocationService', function ($scope, $http, $location, $rootScope, $localStorage, loginRedirect, viewProfileService, geoLocationService) {
 
