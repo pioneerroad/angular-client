@@ -4,7 +4,7 @@
         return function (date) {
 
             if (date === undefined) {
-                return "";
+                return " ";
             }
             var seconds = Math.floor((new Date() - date) / 1000);
 

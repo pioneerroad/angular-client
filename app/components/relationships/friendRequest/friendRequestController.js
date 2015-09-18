@@ -1,5 +1,5 @@
 (function () {
-    var app = angular.module("pioneerRoad");
+    var app = angular.module("pioneerRoad.RelationShips");
 
     app.controller('friendRequestController', ['$scope', '$rootScope', '$http', '$localStorage', 'loginRedirect', 'friendRequestService', function ($scope, $rootScope, $http, $localStorage, loginRedirect, friendRequestService) {
             if (loginRedirect.checkLogin()) {

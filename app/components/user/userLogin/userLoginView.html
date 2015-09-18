@@ -1,82 +1,84 @@
-<div class="info-bar"><h1>Login</h1></div> <!-- Info/status bar at top of screen. May also include some navigation aids eg. to messages -->
-<!-- Main app functions/content goes inside the <main> section -->
-<main>
-    <div class="container">
-        <!-- Dismissable alert at the top of the page: to be displayed if there are errors with the form submission -->
-        <!-- Display only if user can't be validated. Remember ng-show or ng-hide helps with this -->
-        <div ng-show="Error" class="alert alert-danger" role="alert">
-            <button type="button" class="close"  ng-click="closeError()" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <strong>Something went terribly, terribly wrong!</strong>
-            <ul>
-                <li ng-repeat="error in Errors">{{error}}</li>
-            </ul>
-        </div>
-        <!-- End of dismissable alert at the top of the page -->
+<div ng-app="pioneerRoad.userLogin">
+    <div class="info-bar"><h1>Login</h1></div> <!-- Info/status bar at top of screen. May also include some navigation aids eg. to messages -->
+    <!-- Main app functions/content goes inside the <main> section -->
+    <main>
         <div class="container">
-            <!-- Email address field -->
-            <div class="form-group">
-                <div class="input-group input-group-lg">
-                    <span class="input-group-addon" id="sizing-addon"><span class="glyphicon glyphicon-envelope"></span></span>
-                    <input type="text" class="form-control" placeholder="Email Address" aria-describedby="sizing-addon" ng-model="email">
-                </div>
+            <!-- Dismissable alert at the top of the page: to be displayed if there are errors with the form submission -->
+            <!-- Display only if user can't be validated. Remember ng-show or ng-hide helps with this -->
+            <div ng-show="Error" class="alert alert-danger" role="alert">
+                <button type="button" class="close"  ng-click="closeError()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <strong>Something went terribly, terribly wrong!</strong>
+                <ul>
+                    <li ng-repeat="error in Errors">{{error}}</li>
+                </ul>
             </div>
-            <!-- Password Field -->
-            <div class="input-group input-group-lg">
-                <span class="input-group-addon" id="sizing-addon2"><span class="glyphicon glyphicon-lock"></span></span>
-                <input type="password" class="form-control" placeholder="Password" aria-describedby="sizing-addon2" ng-model="password">
-            </div>
-            <div id="user-login-remember" class="form-group">
-                <input id="user-login-remember-checkbox" type="checkbox"ng-click="rememberMe()" ng-model="remember">
-                <label class="cbx-label">Remember Me</label>
-            </div>
-            <!-- Login Button -->
-            <button type="button" class="btn btn-warning btn-lg btn-fw" ng-click="authenticate()">Login</button>
-        </div>
-
-        <!-- Functions to reset password/register new account goes here -->
-        <ul id="user-login-extra-options">
-            <!-- Let's put the password reset form in a popup modal -->
-            <li><a href="" data-toggle="modal" data-target="#passwordResetModal" >Forgot Password?</a></li>
-            <!-- Navigate to the signup/registration page -->
-            <li><a href="#/register">Not a member yet?</a></li> <!-- Link to signup/registration page -->
-            <li><a href="" ng-click="logOut()">Logout</a></li>
-        </ul>
-    </div>
-</main>
-
-<!-- Modals -->
-<!-- Password Reset Modal -->
-<div class="modal fade" id="passwordResetModal" tabindex="-1" role="dialog" aria-labelledby="passwordResetModal">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Reset Your Password</h4>
-            </div>
-            <div class="modal-body">
-                <div class="well">Please enter your email address to receive instructions about how to reset you password</div>
+            <!-- End of dismissable alert at the top of the page -->
+            <div class="container">
+                <!-- Email address field -->
                 <div class="form-group">
                     <div class="input-group input-group-lg">
                         <span class="input-group-addon" id="sizing-addon"><span class="glyphicon glyphicon-envelope"></span></span>
-                        <input type="text" class="form-control" placeholder="Email Address" aria-describedby="sizing-addon">
+                        <input type="text" class="form-control" placeholder="Email Address" aria-describedby="sizing-addon" ng-model="email">
                     </div>
                 </div>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#passwordResetResponseModal">Request Password Reset</button>
+                <!-- Password Field -->
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon" id="sizing-addon2"><span class="glyphicon glyphicon-lock"></span></span>
+                    <input type="password" class="form-control" placeholder="Password" aria-describedby="sizing-addon2" ng-model="password">
+                </div>
+                <div id="user-login-remember" class="form-group">
+                    <input id="user-login-remember-checkbox" type="checkbox"ng-click="rememberMe()" ng-model="remember">
+                    <label class="cbx-label">Remember Me</label>
+                </div>
+                <!-- Login Button -->
+                <button type="button" class="btn btn-warning btn-lg btn-fw" ng-click="authenticate()">Login</button>
+            </div>
+
+            <!-- Functions to reset password/register new account goes here -->
+            <ul id="user-login-extra-options">
+                <!-- Let's put the password reset form in a popup modal -->
+                <li><a href="" data-toggle="modal" data-target="#passwordResetModal" >Forgot Password?</a></li>
+                <!-- Navigate to the signup/registration page -->
+                <li><a href="#/register">Not a member yet?</a></li> <!-- Link to signup/registration page -->
+                <li><a href="" ng-click="logOut()">Logout</a></li>
+            </ul>
+        </div>
+    </main>
+
+    <!-- Modals -->
+    <!-- Password Reset Modal -->
+    <div class="modal fade" id="passwordResetModal" tabindex="-1" role="dialog" aria-labelledby="passwordResetModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Reset Your Password</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="well">Please enter your email address to receive instructions about how to reset you password</div>
+                    <div class="form-group">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="sizing-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+                            <input type="text" class="form-control" placeholder="Email Address" aria-describedby="sizing-addon">
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#passwordResetResponseModal">Request Password Reset</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="modal fade" id="passwordResetResponseModal" tabindex="-1" role="dialog" aria-labelledby="passwordResetResponseModal">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="alert alert-success" role="alert"><strong>Success!!</strong> Please check your email for instructions about how to reset your password.</div>
-                <!-- Display this if email address for reset was not found -->
-                <!-- <div class="alert alert-warning" role="alert"><strong>Sorry!!</strong> We could not find a user account for that email address.</div> -->
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    <div class="modal fade" id="passwordResetResponseModal" tabindex="-1" role="dialog" aria-labelledby="passwordResetResponseModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="alert alert-success" role="alert"><strong>Success!!</strong> Please check your email for instructions about how to reset your password.</div>
+                    <!-- Display this if email address for reset was not found -->
+                    <!-- <div class="alert alert-warning" role="alert"><strong>Sorry!!</strong> We could not find a user account for that email address.</div> -->
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>

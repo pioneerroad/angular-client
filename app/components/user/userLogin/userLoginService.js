@@ -1,6 +1,6 @@
 (function () {
 
-    angular.module('pioneerRoad')
+    angular.module('pioneerRoad.userLogin')
             .factory('userLoginService', ['Base64', '$http', '$localStorage', '$location', '$rootScope',
                 function (Base64, $http, $localStorage, $location, $rootScope) {
                     var service = {};

@@ -1,5 +1,5 @@
 (function () {
-    var app = angular.module("pioneerRoad");
+    var app = angular.module("pioneerRoad.RelationShips", []);
 
     app.controller('friendsNearMeController', ['$scope', 'friendsNearMeService', '$rootScope', function ($scope, friendsNearMeService,$rootScope) {
             //get list of friends

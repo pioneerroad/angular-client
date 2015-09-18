@@ -1,12 +1,11 @@
 (function () {
-    var app = angular.module("pioneerRoad");
+    var app = angular.module("pioneerRoad.UserRegister", []);
     var userRegisterController = function ($scope, $http, $localStorage, loginRedirect, $location) { //handels all of the functionality for creating users including error checking 
-        
-         if(loginRedirect.checkLogin()){
-                $location.path("/profile");
-                console.log("i'm logged in, change to /home");
-            }
-        
+
+        if (loginRedirect.checkLogin()) {
+            $location.path("/home");
+        }
+
         $scope.check_pwd_match = function () { //checks if both passwords match
             if ($scope.password !== $scope.password2) {
                 $scope.passwordvalid = false; //if this is false the form cannot be submitted
@@ -15,14 +14,13 @@
                 $scope.passwordvalid = true;
             }
         };
-        
-        $scope.goToLogin = function(){
+
+        $scope.goToLogin = function () {
             $scope.closeModal();
             $location.path("/login");
         };
-        
+
         $scope.create_user = function () { //creates the structure in which the form data is loaded and post's it to the server
-            console.log("here");
             $scope.closeModal();
             if ($scope.passwordvalid) { //another check incase people manage to submit an ivalid form
 
@@ -45,7 +43,7 @@
                                 else if ("mobile" === response.errors[0].path) {
                                     $scope.errors.push("Mobile number already exsits");
                                 }
-                                
+
                                 $scope.IncorrectFeilds = true;
                             }
                         });
@@ -64,43 +62,57 @@
 
         };
         $scope.CheckForError = function () {
-            console.log("in check for error");
             $scope.closeModal();
             if ($scope.usercreate.password.$error.required) {
                 $scope.errors.push("You did not enter a password");
+                $scope.IncorrectFeilds = true;
             }
             else
             {
-                if ($scope.usercreate.password.$error.pattern)
+                if ($scope.usercreate.password.$error.pattern) {
                     $scope.errors.push("Password must contain at least One number and One uppercase letter");
-
-                if ($scope.usercreate.password.$error.minlength)
+                    $scope.IncorrectFeilds = true;
+                }
+                if ($scope.usercreate.password.$error.minlength) {
                     $scope.errors.push("Password too short, must be at least 8 characters");
-                if (!$scope.passwordvalid)
+                    $scope.IncorrectFeilds = true;
+                }
+                if (!$scope.passwordvalid) {
                     $scope.errors.push("Passwords do not match");
+                    $scope.IncorrectFeilds = true;
+                }
             }
             if ($scope.usercreate.email.$error.required) {
                 $scope.errors.push("You did not enter a email");
+                $scope.IncorrectFeilds = true;
             }
             else
             {
-                if ($scope.usercreate.email.$error.email)
+                if ($scope.usercreate.email.$error.email) {
                     $scope.errors.push("The email you entered is not valid");
+                    $scope.IncorrectFeilds = true;
+                }
             }
 
             if ($scope.usercreate.mobile.$error.required) {
                 $scope.errors.push("You did not enter a mobile number");
+                $scope.IncorrectFeilds = true;
             }
             else
             {
-                if ($scope.usercreate.mobile.$error.pattern)
+                if ($scope.usercreate.mobile.$error.pattern) {
                     $scope.errors.push("Mobile number must be a whole number!");
-
-                if ($scope.usercreate.mobile.$error.minlength)
+                    $scope.IncorrectFeilds = true;
+                }
+                if ($scope.usercreate.mobile.$error.minlength) {
                     $scope.errors.push("Mobile number must be at least 10 digits!");
+                    $scope.IncorrectFeilds = true;
+                }
             }
 
-            $scope.IncorrectFeilds = true;
+            if (!$scope.IncorrectFeilds) {
+                $scope.create_user();
+            }
         };
         //initialising variables
         $scope.passwordvalid = false;

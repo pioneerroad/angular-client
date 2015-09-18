@@ -1,13 +1,10 @@
 (function () {
-    var app = angular.module("pioneerRoad");
+    var app = angular.module('pioneerRoad.Profile');
 
     app.controller('editProfileController', ['$scope', '$localStorage', 'loginRedirect', '$location', 'editProfileService', 'viewProfileService', 'geoLocationService', function ($scope,$localStorage ,loginRedirect, $location, editProfileService, viewProfileService, geoLocationService) {
 
-
-
             if (!loginRedirect.checkLogin()) {
                 $location.path("/login");
-                console.log("i'm not logged in");
             }
 
             //update the nick name

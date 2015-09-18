@@ -1,11 +1,10 @@
 (function () {
-    var app = angular.module("pioneerRoad");
+    var app = angular.module("pioneerRoad.userLogin", []);
 
     app.controller('userLoginController', ['$scope', '$http', '$location', 'userLoginService', '$rootScope', '$localStorage', 'loginRedirect', 'rememberMeService', function ($scope, $http, $location, userLoginService, $rootScope, $localStorage, loginRedirect, rememberMeService) {
             
             if (loginRedirect.checkLogin()) {
                 $location.path("/home");
-                console.log("i'm logged in");
             }
 
 

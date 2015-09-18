@@ -1,5 +1,5 @@
 (function () {
-    angular.module('pioneerRoad')
+    angular.module('pioneerRoad.Profile')
             .factory('homePageService', ['$http',
                 function ($http) {
 

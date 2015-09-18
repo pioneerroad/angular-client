@@ -1,5 +1,5 @@
 (function () {
-    angular.module('pioneerRoad')
+    angular.module("pioneerRoad.RelationShips")
             .factory('friendRequestService', ['$http', '$localStorage',
                 function ($http, $localStorage) {
                     var service = {};
