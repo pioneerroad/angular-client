@@ -1,0 +1,7 @@
+<div class="nav-bar" id="navBarTop">
+    <div id="slideMenuToggle" class="col-xs-3">
+        <span class="glyphicon glyphicon-menu-hamburger"></span>
+    </div>
+    <div class="page-heading col-xs-6"><h5>My Profile</h5></div>
+    <div class="action col-xs-3"><a href="profile-edit-page.html">Edit</a></div>
+</div>

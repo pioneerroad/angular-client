@@ -1,0 +1,11 @@
+<div class="sitewide-navigation slide-menu page-height-container" id="drawerMenu">
+    <ul class="sitewide-nav">
+        <li data-target="messages" class="menu-item menu-item-messages" aria-label="Messages"><span class="badge">15</span></li>
+        <li data-target="notifications" class="menu-item menu-item-notifications" aria-label="Notifications"><span class="badge">5</span></li>
+        <li class="divider" aria-hidden="true"></li>
+        <li data-target="home" class="menu-item menu-item-home active" aria-label="Home"></li>
+        <li data-target="social" class="menu-item menu-item-social" aria-label="Social Connections"></li>
+        <li data-target="places" class="menu-item menu-item-places" aria-label="Places"></li>
+        <li data-target="user" class="menu-item menu-item-user" aria-label="My Profile"></li>
+    </ul>
+</div>
