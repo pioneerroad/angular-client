@@ -22,9 +22,12 @@
         <script src="assets/libs/angular/angular-route.min.js"></script>
         <script src="assets/libs/angular/angular-touch.min.js"></script>
         <script src="assets/libs/angular/ngStorage.min.js"></script>
+        <script src="assets/libs/angular/sanitize.js"></script>
         <script src="assets/libs/modernizr-2.8.3.min.js"></script>
         <script src="assets/libs/angular-ui-bootstrap-modal.js"></script>
         <script src="assets/libs/socket-io/socket.io.js"></script>
+        
+        
         <script src="assets/libs/angular-socket-io/socket.min.js"></script>
         <script src="app/app.module.js"></script>
         <script src="app/app.routes.js"></script>
@@ -68,6 +71,7 @@
 
     <body>
         <main class="page-height-container">
+            
             <span ng-if="user.token">
                 <div ng-include="'/app/global/partials/notificationBar/notificationBar.html'"></div>
             </span>
@@ -77,37 +81,37 @@
 
 
             <!-- this is where the main  content goes -->
-
             <div ng-view></div>
+        </main>
 
+        <span ng-if="user.token">
+            <div ng-include="'/app/global/partials/navigationBar/navigationBar.html'"></div>
+        </span>
 
-            <span ng-if="user.token">
-                <div ng-include="'/app/global/partials/navigationBar/navigationBar.html'"></div>
-            </span>
-            <!--modal for location service -->
-            <div ng-controller="reEnableLocationController" class="modal fade" id="locationModal" tabindex="-1" role="dialog" aria-labelledby="locationModal">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <h1 class="modal-title" id="myModalTitle"></h1>
-                            <p>Please allow location services</p>
-                            <ul>
-                                <li ng-repeat="step in instruction"> {{step}}</li>
-                            </ul>
-                            <button type="button" class="btn btn-lg btn-success" data-dismiss="modal" >OK</button>
-                        </div>
+        <!--modal for location service -->
+        <div ng-controller="reEnableLocationController" class="modal fade" id="locationModal" tabindex="-1" role="dialog" aria-labelledby="locationModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <h1 class="modal-title" id="myModalTitle"></h1>
+                        <p>Please allow location services</p>
+                        <ul>
+                            <li ng-repeat="step in instruction"> {{step}}</li>
+                        </ul>
+                        <button type="button" class="btn btn-lg btn-success" data-dismiss="modal" >OK</button>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-            <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')</script>
-            <script src="/assets/libs/jquery-mobile/jquery.mobile.custom.js"></script>
-            <script src="/assets/libs/jquery.plugins/jcarousel/dist/jquery.jcarousel-core.min.js"></script>
-            <script src="/assets/js/plugins.js"></script>
-            <script src="/assets/js/main.js"></script>
-            <script src="/assets/libs/bootstrap/modal.js"></script>
-        </main>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')</script>
+        <script src="/assets/libs/jquery-mobile/jquery.mobile.custom.js"></script>
+        <script src="/assets/libs/jquery.plugins/jcarousel/dist/jquery.jcarousel-core.min.js"></script>
+        <script src="/assets/js/plugins.js"></script>
+        <script src="/assets/js/main.js"></script>
+        <script src="/assets/libs/bootstrap/modal.js"></script>
+
     </body>
 
 </html>

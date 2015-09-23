@@ -3,7 +3,7 @@
 
     app.controller('navigationBarController', ['$scope', '$rootScope', function ($scope, $rootScope) {
             $scope.doMenuAction = function (id) {
-
+                alert("clicked");
                 if ($('#' + id).hasClass("is-visible")) {
                     $('#' + id).removeClass("is-visible");
                 }

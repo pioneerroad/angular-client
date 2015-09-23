@@ -1,12 +1,12 @@
 
-<main ng-controller="notificationBarController">
+<div ng-controller="notificationBarController">
 
     <div class="nav-bar" id="navBarTop" >
         <div id="slideMenuToggle" class="col-xs-3" ng-click="showHideNav()">
             <span class="glyphicon glyphicon-menu-hamburger"></span>
         </div>
-        <div class="page-heading col-xs-6"><h5>My Profile</h5></div>
-        <div class="action col-xs-3"><a href="profile-edit-page.html">Edit</a></div>
+        <div class="page-heading col-xs-6"><h5 ng-bind-html="Title"></h5></div>
+        <div class="action col-xs-3" ng-bind-html="Link"></div>
     </div>
     <div ng-controller="reEnableLocationController">
         <div  ng-show="locationOff" data-toggle="modal" class="alert alert-danger" role="alert" data-target="#locationModal">
@@ -15,6 +15,6 @@
             <a href="#locationModal"> Help!</a>
         </div>
     </div>
-</main>
+</div>
 <!-- ************* End of dynamic panels *********** -->
 

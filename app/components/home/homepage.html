@@ -1,14 +1,14 @@
 <!doctype html>
 <!-- Main app functions/content goes inside the <main> section -->
-<div ng-app="pioneerRoad.Profile">
+<div ng-app="pioneerRoad.Profile" class="content">
     <div ng-controller="viewProfileController">
-        <div  id="user-profile-photo-container">
-            <div id="user-profile-bg-photo" ng-cloak>
+        <div  id="user-profile-photo-container" ng-controller="homePageController">
+            <div id="user-profile-bg-photo" >
                 <img ng-src="{{background}}" />
             </div>
-            <div id="user-profile-photo-inner-container" ng-cloak>
-                <div id="user-profile-photo">
-                    <img ng-src="{{profilepic}}" />
+            <div id="user-profile-photo-inner-container" >
+                <div id="user-profile-photo" ng-style="{ 'width' : width}">
+                    <img ng-src="{{profilepic}}" class="profile-photo" />
                 </div>
             </div>
             <div class="user-profile-nickname" ng-show="nickName" ng-cloak>
@@ -17,34 +17,26 @@
         </div>
         <div class="well well-orange" id="current-location" ng-cloak>
             <h3>Current Location</h3>
-            <div class="panel-left"><span class="glyphicon glyphicon-map-marker large"></span></div>
-            <div class="panel-right">
-                <h4>Near {{location.location}} ({{location.distance| distanceFilter}})</h4>
-                <h4>{{location.tourism_region}} {{location.state}}</h4>
-                <h4>{{profile.checkinCoords.updatedAt| timeFilter}}</h4>
-            </div>
+            <h4>Near {{location.location}} ({{location.distance| distanceFilter}})</h4>
+            <h4>{{location.tourism_region}} {{location.state}}</h4>
             <div class="clearfix"></div>
         </div>
     </div>
-    <div class="container" ng-controller="friendsNearMeController" ng-cloak>
-        <div class="well well-green scrollable panel-list" id="friends-nearby">
+    <div ng-controller="friendsNearMeController" ng-cloak>
+        <div class="well well-green panel-list" id="friends-nearby">
             <h3>Friends Nearby</h3>
             <!-- Beginning of block inside ng-repeat -->
-            <a href="friend-user-profile.html" ng-repeat="friend in friends"> <!-- Link to user's profile page -->
-                <div class="well well-darker-green">
-                    <div class="panel-left">
-                        <div class="profile-photo-container">
-                            <span class="badge badge-red">{{friend.distance | distanceFilter}}</span><img ng-src="{{friend.profilePic}}" /></div>
-                    </div>
-                    <div class="panel-right">
-                        <h5>{{friend.nickName}}</h5>
-                        <p><span class="glyphicon glyphicon-time"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{friend.checkinTime | timeFilter}}</p>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-            </a>
+            <ul class="profile-grid" ng-cloak>
+                <li ng-repeat="friend in friends"> 
+                    <a href="friend-user-profile.html"> <!-- Link to user's profile page -->
+                        <img ng-src="{{friend.profilePic}}" />
+                    </a><span class="badge">{{friend.distance| distanceFilter}}</span> 
+                </li>
+            </ul>
             <!-- End of block inside ng-repeat -->
         </div>
     </div>
 </div>
+
+
 <!-- End of main section -->
