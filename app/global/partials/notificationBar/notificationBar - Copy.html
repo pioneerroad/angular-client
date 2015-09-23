@@ -1,54 +1,29 @@
-<div ng-controller="navigationBarController" ng-cloak ng-show="showNav">
-    <div class="menu-bar bottom" >
-        <ul role="menu">
-            <li class="icon icon-home" id="home"><a href="#/home"></a></li>
-            <li class="icon icon-community" id="community" ng-click="doMenuAction('community-menu')"></li>
-            <li class="icon icon-places" id="places"><a href="#/home"></a></li>
-            <li class="icon icon-user" id="user" ng-click="doMenuAction('user-menu')"></li>
-        </ul>
-    </div> 
-    <div class="overlay-menu" id="community-menu">
-        <h1>My Community</h1>
-        <div class="section-icon"></div>
-        <ul class="items">
-            <li>Browse my friend list<a href="#/community"></a></li>
-            <li>Find and add friends<a href="#/community"></a></li>
-            <li>View/Manage blocked friends</li>
-            <li>Create or join a group</li>
-            <li>My group memberships</li>
-        </ul>
+
+
+<div ng-controller="notificationBarController">
+
+    <div class="nav-bar" id="navBarTop">
+        <div id="slideMenuToggle" class="col-xs-3">
+            <span class="glyphicon glyphicon-menu-hamburger"></span>
+        </div>
+        <div class="page-heading col-xs-6"><h5>My Profile</h5></div>
+        <div class="action col-xs-3"><a href="profile-edit-page.html">Edit</a></div>
     </div>
 
-    <div class="overlay-menu" id="user-menu">
-        <h1>My User Settings</h1>
-        <div class="section-icon"></div>
-        <ul class="items">
-            <li>View my Profile<a href="#/profile"></a></li>
-            <li>Edit my Profile<a href="#/editprofile"></a></li>
-            <li>Change my Privacy Settings</li>
-            <li>Change my Password</li>
-            <li>Edit my account details</li>
-            <li><a href="#/logout">Logout</a></li>
+    <div class="menu-bar top nav">
+        <ul id="navBarTop">
+            <li id="notificationPanelCtrl" class="notification" ng-click="OpenFriend()" ><span class="badge badge-red">{{numfriendRequest}}</span></li>
+            <li id="messagesPanelCtrl" class="messages" ng-click="OpenMessages()"><span class="badge badge-red">10</span></li>
         </ul>
+    </div> <!-- Info/status bar at top of screen. May also include some navigation aids eg. to messages -->
+
+    <div ng-controller="reEnableLocationController">
+        <div  ng-show="locationOff" data-toggle="modal" class="alert alert-danger" role="alert" data-target="#locationModal">
+            <span class="glyphicon glyphicon-info-sign"></span>
+            <strong> Please enable location service! <br/></strong>
+            <a href="#locationModal"> Help!</a>
+        </div>
     </div>
-    <div class="sitewide-navigation slide-menu page-height-container" id="drawerMenu">
-        <ul class="sitewide-nav ">
-            <li class="menu-item menu-item-messages" aria-label="Messages" id="notificationPanelCtrl" ng-click="OpenFriend()"><span class="badge">{{numfriendRequest}}</span></li>
-            <li data-target="notifications" class="menu-item menu-item-notifications" aria-label="Notifications" id="messagesPanelCtrl" ng-click="OpenMessages()"><span class="badge">5</span></li>
-            <li class="divider" aria-hidden="true"></li>
-            <li data-target="home" class="menu-item menu-item-home active" aria-label="Home"><a href="#/home"></a></li>
-            <li data-target="social" class="menu-item menu-item-social" aria-label="Social Connections" ng-click="doMenuAction('community-menu')"></li>
-            <li data-target="places" class="menu-item menu-item-places" aria-label="Places"><a href="#/home"></a></li>
-            <li data-target="user" class="menu-item menu-item-user" aria-label="My Profile" ng-click="doMenuAction('user-menu')"></li>
-        </ul>
-    </div>
-
-
-
-
-
-
-
 
     <!-- *********** Beginning of Notification Panel ********* -->
     <div class="overlay-panel" id="notification-panel">
@@ -240,3 +215,5 @@
         </div>
     </div>
 </div>
+<!-- ************* End of dynamic panels *********** -->
+

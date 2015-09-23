@@ -14,5 +14,20 @@
                 }
 
             };
+            
+            $scope.OpenFriend = function () {
+                $('#notification-panel').addClass('is-visible');
+            };
+            $scope.CloseFriend = function () {
+                $('#notification-panel').removeClass('is-visible'); 
+            };
+
+            $scope.OpenMessages = function () {
+                $('#messages-panel').addClass('is-visible');
+            };
+            $scope.CloseMessages = function () {
+                $('#messages-panel').removeClass('is-visible');
+            }
+            
         }]);
 }());
