@@ -1,0 +1,96 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>User Login Page</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700' rel='stylesheet' type='text/css'>
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <script src="/js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+<body>
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+
+
+<!-- Main app functions/content goes inside the <main> section -->
+<main class="page-height-container">
+    <div class="nav-bar" id="navBarTop">
+        <div id="slideMenuToggle" class="col-xs-3">
+            <span class="glyphicon glyphicon-menu-hamburger"></span>
+        </div>
+        <div class="page-heading col-xs-6"><h5>Notifications</h5></div>
+    </div>
+    <div class="content">
+        <div class="body-panel panel-list" id="pendingFriendRequests">
+            <h5 class="section-heading">Friend Requests  <span class="badge badge-red">2</span></h5>
+            <div id="notificationsFriendRequestList" class="friend-list">
+                <div class="well well-grey">
+                    <div class="panel-left">
+                        <img src="https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/1/1441153449598_100x100.jpg" class="profile-photo"/>
+                    </div>
+                    <div class="panel-right">
+                        <h3>Michelle Smith</h3>
+                        <div class="inline-form friend-action">
+                            <div class="input-group">
+                                <button class="btn btn-success accept">Accept</button>
+                                <button class="btn btn-danger decline">Decline</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="well well-grey">
+                    <div class="panel-left">
+                        <img src="https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/1/1441153449598_100x100.jpg" class="profile-photo" />
+                    </div>
+                    <div class="panel-right">
+                        <h3>Ian and June Smith</h3>
+                        <div class="inline-form friend-action">
+                            <div class="input-group">
+                                <button class="btn btn-success">Accept</button>
+                                <button class="btn btn-danger">Decline</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- End of main section -->
+
+<div class="sitewide-navigation slide-menu page-height-container" id="drawerMenu">
+    <ul class="sitewide-nav">
+        <li data-target="messages" class="menu-item menu-item-messages" aria-label="Messages"><span class="badge">15</span></li>
+        <li data-target="notifications" class="menu-item menu-item-notifications" aria-label="Notifications"><span class="badge">5</span></li>
+        <li class="divider" aria-hidden="true"></li>
+        <li data-target="home" class="menu-item menu-item-home active" aria-label="Home"></li>
+        <li data-target="social" class="menu-item menu-item-social" aria-label="Social Connections"></li>
+        <li data-target="places" class="menu-item menu-item-places" aria-label="Places"></li>
+        <li data-target="user" class="menu-item menu-item-user" aria-label="My Profile"></li>
+    </ul>
+</div>
+
+<!-- Scripts -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')</script>
+<script src="/js/vendor/jquery-mobile/jquery.mobile.custom.js"></script>
+<script src="/js/vendor/plugins/jcarousel/dist/jquery.jcarousel.min.js"></script>
+<script src="/js/plugins.js"></script>
+<script src="/js/modal.js"></script>
+<script src="/js/main.js"></script>
+</body>
+</html>
