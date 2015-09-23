@@ -6,10 +6,12 @@
 
                 if ($rootScope.showNav) {
                     $rootScope.showNav = false;
+                    
                 }
                 else {
                     $rootScope.showNav = true;
                 }
+                $('main').toggleClass('menu-active');
             };
 
             /**  $('.friend-actions #new-message').on('tap', function (event) {

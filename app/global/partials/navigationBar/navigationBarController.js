@@ -27,7 +27,7 @@
             };
             $scope.CloseMessages = function () {
                 $('#messages-panel').removeClass('is-visible');
-            }
+            };
             
         }]);
 }());
