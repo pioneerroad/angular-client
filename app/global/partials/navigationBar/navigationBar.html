@@ -1,4 +1,16 @@
 <div ng-controller="navigationBarController" ng-cloak ng-show="showNav">
+    
+    <div class="sitewide-navigation slide-menu page-height-container" id="drawerMenu">
+        <ul class="sitewide-nav ">
+            <li class="menu-item menu-item-messages" aria-label="Messages" id="notificationPanelCtrl" ng-click="OpenFriend()"><span class="badge">{{numfriendRequest}}</span></li>
+            <li data-target="notifications" class="menu-item menu-item-notifications" aria-label="Notifications" id="messagesPanelCtrl" ng-click="OpenMessages()"><span class="badge">5</span></li>
+            <li class="divider" aria-hidden="true"></li>
+            <li data-target="home" class="menu-item menu-item-home active" aria-label="Home"><a href="#/home"></a></li>
+            <li data-target="social" class="menu-item menu-item-social" aria-label="Social Connections" ng-click="doMenuAction('community-menu')"></li>
+            <li data-target="places" class="menu-item menu-item-places" aria-label="Places"><a href="#/home"></a></li>
+            <li data-target="user" class="menu-item menu-item-user" aria-label="My Profile" ng-click="doMenuAction('user-menu')"></li>
+        </ul>
+    </div>
     <div class="menu-bar bottom" >
         <ul role="menu">
             <li class="icon icon-home" id="home"><a href="#/home"></a></li>
@@ -31,17 +43,7 @@
             <li><a href="#/logout">Logout</a></li>
         </ul>
     </div>
-    <div class="sitewide-navigation slide-menu page-height-container" id="drawerMenu">
-        <ul class="sitewide-nav ">
-            <li class="menu-item menu-item-messages" aria-label="Messages" id="notificationPanelCtrl" ng-click="OpenFriend()"><span class="badge">{{numfriendRequest}}</span></li>
-            <li data-target="notifications" class="menu-item menu-item-notifications" aria-label="Notifications" id="messagesPanelCtrl" ng-click="OpenMessages()"><span class="badge">5</span></li>
-            <li class="divider" aria-hidden="true"></li>
-            <li data-target="home" class="menu-item menu-item-home active" aria-label="Home"><a href="#/home"></a></li>
-            <li data-target="social" class="menu-item menu-item-social" aria-label="Social Connections" ng-click="doMenuAction('community-menu')"></li>
-            <li data-target="places" class="menu-item menu-item-places" aria-label="Places"><a href="#/home"></a></li>
-            <li data-target="user" class="menu-item menu-item-user" aria-label="My Profile" ng-click="doMenuAction('user-menu')"></li>
-        </ul>
-    </div>
+    
 
 
 
