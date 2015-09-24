@@ -1,18 +1,15 @@
 <!doctype html>
 <!-- Main app functions/content goes inside the <main> section -->
-<div ng-app="pioneerRoad.Profile" class="content">
+<div ng-app="pioneerRoad.Profile">
     <div ng-controller="viewProfileController">
         <div  id="user-profile-photo-container" ng-controller="homePageController">
-            <div id="user-profile-bg-photo" >
-                <img ng-src="{{background}}" />
+            <div id="user-profile-bg-photo" > 
+                <img ng-src="{{background}}"/>
             </div>
             <div id="user-profile-photo-inner-container" >
                 <div id="user-profile-photo" >
                     <img ng-src="{{profilepic}}" class="profile-photo" />
                 </div>
-            </div>
-            <div class="user-profile-nickname" ng-show="nickName" ng-cloak>
-                <h1>{{profile.nickName}}</h1>
             </div>
         </div>
         <div class="well well-orange" id="current-location" ng-cloak>

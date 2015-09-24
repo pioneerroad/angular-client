@@ -1,14 +1,14 @@
 <div ng-controller="navigationBarController" ng-cloak >
 
     <div class="sitewide-navigation slide-menu page-height-container" id="drawerMenu">
-        <ul class="sitewide-nav ">
+        <ul class="sitewide-nav">
             <li class="menu-item menu-item-messages" aria-label="Messages" id="messagesPanelCtrl" ng-click="OpenMessages()"><span class="badge">5</span></li>
             <li class="menu-item menu-item-notifications" aria-label="Notifications" id="notificationPanelCtrl" ng-click="OpenFriend()"><span class="badge">{{numfriendRequest}}</span></li>
             <li class="divider" aria-hidden="true"></li>
-            <li class="menu-item menu-item-home active" aria-label="Home"><a href="#/home"></a></li>
-            <li class="menu-item menu-item-social" aria-label="Social Connections" id="community-menu" ng-click="doMenuAction('community-menu')"></li>
-            <li class="menu-item menu-item-places" aria-label="Places"><a href="#/home"></a></li>
-            <li class="menu-item menu-item-user" aria-label="My Profile" id="user-menu" ng-click="doMenuAction('user-menu')"></li>
+            <li class="menu-item menu-item-home" aria-label="Home" id='home'><a href="#/home"></a></li>
+            <li class="menu-item menu-item-social" aria-label="Social Connections" id="community-menu"><a href="#/communityMenu"></a></li>
+            <li class="menu-item menu-item-places" aria-label="Places" id='places'><a href="#/home"></a></li>
+            <li class="menu-item menu-item-user" aria-label="My Profile" id="user-menu"><a href="#/userMenu"></a></li>
         </ul>
     </div>
 </div>

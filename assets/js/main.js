@@ -56,7 +56,7 @@ $(document).ready(function () {
     $('.jcarousel').jcarousel();
     $('.jcarousel img').on('tap', function (event) {
         $('.jcarousel').jcarousel('scroll', '+=1');
-    })
+    });
     $('.jcarousel img').on('swipeleft', function (event) {
         $('.jcarousel').jcarousel('scroll', '+=1');
     });
@@ -67,6 +67,13 @@ $(document).ready(function () {
     $('.subsection-selector a').on('tap', function (event) {
         $('.subsection-selector a').toggleClass('active');
         $('.subsection-panel').toggleClass('visible').toggleClass('hidden');
+    });
+    
+    $('.menu-item').on('tap', function(event) {
+        var target = $(this);
+        var location = target.data('target');
+        console.log("clicked");
+        window.location.assign(location+'Menu.html');
     });
 
     /***** Popup menu display controls *****/
@@ -95,13 +102,13 @@ $(document).ready(function () {
 
  $('body').on('touchstart', '.menu-active .content', function(event) {
         $('main').removeClass('menu-active');
-        $('main').removeClass('menu-active');
         return false;
     });
 
-    
-
-
+    $('body').on('touchstart', '.sitewide-nav .menu-item', function(event) {
+         $('.sitewide-nav  .menu-item').removeClass('active');
+         $('#' + event.currentTarget.id).toggleClass('active');    
+    });
 
 });
 

@@ -28,7 +28,8 @@ $(document).ready(function() {
     $('.menu-item').on('tap', function(event) {
         var target = $(this);
         var location = target.data('target');
-        window.location.assign(location+'-page.html');
+        console.log("clicked");
+        window.location.assign(location+'Menu.html');
     });
 
     $('#editBioInput').on('keyup', function(event) {

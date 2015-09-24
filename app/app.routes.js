@@ -21,6 +21,10 @@
                         controller: "homePageController"
                        
                   })
+                  .when("/userMenu", {
+                        templateUrl: "app/global/partials/navigationBar/userMenu.html" //redirect to logout page
+                       
+                  })
                   .when("/editprofile", {
                         templateUrl: "app/components/user/editProfile/editProfileView.html", //redirect to user editprofile page
                         controller: "editProfileController"
@@ -29,6 +33,10 @@
                   .when("/community", {
                         templateUrl: "app/components/relationships/relationships/relationshipsView.html", //redirect to community page
                         controller: "relationshipsController"
+                       
+                  })
+                  .when("/communityMenu", {
+                        templateUrl: "app/global/partials/navigationBar/communityMenu.html", //redirect to community page
                        
                   })
                    .when("/places", {
