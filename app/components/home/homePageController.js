@@ -5,6 +5,6 @@
             
             $rootScope.Title = $sce.trustAsHtml("Home");
             $rootScope.Link = $sce.trustAsHtml("");
-            $scope.width = '90%';
+           // $scope.width = '90px';
     }]);
 }());
