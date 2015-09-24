@@ -26,8 +26,8 @@
         <script src="assets/libs/modernizr-2.8.3.min.js"></script>
         <script src="assets/libs/angular-ui-bootstrap-modal.js"></script>
         <script src="assets/libs/socket-io/socket.io.js"></script>
-        
-        
+
+
         <script src="assets/libs/angular-socket-io/socket.min.js"></script>
         <script src="app/app.module.js"></script>
         <script src="app/app.routes.js"></script>
@@ -71,7 +71,7 @@
 
     <body>
         <main class="page-height-container">
-            
+
             <span ng-if="user.token">
                 <div ng-include="'/app/global/partials/notificationBar/notificationBar.html'"></div>
             </span>
@@ -81,12 +81,15 @@
 
 
             <!-- this is where the main  content goes -->
-            <div ng-view></div>
-        </main>
+            <div class="content">
+                <div ng-view></div>
+            </div>
 
+        </main>
         <span ng-if="user.token">
             <div ng-include="'/app/global/partials/navigationBar/navigationBar.html'"></div>
         </span>
+
 
         <!--modal for location service -->
         <div ng-controller="reEnableLocationController" class="modal fade" id="locationModal" tabindex="-1" role="dialog" aria-labelledby="locationModal">

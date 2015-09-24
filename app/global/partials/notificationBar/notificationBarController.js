@@ -3,14 +3,6 @@
 
     app.controller('notificationBarController', ['$scope', '$rootScope', 'NotificationService', function ($scope, $rootScope, NotificationService) {
             $scope.showHideNav = function () {
-
-                if ($rootScope.showNav) {
-                    $rootScope.showNav = false;
-                    
-                }
-                else {
-                    $rootScope.showNav = true;
-                }
                 $('main').toggleClass('menu-active');
             };
 
