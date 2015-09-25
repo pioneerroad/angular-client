@@ -1,6 +1,6 @@
 <!-- Main app functions/content goes inside the <main> section -->
-<main ng-app="pioneerRoad.Profile">
-    <div id="user-profile-photo-container" ng-cloak>
+<div ng-app="pioneerRoad.Profile">
+    <div id="user-profile-photo-container" class="container" ng-cloak>
         <div id="user-profile-bg-photo">
             <img ng-src="{{background}}" />
         </div>
@@ -13,7 +13,7 @@
             <h1>{{profile.nickName}}</h1>
         </div>
     </div>
-    <div class="container">
+    <div>
         <div class="well well-blue" id="current-location" ng-cloak>
             <h3>Hometown</h3>
             <div class="panel-left"><span class="glyphicon glyphicon-home large"></span></div>
@@ -34,4 +34,4 @@
             <div class="clearfix"></div>
         </div>
     </div>
-</main>
+</div>

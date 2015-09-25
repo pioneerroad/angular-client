@@ -17,14 +17,17 @@
         <link rel="stylesheet" href="assets/css/normalize.css">
 
 
-
+        
         <script src="assets/libs/angular/angular.min.js"></script>
         <script src="assets/libs/angular/angular-route.min.js"></script>
         <script src="assets/libs/angular/angular-touch.min.js"></script>
         <script src="assets/libs/angular/ngStorage.min.js"></script>
+        <script src="assets/libs/angular/sanitize.js"></script>
         <script src="assets/libs/modernizr-2.8.3.min.js"></script>
         <script src="assets/libs/angular-ui-bootstrap-modal.js"></script>
         <script src="assets/libs/socket-io/socket.io.js"></script>
+
+
         <script src="assets/libs/angular-socket-io/socket.min.js"></script>
         <script src="app/app.module.js"></script>
         <script src="app/app.routes.js"></script>
@@ -47,7 +50,7 @@
         <script src="app/components/relationships/friendsNearMe/friendsNearMeService.js"></script>
         <script src="app/components/home/homePageController.js"></script>
         <script src="app/components/home/homePageService.js"></script>
-        
+
         <script src="app/components/relationships/friendRequest/friendRequestController.js"></script>
         <script src="app/components/relationships/friendRequest/friendRequestService.js"></script>
         <script src="app/components/relationships/relationships/relationshipsController.js"></script>
@@ -57,29 +60,34 @@
         <script src="app/global/filters/distanceFilter.js"></script>
         <script src="app/global/filters/timeFilter.js"></script>
         <script src="app/global/controllers/reEnableLocationController.js"></script>
-        
+
         <script src="app/global/services/deviceTypeService.js"></script>
-        
+
         <script src="app/global/partials/notificationBar/notificationBarController.js"></script>
-        
-        
+        <script src="app/global/partials/navigationBar/navigationBarController.js"></script>
+
+
     </head>
 
     <body>
+        <main class="page-height-container">
+            <span ng-if="user.token">
+                <div ng-include="'/app/global/partials/notificationBar/notificationBar.html'"></div>
+            </span>
+            <!--[if lt IE 8]>
+                <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+                <![endif]-->
+            <!-- this is where the main  content goes -->
+            <div class="content">
+                <div ng-view></div>
+            </div>
+
+        </main>
         <span ng-if="user.token">
-           <div ng-include="'/app/global/partials/notificationBar/notificationBar.html'"></div>
+            <div ng-include="'/app/global/partials/navigationBar/navigationBar.html'"></div>
         </span>
-        <!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-            <![endif]-->
-        
 
-        <!-- this is where the main  content goes -->
-        <div ng-view></div>     
 
-         <span ng-if="user.token">
-           <div ng-include="'/app/global/partials/navigationBar/navigationBar.html'"></div>
-        </span>
         <!--modal for location service -->
         <div ng-controller="reEnableLocationController" class="modal fade" id="locationModal" tabindex="-1" role="dialog" aria-labelledby="locationModal">
             <div class="modal-dialog" role="document">
@@ -103,6 +111,7 @@
         <script src="/assets/js/plugins.js"></script>
         <script src="/assets/js/main.js"></script>
         <script src="/assets/libs/bootstrap/modal.js"></script>
+
     </body>
 
 </html>

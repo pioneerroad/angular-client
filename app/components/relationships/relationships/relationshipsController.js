@@ -1,7 +1,10 @@
 (function () {
     var app = angular.module("pioneerRoad.RelationShips");
-    app.controller('relationshipsController', ['$scope', 'relationshipsService', '$localStorage', function ($scope, relationshipsService, $localStorage) {
-
+    app.controller('relationshipsController', ['$scope', '$rootScope', 'relationshipsService', '$localStorage', '$sce', function ($scope,$rootScope, relationshipsService, $localStorage, $sce) {
+            
+            $rootScope.Title = $sce.trustAsHtml("Home");
+            $rootScope.Link = $sce.trustAsHtml("<h5><a>Add Friend</a><h5>");
+            
             $scope.showblockFriendConfirmationModal = false;
             $scope.showFriendConfirmationModal = false;
             $scope.addFriendsShow = false; //show the menu to add friends

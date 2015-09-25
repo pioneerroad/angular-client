@@ -1,9 +1,11 @@
 (function () {
     var app = angular.module("pioneerRoad.Profile", []);
 
-    app.controller('viewProfileController', ['$scope', '$http', '$location', '$rootScope', '$localStorage', 'loginRedirect', 'viewProfileService','geoLocationService', function ($scope, $http, $location, $rootScope, $localStorage, loginRedirect, viewProfileService, geoLocationService) {
+    app.controller('viewProfileController', ['$scope', '$http', '$location', '$rootScope', '$localStorage', 'loginRedirect', 'viewProfileService','geoLocationService', '$sce', function ($scope, $http, $location, $rootScope, $localStorage, loginRedirect, viewProfileService, geoLocationService, $sce) {
             $scope.nickName = false;
             $scope.location = " ";
+            $rootScope.Title = $sce.trustAsHtml("Profile");
+            $rootScope.Link = $sce.trustAsHtml("<h5><a href='#/editprofile'>Edit</a><h5>");
             
             geoLocationService.begin(); //update location
 
@@ -33,8 +35,9 @@
                 }
 
                 if (data.profilePhoto === null) {
+                        
                        $scope.profilepic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/ui-images/user-profile-default-img.svg";
-                }
+                console.log($scope.profilepic);}
                 else {
                     $scope.profilepic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/" + $localStorage.token.id + "/" + data.profilePhoto.large;
                 }//ui-images/bg-deafult-img.svg
