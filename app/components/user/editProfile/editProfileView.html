@@ -1,47 +1,64 @@
-<main ng-app="pioneerRoad.Profile">
-    <div id="user-profile-photo-container" ng-cloak>
-        <div id="user-profile-bg-photo">
-            <img ng-src="{{background}}" />
-        </div>
-        <div id="user-profile-photo-inner-container">
-            <div id="user-profile-photo">
-                <img ng-src="{{profilepic}}" />
+<div ng-app="pioneerRoad.Profile" class="form-wrapper">
+    <div id="editProfilePhoto" class="field-edit-wrapper" ng-cloak>
+        <h4>Edit profile photo <span class="badge green hidden status-badge"><span class="glyphicon glyphicon-ok"></span> saved</span></h4>
+        <div id="user-profile-photo">
+            <div class="photo-edit-wrapper">
+                <input type="file" class="cropit-image-input" />
+                <div class="cropit-image-preview"></div>
+                <div class="hidden-image-data"></div>
+                <input type="range" class="cropit-image-zoom-input" />
+                <div class="column"><div class="btn btn-success btn-file-input"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;Select Photo</div></div>
+                <div class="column"><div class="btn btn-warning btn-file-upload"><span class="glyphicon glyphicon-open"></span> Save Photo</div></div>
             </div>
         </div>
-        <div class="user-profile-nickname" ng-show="nickName">
-            <h1>{{profile.nickName}}</h1>
+    </div>
+    <!--  <img ng-src="{{profilepic}}" /> -->
+    <div id="editBackgroundPhoto" class="field-edit-wrapper">
+        <h4>Edit background photo <span class="badge green hidden status-badge"><span class="glyphicon glyphicon-ok"></span> saved</span></h4>
+        <div class="photo-edit-wrapper">
+            <input type="file" class="cropit-image-input" />
+            <div class="cropit-image-preview"></div>
+            <input type="range" class="cropit-image-zoom-input" />
+            <div class="column"><div class="btn btn-success btn-file-input"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;Select Photo</div></div>
+            <div class="column"><div class="btn btn-warning btn-file-upload"><span class="glyphicon glyphicon-open"></span> Save Photo</div></div>
         </div>
     </div>
-    <div>
-        <form ng-submit="updateNickName() && ng-valid">
-            <input type="text" placeholder="enter in nick name" name="nickname"  ng-model="nickname">
-            <button type="submit" >Save</button>
-        </form>
+    <!-- <img ng-src="{{background}}" /> -->
+    <div id="editNickname" class="field-edit-wrapper">
+        <h4>Nickname <span class="badge green hidden status-badge"><span class="glyphicon glyphicon-ok"></span> saved</span></h4>
+        <div class="form-group">
+            <label class="sr-only" for="editNickname">Edit Nickname</label>
+            <div class="input-group">
+                <input type="text" class="form-control" id="exampleInputAmount" placeholder="{{profile.nickName}}" disabled>
+                <div class="input-group-addon toggle-field-edit" ng-click="canUpdate() && updateNickName()"><span class="glyphicon glyphicon-pencil"></span></div>
+            </div>
+        </div>
     </div>
+    <div id="editBio" class="field-edit-wrapper">
+        <h4>Bio <div class="character-count badge">150</div> <span class="badge green hidden status-badge"><span class="glyphicon glyphicon-ok"></span> saved</span></h4>
+        <div class="form-group">
+            <label class="sr-only" for="editBioInput">Edit Bio</label>
+            <div class="input-group">
+                <textarea class="form-control" rows="3" id="editBioInput" disabled></textarea>
+                <div class="input-group-addon toggle-field-edit"><span class="glyphicon glyphicon-pencil"></span></div>
+            </div>
+        </div>
+    </div>
+    <!-- <h1>{{profile.nickName}}</h1> -->
+
     <div class="container">
-        <div>
-            <form ng-submit="updateHomeTown() && ng-valid">
-                <input type="text" placeholder="enter in hometown" name="hometown"  ng-model="hometown" ng-keyup="getHomeTownSug()" required>
-                <button ng-show="showSave" type="submit">Save</button>
+        <div id="editHometown" class="field-edit-wrapper">
+            <h4>Hometown <span class="badge green hidden status-badge"><span class="glyphicon glyphicon-ok"></span> saved</span></h4>
+            <div class="form-group">
+                <label class="sr-only" for="editHometownInput">Edit Hometown</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="editHometownInput" placeholder="{{profile.dataSet_town.location}}" name="hometown"  ng-model="hometown" ng-keyup="getHomeTownSug()" required disabled>
+                    <div class="input-group-addon toggle-field-edit" ng-click="updateHomeTown()" ng-show="showSave"><span class="glyphicon glyphicon-pencil"></span></div>
+                </div>
                 <ul>
-                    <li ng-repeat="town in homeTownSuggestions | limitTo:5" ng-model="town" ng-click="chosenTown(town)">{{town.label}}</li>
+                    <li ng-repeat="town in homeTownSuggestions| limitTo:5" ng-model="town" ng-click="chosenTown(town)">{{town.label}}</li>
                 </ul>
-            </form>
-        </div>
-        <div>
-            <form>
-                <p id="location" ng-model="location"></p>
-                <button type="submit" ng-click="updateLocation()">Check In!</button>
-            </form>
-         </div>
-        <div class="well well-blue">
-            <h3>Hometown</h3>
-            <div class="left"><span class="glyphicon glyphicon-home large"></span></div>
-            <div class="right">
-                <h4>{{profile.dataSet_town.location}}, {{profile.dataSet_town.state}} </h4>
-                <h4>{{profile.dataSet_town.tourism_region}}</h4>
             </div>
-            <div class="clearfix"></div>
         </div>
     </div>
-</main>
+</div>
