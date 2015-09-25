@@ -9,7 +9,7 @@ $(document).ready(function() {
     $('.btn-file-input').click(function() {
         $(this).closest('.photo-edit-wrapper').children('.cropit-image-input').click();
     });
-
+    
     $('.btn-file-upload').click(function() {
         var imageData = $(this).closest('.field-edit-wrapper').cropit('export', {
             type: 'image/jpeg',
