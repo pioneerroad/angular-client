@@ -17,7 +17,7 @@
                                     friend.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/ui-images/user-profile-default-img.svg";
                                 }
                                 else {
-                                    friend.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/" + response[i].friendId + "/" + response[i].profilePhoto.medium;
+                                    friend.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/user-photos/" + response[i].friendId + "/" + response[i].profilePhoto.medium;
                                 }
 
                                 $scope.friends.push(friend);
