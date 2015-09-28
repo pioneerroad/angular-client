@@ -27,6 +27,14 @@
                         );
                     };
                     
+                    service.putPic = function(image){
+                       var data = {
+                           imageFile: image
+                       };
+                        return $http.put('http://pioneerroad.com.au:8081/api/v1/user/' + $localStorage.token.id + '/profile/update/photo',data
+                        );            
+                    };
+                    
                     return service;              
                 }
             ]);
