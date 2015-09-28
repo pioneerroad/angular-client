@@ -312,16 +312,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	    }
 	  }, {
-	    key: 'loadFileReader',
-	    value: function loadFileReader(file) {
-	      var fileReader = new FileReader();
-	      if (file && file.type.match('image')) {
-	        fileReader.readAsDataURL(file);
-	        fileReader.onload = this.onFileReaderLoaded.bind(this);
-	        fileReader.onerror = this.onFileReaderError.bind(this);
-	      } else if (file) {
-	        this.onFileReaderError();
-	      }
+		  key: 'loadFileReader',
+		  value: function loadFileReader(file) {
+			  //var fileReader = new FileReader();
+			  if (file && file.type.match('image')) {
+				  options = {};
+				  loadImage.parseMetaData(file, function (data) {
+					  if (data.exif) {
+						  options.orientation = data.exif.get('Orientation');
+					  }
+					  var fileReader = loadImage(file, function (img) {
+						  this.loadImage(img.toDataURL("image/jpg"));
+					  }.bind(this), options);
+					  fileReader.onerror = this.onFileReaderError.bind(this)}.bind(this));
+			  } else if (file) {
+				  this.onFileReaderError();
+			  }
 	    }
 	  }, {
 	    key: 'onFileReaderLoaded',
