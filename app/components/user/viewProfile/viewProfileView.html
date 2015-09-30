@@ -9,26 +9,26 @@
                 <img ng-src="{{profilepic}}" class="profile-photo" />
             </div>
         </div>
-        <div id="photo-edit-control">
-            <a href="#"><span class="glyphicon glyphicon-cog"></span></a> <!-- Link to profile edit page -->
-        </div>
     </div>
     <div>
-        <div class="well well-blue" ng-cloak>
-            <h3>Hometown</h3>
-            
-            <div class="right">
-                <h4>{{profile.dataSet_town.location}}, {{profile.dataSet_town.state}}</h4>
-                <h4>{{profile.dataSet_town.tourism_region}}</h4>
-            </div>
-            <div class="clearfix"></div>
+        <div class="well well-grey" ng-show="profile.bio">
+            <h3>{{profile.nickName}}</h3>
+            <p>{{profile.bio}}</p>
         </div>
-        <div class="well well-orange" id="current-location" ng-cloak>
-            <h3>Current Location</h3>
+        <div class="well well-blue" id="profileHometown"ng-cloak>
+            <h3>Hometown</h3>  
+            <h4>{{profile.dataSet_town.location}}, {{profile.dataSet_town.state}}</h4>
+            <h4>{{profile.dataSet_town.tourism_region}}</h4>
+        </div>
+        <div class="well well-blue" id="userProfileRV">
+            <div class="left">
+                <img id="user-profile-rig-img" src="https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/suncamper.jpg" />
+            </div>
             <div class="right">
-                <h4>Near {{location.location}} ({{location.distance| distanceFilter}})</h4>
-                <h4>{{location.tourism_region}} {{location.state}}</h4>
-                <h4>{{profile.checkinCoords.updatedAt| timeFilter}}</h4>
+                <h3>My RV</h3>
+                <p>Suncamper</p>
+                <p>Sherwood 4x4</p>
+                <p>2012</p>
             </div>
             <div class="clearfix"></div>
         </div>
