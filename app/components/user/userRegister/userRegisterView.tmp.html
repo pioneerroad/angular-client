@@ -5,27 +5,33 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>User Registration Page</title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
 
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700' rel='stylesheet' type='text/css'>
     <!-- Place favicon.ico in the root directory -->
 
-    <link rel="stylesheet" href="/assets/css/normalize.css">
-    <link rel="stylesheet" href="/assets/css/main.css">
-    <script src="/assets/libs/modernizr-2.8.3.min.js"></script>
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <script src="/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <body>
 <!--[if lt IE 8]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
-
 <!-- Add your site or application content here -->
-<div class="info-bar"><h1>Create an Account</h1></div>
-<main>
-    <div class="container">
-        <!-- Dismissable alert at the top of the page: to be displayed if there are errors with the form submission -->
-        <!-- To conditionally display with ng-show if there are errors in the errors object on $scope -->
+<main class="user-input-page">
+    <div class="nav-bar" id="navBarTop">
+        <div id="slideMenuToggle" class="col-xs-3">
+
+        </div>
+        <div class="page-heading col-xs-6"><h5>Register</h5></div>
+    </div>
+    <!-- Dismissable alert at the top of the page: to be displayed if there are errors with the form submission -->
+    <!-- To conditionally display with ng-show if there are errors in the errors object on $scope -->
+
+    <!-- End of dismissable alert at the top of the page -->
+    <div class="content">
         <div class="alert alert-danger" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -37,29 +43,37 @@
                 <li>The third disaster</li>
             </ul>
         </div>
-        <!-- End of dismissable alert at the top of the page -->
-        <div class="form-group">
-            <div class="input-group input-group-lg">
-                <span class="input-group-addon" id="sizing-addon"><span class="glyphicon glyphicon-envelope"></span></span>
-                <input type="text" class="form-control" placeholder="Email" aria-describedby="sizing-addon">
+        <h4>User Account Details</h4>
+        <div class="panel panel-default">
+
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-addon" id="sizing-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+                        <input type="text" class="form-control" placeholder="Email" aria-describedby="sizing-addon">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-phone"></span></span>
+                        <input type="text" class="form-control" placeholder="Mobile Number" aria-describedby="sizing-addon1">
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="input-group input-group-lg">
-            <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-phone"></span></span>
-            <input type="text" class="form-control" placeholder="Mobile Number" aria-describedby="sizing-addon1">
-        </div>
+        <h4>Password</h4>
         <div class="panel panel-default">
             <div class="panel-body">
-                <h4>Password</h4>
-                <div class="input-group input-group-lg">
-                    <span class="input-group-addon" id="sizing-addon2"><span class="glyphicon glyphicon-lock"></span></span>
-                    <input type="password" class="form-control" placeholder="Password" aria-describedby="sizing-addon2">
-                </div>
-                <div class="input-group input-group-lg">
-                    <span class="input-group-addon" id="sizing-addon3"><span class="glyphicon glyphicon-lock"></span></span>
-                    <input type="password" class="form-control" placeholder="Enter again to confirm.." aria-describedby="sizing-addon3">
-                </div>
-                <div class="well">
+                <div class="form-group">
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-addon" id="sizing-addon2"><span class="glyphicon glyphicon-lock"></span></span>
+                        <input type="password" class="form-control" placeholder="Password" aria-describedby="sizing-addon2">
+                    </div>
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-addon" id="sizing-addon3"><span class="glyphicon glyphicon-lock"></span></span>
+                        <input type="password" class="form-control" placeholder="Please reenter to confirm" aria-describedby="sizing-addon3">
+                    </div>
+                    <p></p>
                     <strong>Your password must have:</strong>
                     <ul>
                         <li>8 or more characters</li>
@@ -67,21 +81,13 @@
                         <li>At least 1 numeral</li>
                     </ul>
                 </div>
-
             </div>
         </div>
         <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#successModal">Join Now</button>
+        <div class="well well-grey">Already a member? <a href="user-login-page.html">Login</a></div>
     </div>
 </main>
 <!-- The menu bar a the bottom of the page -->
-<div class="menu-bar">
-    <ul role="menu">
-        <li class="icon icon-home"><a href="#"></a></li>
-        <li class="icon icon-community"><a href="#"></a></li>
-        <li class="icon icon-places"><a href="#"></a></li>
-        <li class="icon icon-user"><a href="#"></a></li>
-    </ul>
-</div>
 <!-- End of menu bar -->
 <!-- Success Modal -->
 <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel">
@@ -98,10 +104,10 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')</script>
-<script src="/assets/js/plugins.js"></script>
-<script src="/assets/js/main.js"></script>
-<script src="/assets/libs/bootstrap/modal.js"></script>
-<script src="/assets/libs/bootstrap/alert.js"></script>
+<script src="/js/plugins.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/modal.js"></script>
+<script src="/js/alert.js"></script>
 
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
 <script>
