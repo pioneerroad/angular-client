@@ -128,13 +128,13 @@
 
             $scope.addFriendbtn = function (id) {
                 friendAddId = id;
-                $scope.showFriendConfirmationModal = true;
+               // $scope.showFriendConfirmationModal = true;
                 $scope.addFriendNew = null;
+                $scope.addFriend();
             };
 
             $scope.addFriend = function () {
                 friendAddId;
-                console.log("clicked");
                 if ($localStorage.token.id === friendAddId) {
                     $scope.message = "You cannot be friends with yourself";
                     $scope.okay = false; //show error messages
@@ -165,7 +165,6 @@
                                 $scope.message = "could not send request";
                                 friendAddId = null;
                             }
-                            console.log("error");
                         });
             };
 
