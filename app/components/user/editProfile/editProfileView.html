@@ -1,51 +1,18 @@
 
 <div ng-app="pioneerRoad.Profile" class="form-wrapper profile-edit-page">
-    <div id="editProfilePhoto" class="field-edit-wrapper">
-        <h4>Edit profile photo <span class="badge green status-badge" ng-show="PPsaved"><span class="glyphicon glyphicon-ok"></span> saved</span></h4>
-        <div class="photo-edit-wrapper" ng-cloak>
-            <input type="file" class="cropit-image-input" />
-            <div class="cropit-image-preview"></div>
-            <div class="hidden-image-data"></div>
-            <input type="range" class="cropit-image-zoom-input" />
-            <div class="column"><div class="btn btn-success btn-file-input"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;Select Photo</div></div>
-            <div class="column "><div class="btn btn-warning btn-file-upload disabled"><span class="glyphicon glyphicon-open"></span> Save Photo</div></div>
-        </div>
-    </div>
-    <!--  <img ng-src="{{profilepic}}" /> -->
-    <div id="editBackgroundPhoto" class="field-edit-wrapper">
-        <h4>Edit background photo <span class="badge green status-badge" ng-show="BGPsaved"><span class="glyphicon glyphicon-ok"></span> saved</span></h4>
-        <div class="photo-edit-wrapper" ng-cloak>
-            <input type="file" class="cropit-image-input" />
-            <div class="cropit-image-preview"></div>
-            <input type="range" class="cropit-image-zoom-input" />
-            <div class="column"><div class="btn btn-success btn-file-input"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;Select Photo</div></div>
-            <div class="column"><div class="btn btn-warning btn-file-upload disabled"><span class="glyphicon glyphicon-open"></span> Save Photo</div></div>
-        </div>
-    </div>
     <!-- <img ng-src="{{background}}" /> -->
-    <div id="editNickname" class="field-edit-wrapper">
-        <h4>Nickname <span id="nick" class="badge green hidden status-badge"><span class="glyphicon glyphicon-ok"></span> saved</span></h4>
-        <div class="form-group">
-            <label class="sr-only" for="editNickname">Edit Nickname</label>
-            <div class="input-group">
-                <input type="text" class="form-control" id="editnick" placeholder="{{profile.nickName}}" name="nickname" ng-model="nickname" disabled>
-                <div class="input-group-addon toggle-field-edit" ng-click="updateNickName()"><span class="glyphicon glyphicon-pencil"></span></div>
-            </div>
-        </div>
-    </div>
-    <div id="editBio" class="field-edit-wrapper">
-        <h4>Bio <div class="character-count badge">150</div> <span class="badge green hidden status-badge"><span class="glyphicon glyphicon-ok"></span> saved</span></h4>
-        <div class="form-group">
-            <label class="sr-only" for="editBioInput">Edit Bio</label>
-            <div class="input-group">
-                <textarea class="form-control" rows="3" id="editBioInput" placeholder="{{profile.bio}}" name="bio"  ng-model="bio" disabled></textarea>
-                <div class="input-group-addon toggle-field-edit" ng-click="updateBio()"><span class="glyphicon glyphicon-pencil"></span></div>
-            </div>
-        </div>
-    </div>
-    <!-- <h1>{{profile.nickName}}</h1> -->
-
     <div class="container">
+        <div id="editNickname" class="field-edit-wrapper">
+            <h4>Nickname <span id="nick" class="badge green hidden status-badge"><span class="glyphicon glyphicon-ok"></span> saved</span></h4>
+            <div class="form-group">
+                <label class="sr-only" for="editNickname">Edit Nickname</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="editnick" placeholder="{{profile.nickName}}" name="nickname" ng-model="nickname" disabled>
+                    <div class="input-group-addon toggle-field-edit" ng-click="updateNickName()"><span class="glyphicon glyphicon-pencil"></span></div>
+                </div>
+            </div>
+        </div>
+
         <div id="editHometown" class="field-edit-wrapper">
             <h4>Hometown <span id="home" class="badge green hidden status-badge"><span class="glyphicon glyphicon-ok"></span> saved</span></h4>
             <div class="form-group">
@@ -59,5 +26,42 @@
                 </ul>
             </div>
         </div>
+
+        <div id="editProfilePhoto" class="field-edit-wrapper">
+            <h4>Edit profile photo <span class="badge green status-badge" ng-show="PPsaved"><span class="glyphicon glyphicon-ok"></span> saved</span></h4>
+            <div class="photo-edit-wrapper" ng-cloak>
+                <input type="file" class="cropit-image-input" />
+                <div class="cropit-image-preview"></div>
+                <div class="hidden-image-data"></div>
+                <input type="range" class="cropit-image-zoom-input" />
+                <div class="column"><div class="btn btn-success btn-file-input"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;Select Photo</div></div>
+                <div class="column "><div id="profilePhoto" class="btn btn-warning btn-file-upload disabled"><span class="glyphicon glyphicon-open"></span> Save Photo</div></div>
+            </div>
+        </div>
+        <!--  <img ng-src="{{profilepic}}" /> -->
+        <div id="editBackgroundPhoto" class="field-edit-wrapper">
+            <h4>Edit background photo <span class="badge green status-badge" ng-show="BGPsaved"><span class="glyphicon glyphicon-ok"></span> saved</span></h4>
+            <div class="photo-edit-wrapper" ng-cloak>
+                <input type="file" class="cropit-image-input" />
+                <div class="cropit-image-preview"></div>
+                <input type="range" class="cropit-image-zoom-input" />
+                <div class="column"><div class="btn btn-success btn-file-input"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;Select Photo</div></div>
+                <div class="column"><div id="bgPhoto" class="btn btn-warning btn-file-upload disabled"><span class="glyphicon glyphicon-open"></span> Save Photo</div></div>
+            </div>
+        </div>
+
+        <div id="editBio" class="field-edit-wrapper">
+            <h4>Bio <div class="character-count badge">150</div> <span class="badge green hidden status-badge"><span class="glyphicon glyphicon-ok"></span> saved</span></h4>
+            <div class="form-group">
+                <label class="sr-only" for="editBioInput">Edit Bio</label>
+                <div class="input-group">
+                    <textarea class="form-control" rows="3" id="editBioInput" placeholder="{{profile.bio}}" name="bio"  ng-model="bio" disabled></textarea>
+                    <div class="input-group-addon toggle-field-edit" ng-click="updateBio()"><span class="glyphicon glyphicon-pencil"></span></div>
+                </div>
+            </div>
+        </div>
     </div>
+    <!-- <h1>{{profile.nickName}}</h1> -->
+
+
 </div>

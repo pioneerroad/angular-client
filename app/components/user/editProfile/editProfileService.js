@@ -27,11 +27,19 @@
                         );
                     };
                     
-                    service.putPic = function(image){
+                    service.putProfilePic = function(image){
                        var data = {
                            imageFile: image
                        };
                         return $http.put('http://pioneerroad.com.au:8081/api/v1/user/' + $localStorage.token.id + '/profile/update/photo',data
+                        );            
+                    };
+                    
+                    service.putBackgroundPic = function(image){
+                       var data = {
+                           imageFile: image
+                       };
+                        return $http.put('http://pioneerroad.com.au:8081/api/v1/user/' + $localStorage.token.id + '/profile/update/background-photo',data
                         );            
                     };
                     

@@ -179,7 +179,10 @@
                 formData.append("imageFile", imageData);
                 console.log(imageData);
                 //replace with angular call to service
-                editProfileService.putPic(imageData);
+             //   if(this.id === "profilePic"){
+             //       console.log("heyy");
+            //    }
+              //  editProfileService.putProfilePic(imageData);
             });
 
             setEditProfileView();
