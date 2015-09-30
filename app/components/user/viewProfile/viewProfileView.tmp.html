@@ -21,268 +21,69 @@
 <!--[if lt IE 8]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
-<div class="menu-bar top nav">
-    <ul id="navBarTop">
-        <li id="notificationPanelCtrl" class="notification"><span class="badge badge-red">5</span></li>
-        <li id="messagesPanelCtrl" class="messages"><span class="badge badge-red">10</span></li>
-    </ul>
-</div> <!-- Info/status bar at top of screen. May also include some navigation aids eg. to messages -->
 
 <!-- Main app functions/content goes inside the <main> section -->
-<main>
-    <div id="user-profile-photo-container">
-        <div id="user-profile-bg-photo">
-            <img src="https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/mail%40mattclark.com.au/background-photos/1437178330803_540x200.jpg" />
+<main class="page-height-container">
+    <div class="nav-bar" id="navBarTop">
+        <div id="slideMenuToggle" class="col-xs-3">
+            <span class="glyphicon glyphicon-menu-hamburger"></span>
         </div>
-        <div id="user-profile-photo-inner-container">
-            <div id="user-profile-photo">
-                <img src="https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/matthewc%40pioneerroad.com.au/1438748472805_200x200.jpg" />
-            </div>
-        </div>
-        <div id="photo-edit-control">
-            <a href="#"><span class="glyphicon glyphicon-cog"></span></a> <!-- Link to profile edit page -->
-        </div>
+        <div class="page-heading col-xs-6"><h5>My Profile</h5></div>
+        <div class="action col-xs-3"><a href="profile-edit-page.html">Edit</a></div>
     </div>
-    <div class="container">
-        <div class="well well-blue">
-            <h3>Hometown</h3>
-            <div class="left"><span class="glyphicon glyphicon-home large"></span></div>
-            <div class="right">
-                <h4>Warrnambool</h4>
-                <h4>Western Region VIC</h4>
+    <div class="content">
+        <div id="user-profile-photo-container">
+            <div id="user-profile-bg-photo">
+                <img src="https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/1/background-photos/1441153542313_414x140.jpg" />
             </div>
-            <div class="clearfix"></div>
+            <div id="user-profile-photo-inner-container">
+                <div id="user-profile-photo">
+                    <img src="https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/matt-profile-200x200.jpg" class="profile-photo" />
+                </div>
+            </div>
         </div>
-        <div class="well well-orange">
-            <h3>Current Location</h3>
-            <div class="left"><span class="glyphicon glyphicon-map-marker large"></span></div>
+        <div class="well well-grey">
+            <h3>Matthew & Rupa Clark</h3>
+            <p>We've been travelling on and off for more than 5 years. We've visited every state in Australia with Rex, our red cattledog.</p>
+        </div>
+        <div class="well well-blue" id="profileHometown">
+            <h3>My Hometown</h3>
+            <p>Fairy Meadow</p>
+            <p>South Coast NSW</p>
+        </div>
+        <div class="well well-blue" id="userProfileRV">
+            <div class="left">
+                <img id="user-profile-rig-img" src="https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/suncamper.jpg" />
+            </div>
             <div class="right">
-                <h4>Near Cooma (2km)</h4>
-                <h4>Snowy Mountains NSW</h4>
+                <h3>My RV</h3>
+                <p>Suncamper</p>
+                <p>Sherwood 4x4</p>
+                <p>2012</p>
             </div>
             <div class="clearfix"></div>
         </div>
     </div>
 </main>
 <!-- End of main section -->
-<!-- The menu bar a the bottom of the page -->
-<div class="menu-bar bottom">
-    <ul role="menu">
-        <li class="icon icon-home"><a href="#"></a></li>
-        <li class="icon icon-community"><a href="#"></a></li>
-        <li class="icon icon-places"><a href="#"></a></li>
-        <li class="icon icon-user"><a href="#"></a></li>
+
+<div class="sitewide-navigation slide-menu page-height-container" id="drawerMenu">
+    <ul class="sitewide-nav">
+        <li data-target="messages" class="menu-item menu-item-messages" aria-label="Messages"><span class="badge">15</span></li>
+        <li data-target="notifications" class="menu-item menu-item-notifications" aria-label="Notifications"><span class="badge">5</span></li>
+        <li class="divider" aria-hidden="true"></li>
+        <li data-target="home" class="menu-item menu-item-home" aria-label="Home"></li>
+        <li data-target="social" class="menu-item menu-item-social" aria-label="Social Connections"></li>
+        <li data-target="places" class="menu-item menu-item-places" aria-label="Places"></li>
+        <li data-target="user" class="menu-item menu-item-user active" aria-label="My Profile"></li>
     </ul>
-</div>
-<!-- End of menu bar -->
-<div id="notification-panel">
-    <div class="title-panel">
-        <div class="nav-back"><button class="btn btn-default hidden"><span class="glyphicon glyphicon-chevron-left hidden"></span></button></div>
-        <div class="title"><h3>Notifications</h3></div>
-        <div class="close"><button class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button></div>
-        <div class="clearfix"></div>
-    </div>
-    <div class="body-panel">
-        <h5>Friend Requests  <span class="badge badge-red">2</span></h5>
-        <div id="notificationsFriendRequestList" class="friend-list">
-            <div class="well well-grey">
-                <div class="left">
-                    <div class="profile-photo-container">
-                        <img src="https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/mattc%40pioneerroad.com.au/1438920974761_100x100.jpg" />
-                    </div>
-                </div>
-                <div class="right">
-                    <h3>Michelle Smith</h3>
-                    <div class="inline-form friend-action">
-                        <div class="input-group">
-                            <button class="btn btn-success accept">Accept</button>
-                            <button class="btn btn-danger decline">Decline</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-            <div class="well well-grey">
-                <div class="left">
-                    <div class="profile-photo-container">
-                        <img src="https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/mattc%40pioneerroad.com.au/1438919563253_100x100.jpg" />
-                    </div>
-                </div>
-                <div class="right">
-                    <h3>Ian and June Smith</h3>
-                    <div class="inline-form friend-action">
-                        <div class="input-group">
-                            <button class="btn btn-success">Accept</button>
-                            <button class="btn btn-danger">Decline</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-        </div>
-    </div>
-</div>
-<div id="messages-panel">
-    <div class="title-panel">
-        <div class="nav-back"><button class="btn btn-default hidden"><span class="glyphicon glyphicon-chevron-left hidden"></span></button></div>
-        <div class="title"><h3>Messages</h3></div>
-        <div class="close"><button class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button></div>
-        <div class="clearfix"></div>
-    </div>
-    <div id="msg-list-panel" class="msg-panel">
-        <div class="well well-orange" id="msg-new-conversation">
-            <div class="heading">
-                <h4>Start a new conversation</h4>
-                <button class="btn btn-default" id="startNewConversation"><span class="glyphicon glyphicon-pencil"></span></button>
-                <div class="clearfix"></div>
-            </div>
-            <div class="body">
-                <div class="form-group">
-                    <div class="input-group">
-                        <label class="sr-only" for="nickname">Nickname</label>
-                        <input type="text" class="form-control" id="nickname"/>
-                        <span class="input-group-addon" id="addRecipient"><span class="glyphicon glyphicon-plus"></span></span>
-                    </div>
-                    <div class="msg-recipient-list"><ul></ul><!-- Visual indicator of msg recipients; User Ids also need to be added to an array and sent to server--></div>
-                    <div class="input-group">
-                        <label class="sr-only" for="msg-body">Message Body</label>
-                        <textarea class="form-control" rows="5" id="msg-body"></textarea>
-                        <span type="submit" class="input-group-addon" id="postMessage"><span class="glyphicon glyphicon-share-alt"></span></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="msg-conversation-list">
-            <div class="well well-blue" data-thread-id="425"> <!-- data-thread-id value is msg thread ID -->
-                <div class="row">
-                    <div class="msg-user">Carol and Ian Adams</div>
-                    <div class="msg-date">1 day ago</div>
-                </div>
-                <div class="msg-status unread"><span class="glyphicon glyphicon-asterisk"></span></div>
-                <div class="msg-user-profile-photo online"><img src="https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/mattc%40pioneerroad.com.au/1438919563253_30x30.jpg"/></div>
-                <div class="msg-summary">
-
-                    <p class="summary-text">Hi there Betty and Jim, just wanted...</p>
-                </div>
-                <div class="msg-open-thread"><span class="glyphicon glyphicon-chevron-right"></span></div>
-                <div class="clearfix"></div>
-            </div>
-            <div class="well well-blue" data-thread-id="425"> <!-- data-thread-id value is msg thread ID -->
-                <div class="row">
-                    <div class="msg-user">Carol and Ian Adams</div>
-                    <div class="msg-date">1 day ago</div>
-                </div>
-                <div class="msg-status unread"><span class="glyphicon glyphicon-asterisk"></span></div>
-                <div class="msg-user-profile-photo offline"><img src="https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/mattc%40pioneerroad.com.au/1438919563253_30x30.jpg"/></div>
-                <div class="msg-summary">
-
-                    <p class="summary-text">Hi there Betty and Jim, just wanted...</p>
-                </div>
-                <div class="msg-open-thread"><span class="glyphicon glyphicon-chevron-right"></span></div>
-                <div class="clearfix"></div>
-            </div>
-            <div class="well well-blue" data-thread-id="425"> <!-- data-thread-id value is msg thread ID -->
-                <div class="row">
-                    <div class="msg-user">Carol and Ian Adams</div>
-                    <div class="msg-date">1 day ago</div>
-                </div>
-                <div class="msg-status read"><span class="glyphicon glyphicon-asterisk"></span></div>
-                <div class="msg-user-profile-photo away"><img src="https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/mattc%40pioneerroad.com.au/1438919563253_30x30.jpg"/></div>
-                <div class="msg-summary">
-                    <p class="summary-text">Hi there Betty and Jim, just wanted...</p>
-                </div>
-                <div class="msg-open-thread"><span class="glyphicon glyphicon-chevron-right"></span></div>
-                <div class="clearfix"></div>
-            </div>
-        </div>
-    </div>
-    <div id="msg-thread-panel" class="msg-panel">
-        <section>
-            <div class="msg-container from-them">
-                <div class="message">
-                    <p>Hey John and June, we're having a great time up here at the Sunshine Coast. Thanks for all your tips about places to stay along the way.</p>
-                </div>
-                <img src="https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/mattc%40pioneerroad.com.au/1438919563253_30x30.jpg"/>
-                <div class="clearfix"></div>
-                <p class="msg-status"><strong>Read</strong> 10 Aug 2015 09:15</p>
-                <div class="clearfix"></div>
-            </div>
-            <div class="msg-container from-me">
-                <div class="message">
-                    <p>You're welcome. We on our way to Mt Isa now. Weather is lovely out here.</p>
-                </div>
-                <img src="https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/mail%40mattclark.com.au/1437178262889_30x30.jpg"/>
-                <div class="clearfix"></div>
-                <p class="msg-status"><strong>Read</strong> 10 Aug 2015 09:15</p>
-                <div class="clearfix"></div>
-            </div>
-            <div class="clear"></div>
-            <div class="clear"></div>
-            <div class="msg-container from-me">
-                <div class="message">
-                    <p>Is it sunny?</p>
-                </div>
-                <img src="https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/mail%40mattclark.com.au/1437178262889_30x30.jpg"/>
-                <div class="clearfix"></div>
-                <p class="msg-status"><strong>Read</strong> 10 Aug 2015 09:15</p>
-                <div class="clearfix"></div>
-            </div>
-            <div class="msg-container from-me">
-                <div class="message">
-                    <p>Yes!</p>
-                </div>
-                <img src="https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/mail%40mattclark.com.au/1437178262889_30x30.jpg"/>
-                <div class="clearfix"></div>
-                <p class="msg-status"><strong>Read</strong> 10 Aug 2015 09:15</p>
-                <div class="clearfix"></div>
-            </div>
-            <div class="clear"></div>
-            <div class="msg-container from-them">
-                <div class="message">
-                    <p>That's nice. It's raining really heavily over here on the coast.</p>
-                </div>
-                <img src="https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/mattc%40pioneerroad.com.au/1438919563253_30x30.jpg"/>
-                <div class="clearfix"></div>
-                <p class="msg-status"><strong>Read</strong> 10 Aug 2015 09:15</p>
-                <div class="clearfix"></div>
-            </div>
-            <div class="clear"></div>
-            <div class="msg-container from-me">
-                <div class="message">
-                    <p>I heard that. We think it will probably move inland in the next couple of days so we better enjoy this sunshine while it lasts.</p>
-                </div>
-                <div class="clearfix"></div>
-                <img src="https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/mail%40mattclark.com.au/1437178262889_30x30.jpg"/>
-                <p class="msg-status"><strong>Read</strong> 10 Aug 2015 09:15</p>
-                <div class="clearfix"></div>
-            </div>
-            <div class="clear"></div>
-            <div class="msg-container from-them">
-                <div class="message">
-                    <p>Careful out there in the rain. Some of those dirt tracks turn to clay when it's wet.</p>
-                </div>
-                <div class="clearfix"></div>
-                <img src="https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/mattc%40pioneerroad.com.au/1438919563253_30x30.jpg"/>
-                <p class="msg-status"><strong>Read</strong> 10 Aug 2015 09:15</p>
-                <div class="clearfix"></div>
-            </div>
-        </section>
-        <div class="well well-orange msg-reply">
-            <div class="form-group">
-                <label class="sr-only" for="msgReply">Write your reply</label>
-                <div class="input-group">
-                    <input type="text" class="form-control" id="msgReply">
-                    <div class="input-group-addon"><span class="glyphicon glyphicon-share-alt"></span></div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 <!-- Scripts -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')</script>
-<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script src="/js/vendor/jquery-mobile/jquery.mobile.custom.js"></script>
+<script src="/js/vendor/plugins/jcarousel/dist/jquery.jcarousel.min.js"></script>
 <script src="/js/plugins.js"></script>
 <script src="/js/modal.js"></script>
 <script src="/js/main.js"></script>
@@ -290,7 +91,7 @@
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
 <script>
     (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-        function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
         e=o.createElement(i);r=o.getElementsByTagName(i)[0];
         e.src='https://www.google-analytics.com/analytics.js';
         r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
