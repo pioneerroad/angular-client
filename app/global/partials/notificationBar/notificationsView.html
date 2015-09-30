@@ -1,0 +1,22 @@
+<div class="content">
+    <div class="body-panel panel-list" id="pendingFriendRequests">
+        <h5 class="section-heading">Friend Requests  <span class="badge badge-red">{{numfriendRequest}}</span></h5>
+        <div id="notificationsFriendRequestList" class="friend-list">
+            <div ng-repeat="friend in friends" class="well well-grey">
+                <div class="panel-left">
+                    <img ng-src="{{friend.profilePic}}" class="profile-photo"/>
+                </div>
+                <div class="panel-right">
+                    <h3>{{friend.nickName}}</h3>
+                    <div class="inline-form friend-action">
+                        <div class="input-group">
+                            <button class="btn btn-success accept" ng-click="accept(friend.requestId)">Accept</button>
+                            <button class="btn btn-danger decline" ng-click="decline(friend.requestId)">Decline</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

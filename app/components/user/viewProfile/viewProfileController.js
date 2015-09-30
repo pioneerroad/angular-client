@@ -31,7 +31,7 @@
                     $scope.background = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/ui-images/bg-default-img.svg";
                 }
                 else {
-                    $scope.background = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/" + $localStorage.token.id + "/background-photos/" + data.profileBackgroundPhoto.medium;
+                    $scope.background = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/user-photos/" + $localStorage.token.id + "/background-photo/" + data.profileBackgroundPhoto.medium;
                 }
 
                 if (data.profilePhoto === null) {

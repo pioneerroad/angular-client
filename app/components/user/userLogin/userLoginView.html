@@ -1,51 +1,53 @@
-<div ng-app="pioneerRoad.userLogin">
-    <div class="info-bar"><h1>Login</h1></div> <!-- Info/status bar at top of screen. May also include some navigation aids eg. to messages -->
-    <!-- Main app functions/content goes inside the <main> section -->
-    <main>
-        <div class="container">
-            <!-- Dismissable alert at the top of the page: to be displayed if there are errors with the form submission -->
-            <!-- Display only if user can't be validated. Remember ng-show or ng-hide helps with this -->
-            <div ng-show="Error" class="alert alert-danger" role="alert" ng-cloak>
-                <button type="button" class="close"  ng-click="closeError()" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <strong>Something went terribly, terribly wrong!</strong>
-                <ul>
-                    <li ng-repeat="error in Errors">{{error}}</li>
-                </ul>
-            </div>
-            <!-- End of dismissable alert at the top of the page -->
-            <div class="container">
-                <!-- Email address field -->
-                <div class="form-group">
-                    <div class="input-group input-group-lg">
-                        <span class="input-group-addon" id="sizing-addon"><span class="glyphicon glyphicon-envelope"></span></span>
-                        <input type="text" class="form-control" placeholder="Email Address" aria-describedby="sizing-addon" ng-model="email">
-                    </div>
-                </div>
-                <!-- Password Field -->
-                <div class="input-group input-group-lg">
-                    <span class="input-group-addon" id="sizing-addon2"><span class="glyphicon glyphicon-lock"></span></span>
-                    <input type="password" class="form-control" placeholder="Password" aria-describedby="sizing-addon2" ng-model="password">
-                </div>
-                <div id="user-login-remember" class="form-group">
-                    <input id="user-login-remember-checkbox" type="checkbox"ng-click="rememberMe()" ng-model="remember">
-                    <label class="cbx-label">Remember Me</label>
-                </div>
-                <!-- Login Button -->
-                <button type="button" class="btn btn-warning btn-lg btn-fw" ng-click="authenticate()">Login</button>
-            </div>
+<div ng-app="pioneerRoad.userLogin" class="user-input-page"> 
+    <div class="nav-bar" id="navBarTop">
+        <div class="page-heading col-xs-6"><h5>Login</h5></div>
+    </div>
 
-            <!-- Functions to reset password/register new account goes here -->
-            <ul id="user-login-extra-options">
-                <!-- Let's put the password reset form in a popup modal -->
-                <li><a href="" data-toggle="modal" data-target="#passwordResetModal" >Forgot Password?</a></li>
-                <!-- Navigate to the signup/registration page -->
-                <li><a href="#/register">Not a member yet?</a></li> <!-- Link to signup/registration page -->
-                <li><a href="" ng-click="logOut()">Logout</a></li>
+    <!-- Dismissable alert at the top of the page: to be displayed if there are errors with the form submission -->
+    <!-- Display only if user can't be validated. Remember ng-show or ng-hide helps with this -->
+    <div class="container messages">
+        <div ng-show="Error" class="alert alert-danger" role="alert" ng-cloak>
+            <button type="button" class="close"  ng-click="closeError()" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>Something went terribly, terribly wrong!</strong>
+            <ul>
+                <li ng-repeat="error in Errors">{{error}}</li>
             </ul>
         </div>
-    </main>
+    </div>
+    <!-- End of dismissable alert at the top of the page -->
+    <div class="well well-blue">
+        <!-- Email address field -->
+        <div class="form-group">
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="sizing-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+                <input type="text" class="form-control" placeholder="Email Address" aria-describedby="sizing-addon" ng-model="email">
+            </div>
+        </div>
+        <!-- Password Field -->
+        <div class="form-group">
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="sizing-addon2"><span class="glyphicon glyphicon-lock"></span></span>
+                <input type="password" class="form-control" placeholder="Password" aria-describedby="sizing-addon2" ng-model="password">
+            </div>
+        </div>
+        <div id="user-login-remember" class="form-group">
+            <input id="user-login-remember-checkbox" type="checkbox"ng-click="rememberMe()" ng-model="remember">
+            <label class="cbx-label">Remember Me</label>
+        </div>
+        <!-- Login Button -->
+        <button type="button" class="btn btn-warning btn-lg btn-fw" ng-click="authenticate()">Login</button>
+    </div>
+
+    <!-- Functions to reset password/register new account goes here -->
+    <div class="alert">
+        Not a member yet?&nbsp;&nbsp;<button type="button" class="btn btn-success"><a href="#/register">Join Now</a></button>
+    </div>
+    <!-- Functions to reset password/register new account goes here -->
+    <div class="well well-grey">
+        Forgot your password? <a href="#" data-toggle="modal" data-target="#passwordResetModal">Reset it now</a>
+    </div>
 
     <!-- Modals -->
     <!-- Password Reset Modal -->

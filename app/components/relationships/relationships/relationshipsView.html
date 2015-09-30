@@ -1,105 +1,106 @@
 <!doctype html>
-<!-- Main app functions/content goes inside the <main> section -->
-<main ng-app="pioneerRoad.RelationShips">
-    <div class="container">
-        <div class="subsection-selector" role="group" aria-label="subsectionNavigation">
-            <ul class="btn-group btn-group-justified">
-                <a class="btn active">Friends</a>
-            </ul>
-        </div>
-        <div id="friend-panel" class="subsection-panel visible" >
-            <div class="well well-orange" id="add-friend">
-                <div class="heading widget-add-new">
-                    <h4>Add a new friend</h4>
-                    <p align="right">
-                        <button ng-click="addFriends()" class="btn btn-default" id="startFriendRequest"><span class="glyphicon {{symbol}}"></span></button>
-                    </p>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="body" ng-show="addFriendsShow">
-                    <div class="form-group">
-                        <div class="input-group">
-                            <label class="sr-only" for="searchUsers">Email Address</label>
-                            <input type="text" class="form-control" id="searchUsers" ng-model="friendName"/>
-                            <span class="input-group-addon" id="executeSearch"><span ng-click="findFriend()" class="glyphicon glyphicon-search"></span></span>
-                        </div>
-                        <!-- Returned result of friend search -->
-                        <div class="well panel-list friends-list" ng-repeat="friend in addFriendNew" ng-cloak>
-                            {{friend.error}}
-                            <div class="panel-left">
-                                <div class="profile-photo-container">
-                                    <img ng-src="{{friend.profilePic}}" /></div>
-                            </div>
-                            <div class="panel-right" ng-show="friend.nickName">
-                                <h5>{{friend.nickName}}</h5>
-                                <div class="hometown">
-                                    <div class="details left">
-                                        <span class="glyphicon glyphicon-home"></span>
-                                    </div>
-                                    <div class="details right" >
-                                        <p class="town">{{friend.dataSet_town.location}}</p>
-                                        <p class="region">{{friend.dataSet_town.tourism_region}} {{friend.dataSet_town.state}}</p>
-                                    </div>
-                                </div>
-                                <div class="current-location" ng-show="friend.currentLocation.nearestTown">
-                                    <div class="details left">
-                                        <span class="glyphicon glyphicon-map-marker"></span>
-                                    </div>
-                                    <div class="details right" >
-                                        <p class="town">{{friend.currentLocation.nearestTown}}</p>
-                                        <p class="region">{{friend.currentLocation.tourismRegion}}</p>
-                                    </div>
-                                </div>
-                                <button ng-show="friend.userAccountId" class="btn btn-default" ng-click="addFriendbtn(friend.userAccountId)"><span class="glyphicon glyphicon-plus"></span> Add Friend</button>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="scrollable panel-list friends-list">
-                <!-- Beginning of block inside ng-repeat -->
-                <div class="well well-darker-green has-touch-control" ng-swipe-left="blockFriendsOpen(friend.friend)" ng-swipe-right="blockFriendsClose(friend.friend)" ng-repeat="friend in friends">
-                    <div class="panel-left" ng-cloak>
-                        <div class="profile-photo-container">
-                            <img ng-src="{{friend.profilePic}}" /></div>
-                    </div>
-                    <div class="panel-right" ng-cloak>
-                        <h5>{{friend.nickname}}</h5>
-                        <div class="hometown" ng-show="friend.location">
-                            <div class="details left">
-                                <span class="glyphicon glyphicon-home"></span>
-                            </div>
-                            <div class="details right" ng-cloak>
-                                <p class="town">{{friend.location}}</p>
-                                <p class="region">{{friend.tourism_region}} {{friend.state}}</p>
-                            </div>
-                        </div>
-                        <div class="current-location" ng-show="friend.currentLocation.nearestTown" ng-cloak>
-                            <div class="details left">
-                                <span class="glyphicon glyphicon-map-marker"></span>
-                            </div>
-                            <div class="details right" >
-                                <p class="town">Near {{friend.currentLocation.nearestTown}}</p>
-                                <p class="region">{{friend.currentLocation.tourismRegion}}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                    <div class="touch-control inactive" id="{{friend.friend}}" ng-click="blockFriendbtn(friend.friend)" ng-cloak>
-                        <p data-toggle="modal" data-target="#blockFriendConfirmationModal"  >Block Friend</p>
-                    </div>
-                </div>
-                <!-- End of block inside ng-repeat -->
-            </div>
-        </div>
-        <div id="groups-panel" class="subsection-panel hidden"></div>
+
+
+<div ng-app="pioneerRoad.RelationShips">
+    <div class="subsection-selector" role="group" aria-label="subsectionNavigation">
     </div>
-</main>
+    <div id="friend-panel" class="subsection-panel visible" >
+        <div class="well well-orange" id="add-friend">
+            <div class="heading widget-add-new">
+                <div class="alert alert-danger" role="alert"
+                     <h4 ng-hide="okay" class="modal-title">{{message}}</h4>
+                </div>
+                <h4>Add a new friend</h4>
+                <p align="right">
+                    <button ng-click="addFriends()" class="btn btn-default" id="startFriendRequest"><span class="glyphicon {{symbol}}"></span></button>
+                </p>
+                <div class="clearfix"></div>
+            </div>
+            <div class="body" ng-show="addFriendsShow">
+                <div class="form-group">
+                    <div class="input-group">
+                        <label class="sr-only" for="searchUsers">Email Address</label>
+                        <input type="text" class="form-control" id="searchUsers" ng-model="friendName"/>
+                        <span class="input-group-addon" id="executeSearch"><span ng-click="findFriend()" class="glyphicon glyphicon-search"></span></span>
+                    </div>
+                    <!-- Returned result of friend search -->
+                    <div class="well panel-list friends-list" ng-repeat="friend in addFriendNew" ng-cloak>
+                        {{friend.error}}
+                        <div class="panel-left">
+                            <div class="profile-photo-container">
+                                <img ng-src="{{friend.profilePic}}" /></div>
+                        </div>
+                        <div class="panel-right" ng-show="friend.nickName">
+                            <h5>{{friend.nickName}}</h5>
+                            <div class="hometown">
+                                <div class="details left">
+                                    <span class="glyphicon glyphicon-home"></span>
+                                </div>
+                                <div class="details right" >
+                                    <p class="town">{{friend.dataSet_town.location}}</p>
+                                    <p class="region">{{friend.dataSet_town.tourism_region}} {{friend.dataSet_town.state}}</p>
+                                </div>
+                            </div>
+                            <div class="current-location" ng-show="friend.currentLocation.nearestTown">
+                                <div class="details left">
+                                    <span class="glyphicon glyphicon-map-marker"></span>
+                                </div>
+                                <div class="details right" >
+                                    <p class="town">{{friend.currentLocation.nearestTown}}</p>
+                                    <p class="region">{{friend.currentLocation.tourismRegion}}</p>
+                                </div>
+                            </div>
+                            <button ng-show="friend.userAccountId" class="btn btn-default" ng-click="addFriendbtn(friend.userAccountId)"><span class="glyphicon glyphicon-plus"></span> Add Friend</button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scrollable panel-list friends-list">
+            <!-- Beginning of block inside ng-repeat -->
+            <div class="well well-darker-green has-touch-control" ng-swipe-left="blockFriendsOpen(friend.friend)" ng-swipe-right="blockFriendsClose(friend.friend)" ng-repeat="friend in friends">
+                <div class="panel-left" ng-cloak>
+                    <div class="profile-photo-container">
+                        <img ng-src="{{friend.profilePic}}" /></div>
+                </div>
+                <div class="panel-right" ng-cloak>
+                    <h5>{{friend.nickname}}</h5>
+                    <div class="hometown" ng-show="friend.location">
+                        <div class="details left">
+                            <span class="glyphicon glyphicon-home"></span>
+                        </div>
+                        <div class="details right" ng-cloak>
+                            <p class="town">{{friend.location}}</p>
+                            <p class="region">{{friend.tourism_region}} {{friend.state}}</p>
+                        </div>
+                    </div>
+                    <div class="current-location" ng-show="friend.currentLocation.nearestTown" ng-cloak>
+                        <div class="details left">
+                            <span class="glyphicon glyphicon-map-marker"></span>
+                        </div>
+                        <div class="details right" >
+                            <p class="town">Near {{friend.currentLocation.nearestTown}}</p>
+                            <p class="region">{{friend.currentLocation.tourismRegion}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="touch-control inactive" id="{{friend.friend}}" ng-click="blockFriendbtn(friend.friend)" ng-cloak>
+                    <p data-toggle="modal" data-target="#blockFriendConfirmationModal"  >Block Friend</p>
+                </div>
+            </div>
+            <!-- End of block inside ng-repeat -->
+        </div>
+    </div>
+    <div id="groups-panel" class="subsection-panel hidden"></div>
+
+</div>
 <!-- End of main section -->
 
 <!-- Modals -->
-<div class="modal fade"  modal="showblockFriendConfirmationModal" id="blockFriendConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+<div class="modal fade"  modal="showblockFriendConfirmationModal" aria-hidden="true" id="blockFriendConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body">
@@ -112,7 +113,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" modal="showFriendConfirmationModal" id="FriendConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" modal="showFriendConfirmationModal" id="FriendConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body">
@@ -125,4 +126,5 @@
         </div>
     </div>
 </div>
+
 <!-- End Modals -->

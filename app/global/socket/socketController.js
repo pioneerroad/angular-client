@@ -21,7 +21,7 @@
         
         socket.on('friend request', function(){
             console.log("got friend");
-            $rootScope.getFriendRequests();
+            //$rootScope.getFriendRequests();
         });
         return socket;
     });
