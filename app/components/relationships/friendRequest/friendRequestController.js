@@ -10,7 +10,7 @@
                     friendRequestService.getFriendRequestList()
                             .success(function (response) {
                                 $rootScope.numfriendRequest = response.length;//get number of friend requests
-
+                                console.log(response);
                                 for (i = 0; i < response.length; i++) { // for each request
                                     friend.nickName = response[i].nickName;
                                     friend.requestId = response[i].requestId;
@@ -19,10 +19,10 @@
                                         friend.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/ui-images/user-profile-default-img.svg";
                                     }
                                     else {
-                                        friend.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/" + response[i].userAccountId + "/" + response[i].profilePhoto.medium;
+                                        friend.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/user-photos/" + response[i].userAccountId + "/profile-photo/" + response[i].profilePhoto.medium;
                                     }
 
-                                    $rootScope.friends.push(friend);
+                                    $scope.friends.push(friend);
                                     friend = {};
                                 }
                             })
@@ -75,16 +75,13 @@
                     }
                 };
 
-
-                $rootScope.friends = []; //stores all  friend requests
+                $scope.friends = []; //stores all  friend requests
                 var friend = {}; //stores a single friend request
                 $rootScope.getFriendRequests(); //get friend request list
             }
             else { //not logged in
 
             }
-
-
 
         }]);
 }());

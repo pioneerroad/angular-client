@@ -1,7 +1,7 @@
 <!doctype html>
-<!-- Main app functions/content goes inside the <main> section -->
-<main ng-app="pioneerRoad.RelationShips">
-    <div class="container">
+
+<div class="container">
+    <div ng-app="pioneerRoad.RelationShips">
         <div class="subsection-selector" role="group" aria-label="subsectionNavigation">
             <ul class="btn-group btn-group-justified">
                 <a class="btn active">Friends</a>
@@ -94,33 +94,35 @@
             </div>
         </div>
         <div id="groups-panel" class="subsection-panel hidden"></div>
-    </div>
-</main>
-<!-- End of main section -->
 
-<!-- Modals -->
-<div class="modal fade"  modal="showblockFriendConfirmationModal" id="blockFriendConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <h4 ng-hide="okay" class="modal-title">{{message}}</h4>
-                <h4 ng-show="okay" class="modal-title">Do you really want to block this user?</h4>
-                <button ng-show="okay" type="button" class="btn btn-danger" ng-click="blockFriend()">Yes, please!</button>
-                <button ng-show="okay" type="button" class="btn btn-default" data-dismiss="modal" ng-click="close()">No, Thanks!</button>
-                <button ng-hide="okay" type="button" class="btn btn-default" data-dismiss="modal" ng-click="close()">Okay</button>
+    </div>
+    <!-- End of main section -->
+
+    <!-- Modals -->
+    
+    <div class="modal fade"  modal="showblockFriendConfirmationModal" id="blockFriendConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h4 ng-hide="okay" class="modal-title">{{message}}</h4>
+                    <h4 ng-show="okay" class="modal-title">Do you really want to block this user?</h4>
+                    <button ng-show="okay" type="button" class="btn btn-danger" ng-click="blockFriend()">Yes, please!</button>
+                    <button ng-show="okay" type="button" class="btn btn-default" data-dismiss="modal" ng-click="close()">No, Thanks!</button>
+                    <button ng-hide="okay" type="button" class="btn btn-default" data-dismiss="modal" ng-click="close()">Okay</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="modal fade" modal="showFriendConfirmationModal" id="FriendConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <h4 ng-show="okay" class="modal-title">Do you want to add this user?</h4>
-                <h4 ng-hide="okay" class="modal-title">{{message}}</h4>
-                <button ng-show="okay" type="button" class="btn btn-danger" ng-click="addFriend()">Yes, please!</button>
-                <button ng-show="okay" type="button" class="btn btn-default" data-dismiss="modal" ng-click="close()">No, Thanks!</button>
-                <button ng-hide="okay" type="button" class="btn btn-default" data-dismiss="modal" ng-click="close()">Okay</button>
+    <div class="modal fade" modal="showFriendConfirmationModal" id="FriendConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h4 ng-show="okay" class="modal-title">Do you want to add this user?</h4>
+                    <h4 ng-hide="okay" class="modal-title">{{message}}</h4>
+                    <button ng-show="okay" type="button" class="btn btn-danger" ng-click="addFriend()">Yes, please!</button>
+                    <button ng-show="okay" type="button" class="btn btn-default" data-dismiss="modal" ng-click="close()">No, Thanks!</button>
+                    <button ng-hide="okay" type="button" class="btn btn-default" data-dismiss="modal" ng-click="close()">Okay</button>
+                </div>
             </div>
         </div>
     </div>

@@ -77,7 +77,7 @@
                                     friend.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/ui-images/user-profile-default-img.svg";
                                 }
                                 else {
-                                    friend.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/" + response[i].friend + "/" + response[i].profilePhoto.medium;
+                                    friend.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/user-photos/" + response[i].friend + "/profile-photo/" + response[i].profilePhoto.medium;
                                 }
                                 friend.currentLocation = response[i].currentLocation;
                                 $scope.friends.push(friend);
@@ -134,7 +134,7 @@
 
             $scope.addFriend = function () {
                 friendAddId;
-
+                console.log("clicked");
                 if ($localStorage.token.id === friendAddId) {
                     $scope.message = "You cannot be friends with yourself";
                     $scope.okay = false; //show error messages
@@ -165,6 +165,7 @@
                                 $scope.message = "could not send request";
                                 friendAddId = null;
                             }
+                            console.log("error");
                         });
             };
 
@@ -180,7 +181,7 @@
                                     friend.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/ui-images/user-profile-default-img.svg";
                                 }
                                 else {
-                                    friend.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/profile-photos/" + response.userAccountId + "/" + response.profilePhoto.medium;
+                                    friend.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/user-photos/" + response.userAccountId + "/profile-photo/" + response.profilePhoto.medium;
                                 }
                                 $scope.addFriendNew.push(friend);
                                 friend = {};
