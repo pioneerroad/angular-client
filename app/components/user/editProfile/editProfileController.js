@@ -195,17 +195,9 @@
             $scope.charsLeft = $scope.maxChar; //number of chars left in bio
 
             //handles the image uploading
-            $('#editProfilePhoto').cropit('allow-cross-origin', 'true', {rejectSmallImage: true, onImageError: function () {
-                    console.log('error');
-                }});
-            $('#editBackgroundPhoto').cropit('allow-cross-origin', 'true', 'smallImage', 'allow');
+            $('#editProfilePhoto').cropit('allow-cross-origin', 'true');
+            $('#editBackgroundPhoto').cropit('allow-cross-origin', 'true');
 
-            $('.image-editor').cropit({
-                rejectSmallImage: true,
-                onImageError: function () {
-                    console.log('error');
-                }
-            });
 
             $('.btn-file-input').click(function () {
                 $(this).closest('.photo-edit-wrapper').children('.cropit-image-input').click();
