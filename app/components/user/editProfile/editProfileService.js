@@ -43,6 +43,14 @@
                         );            
                     };
                     
+                    service.setBio = function(data){
+                       var body = {
+                           bio: data
+                       };
+                        return $http.put('http://pioneerroad.com.au:8081/api/v1/user/' + $localStorage.token.id + '/bio',body
+                        );            
+                    };
+                    
                     return service;              
                 }
             ]);
