@@ -5,6 +5,7 @@
             $scope.nickName = false;
             $scope.location = " ";
 
+            
             if ($location.path() === "/home") {
                 $rootScope.Title = $sce.trustAsHtml("Home");
                 $rootScope.Link = $sce.trustAsHtml("");

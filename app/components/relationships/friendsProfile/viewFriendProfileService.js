@@ -1,13 +1,12 @@
 (function () {
 
-    angular.module("pioneerRoad.Profile")
-            .factory('viewProfileService', ['$http', '$localStorage',
-                function ($http, $localStorage) {
+    angular.module("pioneerRoad.FriendProfile")
+            .factory('viewFriendProfileService', ['$http', '$location', '$localStorage',
+                function ($http, $location, $localStorage) {
                     var service = {};
 
-                    service.getData = function () {
-                        
-                        return $http.post('http://pioneerroad.com.au:8081/api/v1/user/'+$localStorage.token.id+'/profile/fetch'
+                    service.getData = function (id) {
+                        return $http.post('http://pioneerroad.com.au:8081/api/v1/user/' + id + '/profile/fetch'
                                 );
                     };
 

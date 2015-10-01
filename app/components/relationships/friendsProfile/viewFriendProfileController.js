@@ -1,31 +1,17 @@
 (function () {
-    var app = angular.module("pioneerRoad.Profile", []);
+    var app = angular.module("pioneerRoad.FriendProfile", []);
 
-    app.controller('viewProfileController', ['$scope', '$http', '$location', '$rootScope', '$localStorage', 'loginRedirect', 'viewProfileService', 'geoLocationService', '$sce', function ($scope, $http, $location, $rootScope, $localStorage, loginRedirect, viewProfileService, geoLocationService, $sce) {
-            $scope.nickName = false;
-            $scope.location = " ";
-
-            if ($location.path() === "/home") {
-                $rootScope.Title = $sce.trustAsHtml("Home");
-                $rootScope.Link = $sce.trustAsHtml("");
-            }
-            else {
-                $rootScope.Title = $sce.trustAsHtml("Profile");
-                $rootScope.Link = $sce.trustAsHtml("<h5><a href='#/editprofile'>Edit</a><h5>");
-            }
-            
-
-            geoLocationService.begin(); //update location
+    app.controller('viewFriendProfileController', ['$scope', '$http', '$location', '$rootScope', '$localStorage', 'loginRedirect', 'viewFriendProfileService', 'geoLocationService', '$sce', '$routeParams', function ($scope, $http, $location, $rootScope, $localStorage, loginRedirect, viewFriendProfileService, geoLocationService, $sce, $routeParams) {
 
             var getProfile = function () { //get the users profile
 
-                viewProfileService.getData()
+                viewFriendProfileService.getData(friendId)
                         .success(function (response) {
                             if (response) {
                                 $scope.profile = response;
                                 setImages(response);
-                                setNick(response);
-                                getCurrentLocation();
+                                $rootScope.Title = $sce.trustAsHtml($scope.profile.nickName);
+                                console.log(response);
                             }
                         })
                         .error(function (error) {
@@ -39,7 +25,7 @@
                     $scope.background = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/ui-images/bg-default-img.svg";
                 }
                 else {
-                    $scope.background = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/user-photos/" + $localStorage.token.id + "/background-photo/" + data.profileBackgroundPhoto.medium;
+                    $scope.background = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/user-photos/" + friendId + "/background-photo/" + data.profileBackgroundPhoto.medium;
                 }
 
                 if (data.profilePhoto === null) {
@@ -48,37 +34,27 @@
                     console.log($scope.profilepic);
                 }
                 else {
-                    $scope.profilepic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/user-photos/" + $localStorage.token.id + "/profile-photo/" + data.profilePhoto.large;
+                    $scope.profilepic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/user-photos/" + friendId + "/profile-photo/" + data.profilePhoto.large;
                 }//ui-images/bg-deafult-img.svg
             };
 
-            var setNick = function (data) {
-                if (data.nickName === null) {
-                    $scope.nickName = false;
-                }
-                else {
-                    $scope.nickName = true;
-                }
-            };
-
-
+            var friendId = $routeParams.id;
+            $scope.profile = {};
+            $scope.profile.nickName = "";
+            
             if (!loginRedirect.checkLogin()) {
                 $location.path("/login");
-                console.log("i'm not logged in");
             }
             else {
                 getProfile();
             }
 
-            var getCurrentLocation = function () {
-                geoLocationService.returnLocation()
-                        .success(function (data, response) {
-                            $scope.location = data; //location data
-                        })
-                        .error(function (error) {
-                            console.log(error);
-                        });
-            };
+            $rootScope.Title = $sce.trustAsHtml("");
+            $rootScope.Link = $sce.trustAsHtml("");
+
+            $scope.location = " ";
+
+            geoLocationService.begin(); //update location
 
         }]);
 }());

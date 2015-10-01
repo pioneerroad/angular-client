@@ -1,13 +1,16 @@
 <!doctype html>
 <div ng-app="pioneerRoad.RelationShips">
     <div id="friend-panel" class="subsection-panel visible" >
-        
+
         <div class="scrollable panel-list friends-list">
             <!-- Beginning of block inside ng-repeat -->
             <div class="well well-darker-green has-touch-control" ng-swipe-left="blockFriendsOpen(friend.friend)" ng-swipe-right="blockFriendsClose(friend.friend)" ng-repeat="friend in friends">
                 <div class="panel-left" ng-cloak>
                     <div class="profile-photo-container">
-                        <img ng-src="{{friend.profilePic}}" /></div>
+                        <a href="#/friendProfile/{{friend.friend}}"> <!-- Link to user's profile page -->
+                            <img ng-src="{{friend.profilePic}}" />
+                        </a>
+                    </div>
                 </div>
                 <div class="panel-right" ng-cloak>
                     <h5>{{friend.nickname}}</h5>

@@ -16,6 +16,11 @@
                     controller: "viewProfileController"
 
                 })
+                .when("/friendProfile/:id", {
+                    templateUrl: "app/components/relationships/friendsProfile/viewFriendProfileView.html", //redirect to user profile page
+                    controller: "viewFriendProfileController"
+
+                })
                 .when("/home", {
                     templateUrl: "app/components/home/homepage.html", //redirect to user home page
                     controller: "homePageController"
