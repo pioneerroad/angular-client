@@ -1,7 +1,7 @@
 (function () {
     var app = angular.module("pioneerRoad");
 
-    app.factory('NotificationService', function (socketFactory, $localStorage, $rootScope) {
+    app.factory('NotificationService',['socketFactory', '$localStorage', '$rootScope', 'friendRequestService', function (socketFactory, $localStorage, $rootScope, friendRequestService) {
 
         var mysocket = io("http://pioneerroad.com.au:8081");
         var socket = socketFactory({
@@ -20,9 +20,8 @@
 
         
         socket.on('friend request', function(){
-            console.log("got friend");
-            //$rootScope.getFriendRequests();
+           friendRequestService.updateNum();
         });
         return socket;
-    });
+    }]);
 }());

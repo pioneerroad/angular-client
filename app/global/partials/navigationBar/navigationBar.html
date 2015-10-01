@@ -15,38 +15,6 @@
 
 <!--
 <div>
-        <!-- *********** Beginning of Notification Panel ********* --> <!--
-        <div class="overlay-panel" id="notification-panel">
-            <div class="title-panel">
-                <div class="nav-back" ng-click="CloseFriend()"><button class="btn btn-default hidden"><span class="glyphicon glyphicon-chevron-left hidden"></span></button></div>
-                <div class="title"><h3>Notifications</h3></div>
-                <div class="close" ng-click="CloseFriend()"><button class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button></div>
-                <div class="clearfix"></div>
-            </div>
-            <div class="body-panel panel-list" id="pendingFriendRequests" ng-controller="friendRequestController">
-                <h5>Friend Requests  <span class="badge badge-red">{{numfriendRequest}}</span></h5>
-                <div id="notificationsFriendRequestList" class="friend-list">
-                    <div ng-repeat="friend in friends" class="well well-grey">
-                        <div class="panel-left">
-                            <div class="profile-photo-container">
-                                <img ng-src="{{friend.profilePic}}" />
-                            </div>
-                        </div>
-                        <div class="right">
-                            <h3>{{friend.nickName}}</h3>
-                            <div class="inline-form friend-action">
-                                <div class="input-group">
-                                    <button class="btn btn-success accept" ng-click="accept(friend.requestId)">Accept</button>
-                                    <button class="btn btn-danger decline" ng-click="decline(friend.requestId)">Decline</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!-- ********* Messages Panel ***************** --> <!--
         <div class="overlay-panel" id="messages-panel" >
             <div class="title-panel">

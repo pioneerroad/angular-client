@@ -53,7 +53,12 @@
         <script src="app/components/relationships/friendRequest/friendRequestController.js"></script>
         <script src="app/components/relationships/friendRequest/friendRequestService.js"></script>
         <script src="app/components/relationships/relationships/relationshipsController.js"></script>
+        <script src="app/components/relationships/relationships/addFriendController.js"></script>
         <script src="app/components/relationships/relationships/relationshipsService.js"></script>
+        
+        <script src="app/components/relationships/friendsProfile/viewFriendProfileController.js"></script>
+        <script src="app/components/relationships/friendsProfile/viewFriendProfileService.js"></script>
+
 
 
         <script src="app/global/filters/distanceFilter.js"></script>
@@ -70,7 +75,7 @@
 
     <body>
         <main class="page-height-container">
-            <span ng-if="user.token">
+            <span ng-if="user.token" id="topBar">
                 <div ng-include="'/app/global/partials/notificationBar/notificationBar.html'"></div>
             </span>
             <!--[if lt IE 8]>
@@ -82,7 +87,7 @@
             </div>
 
         </main>
-        <span ng-if="user.token">
+        <span ng-if="user.token" id="sideBar">
             <div ng-include="'/app/global/partials/navigationBar/navigationBar.html'"></div>
         </span>
 

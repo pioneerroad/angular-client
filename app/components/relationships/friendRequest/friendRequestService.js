@@ -1,7 +1,7 @@
 (function () {
     angular.module("pioneerRoad.RelationShips")
-            .factory('friendRequestService', ['$http', '$localStorage',
-                function ($http, $localStorage) {
+            .factory('friendRequestService', ['$http', '$localStorage', '$rootScope',
+                function ($http, $localStorage, $rootScope) {
                     var service = {};
 
                     service.getFriendRequestList = function () {
@@ -24,7 +24,16 @@
                         }
                         );
                     };
-
+                    
+                    service.updateNum = function(){
+                        service.getFriendRequestList()
+                            .success(function (response) {
+                                $rootScope.numfriendRequest = response.length;//get number of friend requests
+                            })
+                            .error(function (error) {
+                                console.log(error);
+                            });
+                    };
                     return service;
                 }
             ]);

@@ -1,83 +1,59 @@
 <!-- Add your site or application content here -->
 <div class="info-bar"><h1>Create an Account</h1></div>
-<main>
-    <div class="container">
-        <!-- Dismissable alert at the top of the page: to be displayed if there are errors with the form submission -->
-        <!-- To conditionally display with ng-show if there are errors in the errors object on $scope -->
-        <form name="usercreate"ng-submit="CheckForError()" novalidate>
-            <div ng-show="IncorrectFeilds" class="alert alert-danger" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="closeModal()">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <strong>Something went terribly, terribly wrong!</strong>
-                <ul>
-                    <li ng-repeat="error in errors" >{{error}}</li>
-                </ul>
-            </div>
-            <!-- End of dismissable alert at the top of the page -->
-            <div class="form-group">
-                <div class="input-group input-group-lg">
-                    <span class="input-group-addon" id="sizing-addon"><span class="glyphicon glyphicon-envelope"></span></span>
-                    <input type="email" class="form-control" name="email" placeholder="Email" aria-describedby="sizing-addon" ng-model="email"  required >
-                </div>
-
-            </div>
+<div class="container">
+    <!-- Dismissable alert at the top of the page: to be displayed if there are errors with the form submission -->
+    <!-- To conditionally display with ng-show if there are errors in the errors object on $scope -->
+    <div ng-show="IncorrectFeilds" class="alert alert-danger" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="closeModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>Something went terribly, terribly wrong!</strong>
+        <ul>
+            <li ng-repeat="error in errors" >{{error}}</li>
+        </ul>
+    </div>
+    <div class="alert alert-success" ng-show="ShowModal">
+        <h1 class="modal-title" id="myModalTitle">Success!</h1>
+        <p>Your account has been created!</p>
+        <button type="button" class="btn btn-lg btn-success" data-dismiss="modal" ng-click='goToLogin()'>OK</button>
+    </div>
+    <!-- End of dismissable alert at the top of the page -->
+    <form name="usercreate"ng-submit="CheckForError()" novalidate>
+        <div class="form-group">
             <div class="input-group input-group-lg">
-                <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-phone"></span></span>
-                <input type="text" ng-pattern="/^\d+$/" name="mobile" class="form-control" placeholder="Mobile Number" aria-describedby="sizing-addon1" ng-model="mobile" required ng-minlength="10">
+                <span class="input-group-addon" id="sizing-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+                <input type="email" class="form-control" name="email" placeholder="Email" aria-describedby="sizing-addon" ng-model="email"  required >
             </div>
 
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h4>Password</h4>
-                    <div class="input-group input-group-lg">
-                        <span class="input-group-addon" id="sizing-addon2"><span class="glyphicon glyphicon-lock"></span></span>
-                        <input type="password" class="form-control" name="password" placeholder="Password" aria-describedby="sizing-addon2" ng-model="password" required ng-minlength="8" ng-pattern="/^(?=.*[A-Z])(?=.*\d).+$/">
-                    </div>
-                    <div class="input-group input-group-lg">
-                        <span class="input-group-addon" id="sizing-addon3"><span class="glyphicon glyphicon-lock"></span></span>
-                        <input type="password" class="form-control" name="password2" placeholder="Enter again to confirm.." aria-describedby="sizing-addon3" ng-model="password2" ng-keyup="check_pwd_match()" required ng-minlength="8" ng-pattern="/^(?=.*[A-Z])(?=.*\d).+$/">
-                    </div>
+        </div>
+        <div class="input-group input-group-lg">
+            <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-phone"></span></span>
+            <input type="text" ng-pattern="/^\d+$/" name="mobile" class="form-control" placeholder="Mobile Number" aria-describedby="sizing-addon1" ng-model="mobile" required ng-minlength="10">
+        </div>
 
-                    <div class="well">
-                        <strong>Your password must have:</strong>
-                        <ul>
-                            <li>8 or more characters</li>
-                            <li>At least 1 capital letter</li>
-                            <li>At least 1 numeral</li>
-                        </ul>
-                    </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h4>Password</h4>
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon" id="sizing-addon2"><span class="glyphicon glyphicon-lock"></span></span>
+                    <input type="password" class="form-control" name="password" placeholder="Password" aria-describedby="sizing-addon2" ng-model="password" required ng-minlength="8" ng-pattern="/^(?=.*[A-Z])(?=.*\d).+$/">
+                </div>
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon" id="sizing-addon3"><span class="glyphicon glyphicon-lock"></span></span>
+                    <input type="password" class="form-control" name="password2" placeholder="Enter again to confirm.." aria-describedby="sizing-addon3" ng-model="password2" ng-keyup="check_pwd_match()" required ng-minlength="8" ng-pattern="/^(?=.*[A-Z])(?=.*\d).+$/">
+                </div>
 
+                <div class="well">
+                    <strong>Your password must have:</strong>
+                    <ul>
+                        <li>8 or more characters</li>
+                        <li>At least 1 capital letter</li>
+                        <li>At least 1 numeral</li>
+                    </ul>
                 </div>
             </div>
-        
-            <!-- #successModal -->
-            <button type="submit" class="btn btn-primary btn-lg">Join Now</button>
-        </form>
-    </div>
-</main>
-<!-- Success Modal -->
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg">Join Now</button>
+    </form>
+</div>
 
-<div class="modal fade"  modal="ShowModal" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <h1 class="modal-title" id="myModalTitle">Success!</h1>
-                <p>Your account has been created!</p>
-                <button type="button" class="btn btn-lg btn-success" data-dismiss="modal" ng-click='goToLogin()'>OK</button>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade"  modal="ShowErrorModal" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <h1 class="modal-title" id="myModalTitle">Failed!</h1>
-                <p>Your account has not been created!</p>
-                <p>{{error}}</p>
-                <button type="button" class="btn btn-lg btn-success" data-dismiss="modal" ng-click='closeModal()'>OK</button>
-            </div>
-        </div>
-    </div>
-</div>

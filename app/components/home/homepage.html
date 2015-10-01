@@ -2,7 +2,7 @@
 <!-- Main app functions/content goes inside the <main> section -->
 <div ng-app="pioneerRoad.Profile">
     <div ng-controller="viewProfileController">
-        <div  id="user-profile-photo-container" ng-controller="homePageController">
+        <div  id="user-profile-photo-container">
             <div id="user-profile-bg-photo" > 
                 <img ng-src="{{background}}"/>
             </div>
@@ -14,7 +14,7 @@
         </div>
         <div class="well well-orange" id="current-location" ng-cloak>
             <h3>Current Location</h3>
-            <h4>Near {{location.location}} ({{location.distance| distanceFilter}})</h4>
+            <h4>{{location.location}} ({{location.distance| distanceFilter}})</h4>
             <h4>{{location.tourism_region}} {{location.state}}</h4>
             <div class="clearfix"></div>
         </div>
@@ -25,7 +25,7 @@
             <!-- Beginning of block inside ng-repeat -->
             <ul class="profile-grid" ng-cloak>
                 <li ng-repeat="friend in friends"> 
-                    <a href="friend-user-profile.html"> <!-- Link to user's profile page -->
+                    <a href="#/friendProfile/{{friend.id}}"> <!-- Link to user's profile page -->
                         <img ng-src="{{friend.profilePic}}" />
                     </a><span class="badge">{{friend.distance| distanceFilter}}</span> 
                 </li>
