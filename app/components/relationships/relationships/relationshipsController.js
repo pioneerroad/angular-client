@@ -1,6 +1,10 @@
 (function () {
     var app = angular.module("pioneerRoad.RelationShips");
-    app.controller('relationshipsController', ['$scope', '$rootScope', 'relationshipsService', '$localStorage', '$sce', function ($scope,$rootScope, relationshipsService, $localStorage, $sce) {
+    app.controller('relationshipsController', ['$scope', '$rootScope', 'relationshipsService', '$localStorage', '$sce','$location' , 'loginRedirect', function ($scope,$rootScope, relationshipsService, $localStorage, $sce, $location ,loginRedirect) {
+            
+            if (!loginRedirect.checkLogin()) {
+                $location.path("/login");
+            }
             
             $rootScope.Title = $sce.trustAsHtml("Home");
             $rootScope.Link = $sce.trustAsHtml("<h5><a>Add Friend</a><h5>");

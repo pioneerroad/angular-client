@@ -5,6 +5,10 @@
         if (loginRedirect.checkLogin()) {
             $location.path("/home");
         }
+        else{
+            $("#topBar").css("display","none");
+            console.log("here " + $("#topBar").get());
+        }
 
         $scope.check_pwd_match = function () { //checks if both passwords match
             if ($scope.password !== $scope.password2) {
@@ -54,7 +58,7 @@
 
         };
         $scope.closeModal = function () { // as data-dismissed stopped working because of the modal element
-            $scope.ShowErrorModal = false; // use this function to close modal's
+             // use this function to close modal's
             $scope.ShowModal = false;
             $scope.IncorrectFeilds = false;
             $scope.errors = [];

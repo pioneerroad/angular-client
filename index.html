@@ -70,7 +70,7 @@
 
     <body>
         <main class="page-height-container">
-            <span ng-if="user.token">
+            <span ng-if="user.token" id="topBar">
                 <div ng-include="'/app/global/partials/notificationBar/notificationBar.html'"></div>
             </span>
             <!--[if lt IE 8]>
@@ -82,7 +82,7 @@
             </div>
 
         </main>
-        <span ng-if="user.token">
+        <span ng-if="user.token" id="sideBar">
             <div ng-include="'/app/global/partials/navigationBar/navigationBar.html'"></div>
         </span>
 
