@@ -1,11 +1,13 @@
 (function () {
     var app = angular.module('pioneerRoad.Profile');
 
-    app.controller('editProfileController', ['$scope', '$localStorage', 'loginRedirect', '$location', 'editProfileService', 'viewProfileService', 'geoLocationService', function ($scope, $localStorage, loginRedirect, $location, editProfileService, viewProfileService, geoLocationService) {
+    app.controller('editProfileController', ['$scope','$rootScope', '$localStorage', 'loginRedirect', '$location', 'editProfileService', 'viewProfileService', 'geoLocationService', '$sce', function ($scope,$rootScope ,$localStorage, loginRedirect, $location, editProfileService, viewProfileService, geoLocationService, $sce) {
 
             if (!loginRedirect.checkLogin()) {
                 $location.path("/login");
             }
+            $rootScope.Title = $sce.trustAsHtml("Edit Profile");
+            $rootScope.Link = $sce.trustAsHtml("");
             geoLocationService.begin();
             //update the nick name
             $scope.updateNickName = function () {

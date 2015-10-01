@@ -17,11 +17,14 @@
             var friend = {}; //used to hold each friend object and doubles as an error message store
             var friendAddId = null; //
             $scope.message = "";
-            $scope.okay = true;
             $scope.error = false;
+            $scope.success = false;
 
             $scope.findFriend = function () {
                 $scope.addFriendNew = [];
+                $scope.error = false;
+                $scope.success = false;
+                $scope.showFriendConfirmationModal = false;
                 if ($scope.friendName === "") {
                     friend.error = "Please enter a friends email!";
                     $scope.addFriendNew.push(friend);
@@ -57,12 +60,12 @@
             $scope.addFriendbtn = function (id) {
                 friendAddId = id;
                 $scope.showFriendConfirmationModal = true;
-                $scope.addFriendNew = null;
             };
 
             $scope.addFriend = function () {
                 friendAddId;
                 $scope.showFriendConfirmationModal = false;
+                $scope.addFriendNew = [];
                 if ($localStorage.token.id === friendAddId) {
                     $scope.message = "You cannot be friends with yourself";
                     $scope.error = true; //show error messages
@@ -77,7 +80,7 @@
                 relationshipsService.sendFriendRequest(friendAddId)
                         .success(function (response) {
                             $scope.message = "Friend request sent";
-                            $scope.error = true;
+                            $scope.success = true;
                             friendAddId = null;
                             $scope.friends = [];
                         })
@@ -122,8 +125,9 @@
                 $scope.showFriendConfirmationModal = false;
                 $scope.addFriendNew = []; //lists all people matching searched name
                 friendAddId = null; //
+                $scope.error = false;
                 $scope.message = "";
-                $scope.okay = true;
+                $scope.success = false;
             };
 
         }]);

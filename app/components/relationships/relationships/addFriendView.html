@@ -2,15 +2,22 @@
 <div ng-app="pioneerRoad.RelationShips">
     <div class="well well-orange" id="add-friend">
         <div class="heading widget-add-new">
-            <div class="alert alert-danger" role="alert"
-                 <h4 ng-show="error" class="modal-title">{{message}}</h4>
+            <div class="alert alert-danger" ng-show="error">
+                <button type="button" class="close" ng-click="close()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                 <p>{{message}}</p>
+            </div>
+             <div class="alert alert-success" ng-show="success">
+                <button type="button" class="close" ng-click="close()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                 <p>{{message}}</p>
             </div>
             <div class="alert alert-info" ng-show="showFriendConfirmationModal" >
-                <h4 ng-show="okay" class="modal-title">Do you want to add this user?</h4>
-                <h4 ng-hide="okay" class="modal-title">{{message}}</h4>
-                <button ng-show="okay" type="button" class="btn btn-danger" ng-click="addFriend()">Yes, please!</button>
-                <button ng-show="okay" type="button" class="btn btn-default" data-dismiss="modal" ng-click="close()">No, Thanks!</button>
-                <button ng-hide="okay" type="button" class="btn btn-default" data-dismiss="modal" ng-click="close()">Okay</button>
+                <h4 class="modal-title">Do you want to add this user?</h4>
+                <button type="button" class="btn btn-danger" ng-click="addFriend()">Yes, please!</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="close()">No, Thanks!</button>
             </div>
             <h4>Add a new friend</h4>
             <div class="clearfix"></div>

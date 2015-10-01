@@ -10,7 +10,6 @@
                     friendRequestService.getFriendRequestList()
                             .success(function (response) {
                                 $rootScope.numfriendRequest = response.length;//get number of friend requests
-                                console.log(response);
                                 for (i = 0; i < response.length; i++) { // for each request
                                     friend.nickName = response[i].nickName;
                                     friend.requestId = response[i].requestId;
@@ -63,19 +62,9 @@
                             .error(function (error) {
                                 console.log(error);
                             });
-                    setNotification();
                 };
 
-                var setNotification = function () {
-                    if ($rootScope.numfriendRequest > 0) {
-                        $rootScope.areNotifications = true;
-                    }
-                    else {
-                        $rootScope.areNotifications = false;
-                    }
-                };
-
-                $scope.friends = []; //stores all  friend requests
+                $rootScope.friends = []; //stores all  friend requests
                 var friend = {}; //stores a single friend request
                 $rootScope.getFriendRequests(); //get friend request list
             }
