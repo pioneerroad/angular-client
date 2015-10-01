@@ -35,6 +35,11 @@
                     controller: "relationshipsController"
 
                 })
+                .when("/addFriend", {
+                    templateUrl: "app/components/relationships/relationships/addFriendView.html", 
+                    controller: "addFriendController"
+
+                })
                 .when("/communityMenu", {
                     templateUrl: "app/global/partials/navigationBar/communityMenu.html", //redirect to community page
 

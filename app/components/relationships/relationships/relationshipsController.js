@@ -6,34 +6,16 @@
                 $location.path("/login");
             }
             
-            $rootScope.Title = $sce.trustAsHtml("Home");
-            $rootScope.Link = $sce.trustAsHtml("<h5><a>Add Friend</a><h5>");
+            $rootScope.Title = $sce.trustAsHtml("Friends");
+            $rootScope.Link = $sce.trustAsHtml("<h5><a href='#/addFriend'>Add Friend</a><h5>");
             
             $scope.showblockFriendConfirmationModal = false;
-            $scope.showFriendConfirmationModal = false;
-            $scope.addFriendsShow = false; //show the menu to add friends
-            $scope.symbol = "glyphicon-plus"; //this class controls a glyphicon on the add user button
-            $scope.friendName = ""; //friend to find
             $scope.friends = []; //array to hold list of friends
-            $scope.addFriendNew = []; //lists all people matching searched name
             var friendId = ""; //id returned from findFriends() function in service
             var friend = {}; //used to hold each friend object and doubles as an error message store
-            var friendAddId = null; //
             var friendToBlock = null;
             $scope.message = "";
             $scope.okay = true;
-
-
-            $scope.addFriends = function () {
-                if ($scope.addFriendsShow) {
-                    $scope.addFriendsShow = false;
-                    $scope.symbol = "glyphicon-plus";
-                }
-                else {
-                    $scope.addFriendsShow = true;
-                    $scope.symbol = "glyphicon-minus";
-                }
-            };
 
             $scope.blockFriendsOpen = function (id) {
                 $('#' + id).addClass('active').removeClass('inactive');
@@ -96,82 +78,6 @@
                         });
             };
 
-            $scope.findFriend = function () {
-                $scope.addFriendNew = [];
-                if ($scope.friendName === "") {
-                    friend.error = "Please enter a friends email!";
-                    $scope.addFriendNew.push(friend);
-                    friend = {};
-                }
-                else {
-                    relationshipsService.findFriend($scope.friendName)
-                            .success(function (response) {
-                                if (response.error === "NO_MATCHING_USER") { //no people found
-                                    friend.error = "Could not find any users by that email!";
-                                    $scope.addFriendNew.push(friend);
-                                    friend = {};
-                                    return;
-                                }
-                                getFriendProfile(response.id);
-                            })
-                            .error(function (error) {
-                                console.log(error);
-                                if (error.error === "NO_MATCHING_USER") { //no people found
-                                    friend.error = "Could not find any users by that email!";
-                                    $scope.addFriendNew.push(friend);
-                                    friend = {};
-                                }
-                                else { //unknown error
-                                    friend.error = "Could not find any users by that email!";
-                                    $scope.addFriendNew.push(friend);
-                                    friend = {};
-                                }
-                            });
-                }
-            };
-
-            $scope.addFriendbtn = function (id) {
-                friendAddId = id;
-               // $scope.showFriendConfirmationModal = true;
-                $scope.addFriendNew = null;
-                $scope.addFriend();
-            };
-
-            $scope.addFriend = function () {
-                friendAddId;
-                if ($localStorage.token.id === friendAddId) {
-                    $scope.message = "You cannot be friends with yourself";
-                    $scope.okay = false; //show error messages
-                    return;
-                }
-
-                if (friendAddId === null) {
-                    return;
-                    $scope.message = "please select friend to add";
-                    $scope.okay = false; //show error messages
-                }
-                relationshipsService.sendFriendRequest(friendAddId)
-                        .success(function (response) {
-                            $scope.message = "Friend request sent";
-                            $scope.okay = false;
-                            friendAddId = null;
-                            $scope.friends = [];
-                            listFriends();
-                        })
-                        .error(function (error) {
-                            if (error.message === "Validation error") {
-                                $scope.okay = false;
-                                $scope.message = "You have already sent a friend request";
-                                friendAddId = null;
-                            }
-                            else {
-                                $scope.okay = false;
-                                $scope.message = "could not send request";
-                                friendAddId = null;
-                            }
-                        });
-            };
-
             var getFriendProfile = function (friendId) {
                 if (friendId === "") {
                     console.log("friend id is undefined");
@@ -199,9 +105,6 @@
 
             $scope.close = function () {
                 $scope.showblockFriendConfirmationModal = false;
-                $scope.showFriendConfirmationModal = false;
-                $scope.addFriendNew = []; //lists all people matching searched name
-                friendAddId = null; //
                 friendToBlock = null;
                 $scope.message = "";
                 $scope.okay = true;
