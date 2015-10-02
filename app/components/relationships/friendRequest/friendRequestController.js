@@ -45,7 +45,6 @@
                             .error(function (error) {
                                 console.log(error);
                             });
-                    setNotification();
                 };
 
                 $scope.decline = function (friendId) {
