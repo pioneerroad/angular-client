@@ -41,7 +41,7 @@
 
                 })
                 .when("/addFriend", {
-                    templateUrl: "app/components/relationships/relationships/addFriendView.html", 
+                    templateUrl: "app/components/relationships/relationships/addFriendView.html",
                     controller: "addFriendController"
 
                 })
@@ -52,6 +52,10 @@
                 .when("/notifications", {
                     templateUrl: "app/global/partials/notificationBar/notificationsView.html",
                     controller: "friendRequestController"
+                })
+                .when("/messages", {
+                    templateUrl: "app/global/partials/messages/messagesView.html",
+                    controller: "messagesController"
                 })
                 .when("/places", {
                     templateUrl: "app/components/user/viewProfile/viewProfileView.html" //redirect to places page

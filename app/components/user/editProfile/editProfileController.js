@@ -1,7 +1,7 @@
 (function () {
     var app = angular.module('pioneerRoad.Profile');
 
-    app.controller('editProfileController', ['$scope','$rootScope', '$localStorage', 'loginRedirect', '$location', 'editProfileService', 'viewProfileService', '$sce', function ($scope,$rootScope ,$localStorage, loginRedirect, $location, editProfileService, viewProfileService, $sce) {
+    app.controller('editProfileController', ['$scope', '$rootScope', '$localStorage', 'loginRedirect', '$location', 'editProfileService', 'viewProfileService', '$sce', function ($scope, $rootScope, $localStorage, loginRedirect, $location, editProfileService, viewProfileService, $sce) {
 
             if (!loginRedirect.checkLogin()) {
                 $location.path("/login");
@@ -186,6 +186,21 @@
                 setEditProfileView();
             };
 
+            setSave = function (id) {
+                $(id).removeClass('disabled');
+            };
+            
+            ImageError = function (id) {
+                if (id === "#profilePhoto") {
+                   $("#PPError").removeClass('hidden');
+                }
+                else {
+                    $("#BGError").removeClass('hidden');
+                }
+            };
+            
+            var intialImageLoadP = true; //stops the onloaded image for the intial images
+            var intialImageLoadB = true;
             $scope.tmpNickName = "";
             $scope.chosenHomeTown = ""; //the data that is used to set/update the home town on server
             $scope.homeTownSuggestions = [];
@@ -196,23 +211,36 @@
             $scope.charsLeft = $scope.maxChar; //number of chars left in bio
 
             //handles the image uploading
-            $('#editProfilePhoto').cropit('allow-cross-origin', 'true');
-            $('#editBackgroundPhoto').cropit('allow-cross-origin', 'true');
+            //$('#editProfilePhoto').cropit();
+            $('#editProfilePhoto').cropit({AllowCrossOrigin: true, onImageLoaded: function () {
+                        setSave('#profilePhoto');
+                },onImageError: function () {
+                        ImageError('#profilePhoto');
+                }
+            });
+            $('#editBackgroundPhoto').cropit({AllowCrossOrigin: true, onImageLoaded: function () {
+                        setSave('#bgPhoto');
+                },onImageError: function () {
+                        ImageError('#bgPhoto');
+                }
+            });
 
 
             $('.btn-file-input').click(function () {
                 $(this).closest('.photo-edit-wrapper').children('.cropit-image-input').click();
                 if (this.id === "pPhotoInput") {
                     $("#PPsaved").addClass('hidden');
+                    $("#PPError").addClass('hidden');
                 }
                 else {
                     $("#BGPsaved").addClass('hidden');
+                    $("#BGError").addClass('hidden');
                 }
 
             });
 
             $('input[type=file]').change(function () {
-                $(this).closest('.photo-edit-wrapper').find('.btn-file-upload').removeClass('disabled');
+                
             });
 
             $('.btn-file-upload').click(function () {
