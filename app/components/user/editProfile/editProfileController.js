@@ -189,6 +189,16 @@
             setSave = function (id) {
                 $(id).removeClass('disabled');
             };
+            
+            ImageError = function (id) {
+                if (id === "#profilePhoto") {
+                   $("#PPError").removeClass('hidden');
+                }
+                else {
+                    $("#BGError").removeClass('hidden');
+                }
+            };
+            
             var intialImageLoadP = true; //stops the onloaded image for the intial images
             var intialImageLoadB = true;
             $scope.tmpNickName = "";
@@ -204,11 +214,14 @@
             //$('#editProfilePhoto').cropit();
             $('#editProfilePhoto').cropit({AllowCrossOrigin: true, onImageLoaded: function () {
                         setSave('#profilePhoto');
+                },onImageError: function () {
+                        ImageError('#profilePhoto');
                 }
             });
-
             $('#editBackgroundPhoto').cropit({AllowCrossOrigin: true, onImageLoaded: function () {
                         setSave('#bgPhoto');
+                },onImageError: function () {
+                        ImageError('#bgPhoto');
                 }
             });
 
@@ -217,9 +230,11 @@
                 $(this).closest('.photo-edit-wrapper').children('.cropit-image-input').click();
                 if (this.id === "pPhotoInput") {
                     $("#PPsaved").addClass('hidden');
+                    $("#PPError").addClass('hidden');
                 }
                 else {
                     $("#BGPsaved").addClass('hidden');
+                    $("#BGError").addClass('hidden');
                 }
 
             });
