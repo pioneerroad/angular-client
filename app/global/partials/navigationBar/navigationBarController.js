@@ -17,7 +17,5 @@
                 $rootScope.Title = $sce.trustAsHtml("Community");
                 $rootScope.Link = $sce.trustAsHtml("");
             });
-
-
         }]);
 }());

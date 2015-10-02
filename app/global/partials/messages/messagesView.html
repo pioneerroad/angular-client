@@ -1,0 +1,174 @@
+
+<div>
+    <!-- ********* Messages Panel ***************** --> 
+    <div class="overlay-panel" id="messages-panel" >
+        <div class="title-panel">
+            <div class="nav-back" ng-click="CloseMessages()"><button class="btn btn-default hidden"><span class="glyphicon glyphicon-chevron-left hidden"></span></button></div>
+            <div class="title"><h3>Messages</h3></div>
+            <div class="clearfix"></div>
+        </div>
+        <div id="msg-list-panel" class="msg-panel">
+            <div class="well well-orange" id="msg-new-conversation">
+                <div class="heading">
+                    <h4>Start a new conversation</h4>
+                    <button class="btn btn-default" id="startNewConversation"><span class="glyphicon glyphicon-pencil"></span></button>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="body hidden">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <label class="sr-only" for="nickname">Nickname</label>
+                            <input type="text" class="form-control" id="nickname"/>
+                            <span class="input-group-addon" id="addRecipient"><span class="glyphicon glyphicon-plus"></span></span>
+                        </div>
+                        <div class="msg-recipient-list"><ul></ul><!-- Visual indicator of msg recipients; User Ids also need to be added to an array and sent to server--> </div>
+                        <div class="input-group">
+                            <label class="sr-only" for="msg-body">Message Body</label>
+                            <textarea class="form-control" rows="5" id="msg-body"></textarea>
+                            <span type="submit" class="input-group-addon" id="postMessage"><span class="glyphicon glyphicon-share-alt"></span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="msg-conversation-list">
+                <div class="well well-blue" data-thread-id="425" ng-repeat="thread in threads"> <!-- data-thread-id value is msg thread ID --> 
+                    <div class="row">
+                        <div class="msg-user">{{thread.participants}}</div>
+                        {{thread.numOfPar}}
+                        <div class="msg-date">{{thread.timestamp | timeFilter}}</div>
+                    </div>
+                    <div class="msg-status unread"><span class="glyphicon glyphicon-asterisk"></span></div>
+                    <div class="msg-user-profile-photo online"><img src=""/></div>
+                    <div class="msg-summary">
+
+                        <p class="summary-text">{{thread.summary}}</p>
+                    </div>
+                    <div class="msg-open-thread"><span class="glyphicon glyphicon-chevron-right"></span></div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="well well-blue" data-thread-id="425"> <!-- data-thread-id value is msg thread ID --> 
+                    <div class="row">
+                        <div class="msg-user">Bill and Betty Burrows</div>
+                        <div class="msg-date">1 hour ago</div>
+                    </div>
+                    <div class="msg-status unread"><span class="glyphicon glyphicon-asterisk"></span></div>
+                    <div class="msg-user-profile-photo online"><img src=""/></div>
+                    <div class="msg-summary">
+
+                        <p class="summary-text">Hi there Betty and Bill, just wanted...</p>
+                    </div>
+                    <div class="msg-open-thread"><span class="glyphicon glyphicon-chevron-right"></span></div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="well well-blue" data-thread-id="425"> <!-- data-thread-id value is msg thread ID --> 
+                    <div class="row">
+                        <div class="msg-user">Sid and Sheryl Smith</div>
+                        <div class="msg-date">2 days ago</div>
+                    </div>
+                    <div class="msg-status unread"><span class="glyphicon glyphicon-asterisk"></span></div>
+                    <div class="msg-user-profile-photo offline"><img src=""/></div>
+                    <div class="msg-summary">
+
+                        <p class="summary-text">We're at Port Fairy now...</p>
+                    </div>
+                    <div class="msg-open-thread"><span class="glyphicon glyphicon-chevron-right"></span></div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="well well-blue" data-thread-id="425"> <!-- data-thread-id value is msg thread ID --> 
+                    <div class="row">
+                        <div class="msg-user">Jack and Jill James</div>
+                        <div class="msg-date">3 days ago</div>
+                    </div>
+                    <div class="msg-status read"><span class="glyphicon glyphicon-asterisk"></span></div>
+                    <div class="msg-user-profile-photo away"><img src=""/></div>
+                    <div class="msg-summary">
+                        <p class="summary-text">If you're going to be near the...</p>
+                    </div>
+                    <div class="msg-open-thread"><span class="glyphicon glyphicon-chevron-right"></span></div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+        <div id="msg-thread-panel" class="msg-panel hidden">
+            <section>
+                <div class="msg-container from-them">
+                    <div class="message">
+                        <p>Hey John and June, we're having a great time up here at the Sunshine Coast. Thanks for all your tips about places to stay along the way.</p>
+                    </div>
+                    <img src=""/>
+                    <div class="clearfix"></div>
+                    <p class="msg-status"><strong>Read</strong> 10 Aug 2015 09:15</p>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="msg-container from-me">
+                    <div class="message">
+                        <p>You're welcome. We on our way to Mt Isa now. Weather is lovely out here.</p>
+                    </div>
+                    <img src=""/>
+                    <div class="clearfix"></div>
+                    <p class="msg-status"><strong>Read</strong> 10 Aug 2015 09:15</p>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="clear"></div>
+                <div class="clear"></div>
+                <div class="msg-container from-me">
+                    <div class="message">
+                        <p>Is it sunny?</p>
+                    </div>
+                    <img src=""/>
+                    <div class="clearfix"></div>
+                    <p class="msg-status"><strong>Read</strong> 10 Aug 2015 09:15</p>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="msg-container from-me">
+                    <div class="message">
+                        <p>Yes!</p>
+                    </div>
+                    <img src=""/>
+                    <div class="clearfix"></div>
+                    <p class="msg-status"><strong>Read</strong> 10 Aug 2015 09:15</p>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="clear"></div>
+                <div class="msg-container from-them">
+                    <div class="message">
+                        <p>That's nice. It's raining really heavily over here on the coast.</p>
+                    </div>
+                    <img src=""/>
+                    <div class="clearfix"></div>
+                    <p class="msg-status"><strong>Read</strong> 10 Aug 2015 09:15</p>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="clear"></div>
+                <div class="msg-container from-me">
+                    <div class="message">
+                        <p>I heard that. We think it will probably move inland in the next couple of days so we better enjoy this sunshine while it lasts.</p>
+                    </div>
+                    <div class="clearfix"></div>
+                    <img src=""/>
+                    <p class="msg-status"><strong>Read</strong> 10 Aug 2015 09:15</p>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="clear"></div>
+                <div class="msg-container from-them">
+                    <div class="message">
+                        <p>Careful out there in the rain. Some of those dirt tracks turn to clay when it's wet.</p>
+                    </div>
+                    <div class="clearfix"></div>
+                    <img src=""/>
+                    <p class="msg-status"><strong>Read</strong> 10 Aug 2015 09:15</p>
+                    <div class="clearfix"></div>
+                </div>
+            </section>
+            <div class="well well-orange msg-reply">
+                <div class="form-group">
+                    <label class="sr-only" for="msgReply">Write your reply</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="msgReply">
+                        <div class="input-group-addon"><span class="glyphicon glyphicon-share-alt"></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
