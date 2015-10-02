@@ -47,7 +47,6 @@
         var checkLogin = function(){
           if($localStorage.token){
             //call check token or someother way to check authentication 
-            $rootScope.navbar = true;
             $rootScope.user = $localStorage.token;
             return true;
             
