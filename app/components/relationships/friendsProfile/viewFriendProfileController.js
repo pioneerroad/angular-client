@@ -11,7 +11,6 @@
                                 $scope.profile = response;
                                 setImages(response);
                                 $rootScope.Title = $sce.trustAsHtml($scope.profile.nickName);
-                                console.log(response);
                             }
                         })
                         .error(function (error) {
@@ -29,9 +28,7 @@
                 }
 
                 if (data.profilePhoto === null) {
-
                     $scope.profilepic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/ui-images/user-profile-default-img.svg";
-                    console.log($scope.profilepic);
                 }
                 else {
                     $scope.profilepic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/user-photos/" + friendId + "/profile-photo/" + data.profilePhoto.large;
