@@ -14,9 +14,6 @@
                 $rootScope.Title = $sce.trustAsHtml("Profile");
                 $rootScope.Link = $sce.trustAsHtml("<h5><a href='#/editprofile'>Edit</a><h5>");
             }
-            
-
-            geoLocationService.begin(); //update location
 
             var getProfile = function () { //get the users profile
 
