@@ -1,19 +1,18 @@
 (function () {
     var app = angular.module("pioneerRoad.RelationShips");
-    app.controller('relationshipsController', ['$scope', '$rootScope', 'relationshipsService', '$localStorage', '$sce','$location' , 'loginRedirect', function ($scope,$rootScope, relationshipsService, $localStorage, $sce, $location ,loginRedirect) {
-            
+    app.controller('relationshipsController', ['$scope', '$rootScope', 'relationshipsService', '$localStorage', '$sce', '$location', 'loginRedirect', function ($scope, $rootScope, relationshipsService, $localStorage, $sce, $location, loginRedirect) {
+
             if (!loginRedirect.checkLogin()) {
                 $location.path("/login");
             }
-            
+
             $rootScope.Title = $sce.trustAsHtml("Friends");
             $rootScope.Link = $sce.trustAsHtml("<h5><a href='#/addFriend'>Add Friend</a><h5>");
-            
+
             $scope.showblockFriendConfirmationModal = false;
             $scope.friends = []; //array to hold list of friends
             var friendId = ""; //id returned from findFriends() function in service
             var friend = {}; //used to hold each friend object and doubles as an error message store
-            var friendToBlock = null;
             $scope.message = "";
             $scope.okay = true;
 
@@ -25,12 +24,11 @@
             };
 
             $scope.blockFriendbtn = function (id) {
-                friendToBlock = id;
-                $scope.showblockFriendConfirmationModal = true;
-                console.log(friendToBlock);
+                $('#' + id + "Block").removeClass('hidden');
+                $('#' + id).addClass('inactive').removeClass('active');
             };
 
-            $scope.blockFriend = function () {
+            $scope.blockFriend = function (friendToBlock) {
                 if (friendToBlock === null) {
                     $scope.message = "Could not block friend";
                     $scope.okay = false;
@@ -38,7 +36,7 @@
                 }
                 relationshipsService.blockFriend(friendToBlock)
                         .success(function (response) {
-                            $scope.message = "Friend Blocked";
+                            $scope.message = "Friend Blocked"; //won't be displayed as the dialog is removed from dom firend
                             $scope.okay = false;
                             friendToBlock = null;
                             $scope.friends = null;
@@ -69,6 +67,17 @@
                                 $scope.friends.push(friend);
                                 friend = {};
                             }
+                            $scope.friends.sort(function (a, b) {
+                                if (a.nickname === b.nickname) {
+                                    return 0;
+                                }
+                                else if (a.nickname > b.nickname) {
+                                    return 1;
+                                }
+                                else {
+                                    return -1;
+                                }
+                            });
                         })
                         .error(function (error) {
                             console.log(error);
@@ -102,10 +111,13 @@
             };
 
             listFriends();
+            
+            $scope.closeBlockDialog = function(id){
+                $('#' + id + "Block").addClass('hidden');
+                $scope.close();
+            };
 
             $scope.close = function () {
-                $scope.showblockFriendConfirmationModal = false;
-                friendToBlock = null;
                 $scope.message = "";
                 $scope.okay = true;
             };

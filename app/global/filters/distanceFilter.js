@@ -4,13 +4,13 @@
         return function (input) {
             if (input < 1) {
                 input = Math.round(input * 1000);
-                input = "Near by";
+                input = "Nearby";
                 return input;
             }
             else {
                 input = Math.round(input);
                 if (input === 1) {
-                    input = "Near by";
+                    input = "Nearby";
                     return input;
                 }
                 else {

@@ -28,7 +28,6 @@
                             .error(function (error) {
                                 console.log(error);
                             });
-                    setNotification();
                 };
 
                 // implemented functions to send accept or block request
