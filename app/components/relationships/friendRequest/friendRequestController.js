@@ -1,7 +1,7 @@
 (function () {
     var app = angular.module("pioneerRoad.RelationShips");
 
-    app.controller('friendRequestController', ['$scope', '$rootScope', '$http', '$localStorage', 'loginRedirect', 'friendRequestService', function ($scope, $rootScope, $http, $localStorage, loginRedirect, friendRequestService) {
+    app.controller('friendRequestController', ['$scope', '$rootScope', '$http', '$localStorage', 'loginRedirect', 'friendRequestService', '$location', function ($scope, $rootScope, $http, $localStorage, loginRedirect, friendRequestService, $location) {
             if (loginRedirect.checkLogin()) {
                 //get a current list of friend requests straight away
                 $rootScope.getFriendRequests = function () {
@@ -67,7 +67,7 @@
                 $rootScope.getFriendRequests(); //get friend request list
             }
             else { //not logged in
-
+                $location.path('/logout');
             }
 
         }]);
