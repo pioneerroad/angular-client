@@ -26,11 +26,11 @@
                 </ul>
             </div>
         </div>
-        <div id="editProfilePhoto" class="field-edit-wrapper">
+        <div id="editProfilePhoto" class="field-edit-wrapper" style="position: relative">
             <h4>Edit profile photo <span id="PPsaved" class="badge green status-badge hidden"><span class="glyphicon glyphicon-ok"></span> saved</span></h4>
             <span id="PPError" class="badge red status-badge hidden"><span class="glyphicon glyphicon-remove"></span> Try a larger image!</span>
             <div class="photo-edit-wrapper" ng-cloak>
-                <input type="file" class="cropit-image-input" />
+                <input id="pFile" type="file" class="cropit-image-input" />
                 <div class="cropit-image-preview"></div>
                 <div class="hidden-image-data"></div>
                 <input type="range" class="cropit-image-zoom-input" />
@@ -39,11 +39,11 @@
             </div>
         </div>
         <!--  <img ng-src="{{profilepic}}" /> -->
-        <div id="editBackgroundPhoto" class="field-edit-wrapper">
+        <div id="editBackgroundPhoto" class="field-edit-wrapper" style="position: relative">
             <h4>Edit background photo <span id="BGPsaved" class="badge green status-badge hidden" ><span class="glyphicon glyphicon-ok"></span> saved</span></h4>
             <span id="BGError" class="badge red status-badge hidden"><span class="glyphicon glyphicon-remove"></span> Try a larger image!</span>
             <div class="photo-edit-wrapper" ng-cloak>
-                <input type="file" class="cropit-image-input" />
+                <input id="bgFile" type="file" class="cropit-image-input" />
                 <div class="cropit-image-preview"></div>
                 <input type="range" class="cropit-image-zoom-input" />
                 <div class="column"><div id="bgPhotoInput" class="btn btn-success btn-file-input"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;Select Photo</div></div>
