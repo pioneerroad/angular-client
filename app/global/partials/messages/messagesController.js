@@ -9,19 +9,22 @@
 
             $rootScope.Title = $sce.trustAsHtml("Messages");
             $rootScope.Link = $sce.trustAsHtml("");
+            
+            var thread = {};
+            $scope.threads = [];
 
             var getThreads = function () {
                 messagesService.getThread()
                         .success(function (response) {
                             console.log(response);
                             for (i = 0; i < response.length; i++) { // for each request
-                                thread = response;
-
+                               thread = response[i];
+                               console.log(thread);
                                 if (response[i].profilePhoto === null) {
-                                    friend.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/ui-images/user-profile-default-img.svg";
+                                    thread.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/ui-images/user-profile-default-img.svg";
                                 }
                                 else {
-                                    friend.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/user-photos/" + response[i].userAccountId + "/profile-photo/" + response[i].profilePhoto.medium;
+                                    thread.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/user-photos/" + response[i].subscriberid + "/profile-photo/" + response[i].photo.medium;
                                 }
 
                                 $scope.threads.push(thread);
