@@ -315,25 +315,26 @@ return /******/ (function(modules) { // webpackBootstrap
 		  key: 'loadFileReader',
 		  value: function loadFileReader(file) {
 			  //var fileReader = new FileReader();
-			  if (file && file.type.match('image')) {
-				  options = {};                            
-                                  if(!file.exif){
-                                    var fileReader = new FileReader();
-                                    fileReader.readAsDataURL(file);
-                                    fileReader.onload = this.onFileReaderLoaded.bind(this);
-                                    fileReader.onerror = this.onFileReaderError.bind(this);
-                                }
-                                else{
+			  if (file && file.type.match('image')) {				                               
                                     loadImage.parseMetaData(file, function (data) {
+                                        if(data.exif){
+                                            options = {}; 
                                           if (data.exif) {
                                                   options.orientation = data.exif.get('Orientation');
                                           }
+                                         
                                           var fileReader = loadImage(file, function (img) {
                                                   this.loadImage(img.toDataURL("image/jpg"));
                                           }.bind(this), options);
                                           fileReader.onerror = this.onFileReaderError.bind(this)
+                                      }
+                                      else{
+                                            var fileReader = new FileReader();
+                                            fileReader.readAsDataURL(file);
+                                            fileReader.onload = this.onFileReaderLoaded.bind(this);
+                                            fileReader.onerror = this.onFileReaderError.bind(this);
+                                      }
                                   }.bind(this));
-                                }
 			  } else if (file) {
 				  this.onFileReaderError();
 			  }

@@ -8,6 +8,36 @@
             }
             $rootScope.Title = $sce.trustAsHtml("Edit Profile");
             $rootScope.Link = $sce.trustAsHtml("");
+            //stuff for spinning animation 
+            var opts = {
+                lines: 13 // The number of lines to draw
+                , length: 20 // The length of each line
+                , width: 13 // The line thickness
+                , radius: 42 // The radius of the inner circle
+                , scale: 1 // Scales overall size of the spinner
+                , corners: 1 // Corner roundness (0..1)
+                , color: '#000' // #rgb or #rrggbb or array of colors
+                , opacity: 0.25 // Opacity of the lines
+                , rotate: 0 // The rotation offset
+                , direction: 1 // 1: clockwise, -1: counterclockwise
+                , speed: 1 // Rounds per second
+                , trail: 60 // Afterglow percentage
+                , fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
+                , zIndex: 2e9 // The z-index (defaults to 2000000000)
+                , className: 'spinner' // The CSS class to assign to the spinner
+                , top: '35%' // Top position relative to parent
+                , left: '50%' // Left position relative to parent
+                , shadow: false // Whether to render a shadow
+                , hwaccel: false // Whether to use hardware acceleration
+                , position: 'absolute' // Element positioning
+            };
+
+            var profileTarget = document.getElementById('editProfilePhoto'); //a position of releative needs to be applied to divs using spinners
+            var backgroundTarget = document.getElementById('editBackgroundPhoto');
+
+            var spinner = new Spinner(opts);
+            var spinner2 = new Spinner(opts);
+
             //update the nick name
             $scope.updateNickName = function () {
                 if ($('#editnick').attr("disabled")) {
@@ -189,16 +219,16 @@
             setSave = function (id) {
                 $(id).removeClass('disabled');
             };
-            
+
             ImageError = function (id) {
                 if (id === "#profilePhoto") {
-                   $("#PPError").removeClass('hidden');
+                    $("#PPError").removeClass('hidden');
                 }
                 else {
                     $("#BGError").removeClass('hidden');
                 }
             };
-            
+
             var intialImageLoadP = true; //stops the onloaded image for the intial images
             var intialImageLoadB = true;
             $scope.tmpNickName = "";
@@ -210,18 +240,21 @@
             $scope.maxChar = 150; //max number of chars in input
             $scope.charsLeft = $scope.maxChar; //number of chars left in bio
 
-            //handles the image uploading
-            //$('#editProfilePhoto').cropit();
+
             $('#editProfilePhoto').cropit({AllowCrossOrigin: true, onImageLoaded: function () {
-                        setSave('#profilePhoto');
-                },onImageError: function () {
-                        ImageError('#profilePhoto');
+                    setSave('#profilePhoto');
+                    spinner.stop();
+                }, onImageError: function () {
+                    ImageError('#profilePhoto');
+                    spinner.stop();
                 }
             });
             $('#editBackgroundPhoto').cropit({AllowCrossOrigin: true, onImageLoaded: function () {
-                        setSave('#bgPhoto');
-                },onImageError: function () {
-                        ImageError('#bgPhoto');
+                    setSave('#bgPhoto');
+                    spinner2.stop();
+                }, onImageError: function () {
+                    ImageError('#bgPhoto');
+                    spinner2.stop();
                 }
             });
 
@@ -239,7 +272,21 @@
 
             });
 
-            $('input[type=file]').change(function () {
+            $('input[type=file]').change(function (evt) {
+                var files = evt.target.files;
+                if(files[0] === undefined){ //fixes issue when user closes file selctor without selecting file
+                    return;             //and spinner is set to spin
+                }
+                if (this.id === "pFile") {
+                    spinner.spin(profileTarget);
+                }
+                else if (this.id === "bgFile") {
+                    spinner2.spin(backgroundTarget);
+                }
+            });
+            
+            $('input[type=file]').error(function () {
+                console.log("stopped");
                 
             });
 
@@ -252,29 +299,34 @@
                 var formData = new FormData();
                 formData.append("imageFile", imageData);
                 if (this.id === "profilePhoto") {
+                    spinner.spin(profileTarget);
                     editProfileService.putProfilePic(imageData)
                             .success(function (response) {
                                 $("#PPsaved").removeClass('hidden');
                                 $("#profilePhoto").addClass('disabled');
+                                spinner.stop();
                             })
                             .error(function (error) {
                                 console.log(error);
+                                spinner.stop();
                             });
 
                 }
                 else {
+                    spinner2.spin(backgroundTarget);
                     editProfileService.putBackgroundPic(imageData)
                             .success(function (response) {
                                 $("#BGPsaved").removeClass('hidden');
                                 $("#bgPhoto").addClass('disabled');
+                                spinner2.stop();
                             })
                             .error(function (error) {
                                 console.log(error);
+                                spinner2.stop();
                             });
                 }
 
             });
-
             setEditProfileView();
         }]);
 }());
