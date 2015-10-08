@@ -3,7 +3,7 @@
 
     <div class="nav-bar" id="navBarTop" >
         <div id="slideMenuToggle" class="col-xs-3" ng-click="showHideNav()">
-            <span class="glyphicon glyphicon-menu-hamburger"><span class="badge" ng-if="numfriendRequest + messageNum !==0">{{numfriendRequest + $rootScope.messageNum}}</span></span>
+            <span class="glyphicon glyphicon-menu-hamburger"><span class="badge" ng-if="numfriendRequest + messageNoti.length !==0">{{numfriendRequest + messageNoti.length}}</span></span>
         </div>
         <div class="page-heading col-xs-6"><h5 ng-bind-html="Title"></h5></div>
         <div class="action col-xs-3" ng-bind-html="Link"></div>

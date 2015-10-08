@@ -3,6 +3,8 @@
     app.run(function ($rootScope, friendRequestService) {
         $rootScope.numfriendRequest = 0;
         $rootScope.messageNum = 0;
+        $rootScope.messages = []; // holds messages of current thread, not good but only way to appened message without reloading all of them
+        $rootScope.messageNoti = []; //will store the thread id's of threads with new messages
         $rootScope.user = {};
         $rootScope.showNav = false;
         $rootScope.friends = [];

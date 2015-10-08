@@ -9,14 +9,14 @@
             var threadId = $routeParams.id;
             $rootScope.Title = $sce.trustAsHtml("Todo add nickname");
             $rootScope.Link = $sce.trustAsHtml("");
-            $scope.messages = [];
+            $rootScope.messages = [];
             $scope.reply = null;
             var message = {};
 
             var getMessages = function () {
                 messagesService.readThread(threadId)
                         .success(function (response) {
-                            $scope.messages = [];
+                            $rootScope.messages = [];
                             for (i = 0; i < response.threadContent.length; i++) { // for each request
                                 var message = response.threadContent[i];
                                 if (message.userId === $localStorage.token.id.toString()) {
@@ -25,14 +25,14 @@
                                 else {
                                     message.class = "msg-container from-them";
                                 }
-                                $scope.messages.push(message);
+                                $rootScope.messages.push(message);
                                 message = {};
                             }
 
                         })
                         .error(function (error) {
                             console.log(error);
-                            $scope.messages = [];
+                            $rootScope.messages = [];
                         });
             };
 
