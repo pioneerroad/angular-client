@@ -10,9 +10,11 @@
                         );
             };
 
-            service.createThread = function (recipients, message) {
-                body = {
-                    recipients: recipients,
+            service.createThread = function (recipient, message) {
+                console.log(recipient);
+                
+                var body = {
+                    recipients: JSON.stringify(recipient),
                     content: message
                 };
                 return $http.post('http://pioneerroad.com.au:8081/api/v1/message/user/' + $localStorage.token.id + '/new-thread', body
@@ -21,10 +23,10 @@
 
             service.createMessage = function (threadId, message) {
 
-                body = {
+                var body = {
                     content: message
                 };
-                return $http.put('http://pioneerroad.com.au:8081/api/v1/message/user/' + $localStorage.token.id + '/thread/' + threadId + '/new-message',body
+                return $http.put('http://pioneerroad.com.au:8081/api/v1/message/user/' + $localStorage.token.id + '/thread/' + threadId + '/new-message', body
                         );
             };
 
@@ -32,11 +34,16 @@
                 return $http.get('http://pioneerroad.com.au:8081/api/v1/message/user/' + $localStorage.token.id + '/thread/' + threadId + '/read-thread'
                         );
             };
+
+            service.getFriendList = function () {
+                return $http.get('http://pioneerroad.com.au:8081/api/v1/user/' + $localStorage.token.id + '/friends/active'
+                        );
+            };
             
-             service.getFriendList = function () {
-                        return $http.get('http://pioneerroad.com.au:8081/api/v1/user/' + $localStorage.token.id + '/friends/active'
-                                );
-                    };
+            service.unSubscribe = function (threadId) {
+                return $http.put('http://pioneerroad.com.au:8081/api/v1/message/user/' + $localStorage.token.id + '/thread/' + threadId + '/unsubscribe'
+                        );
+            };
 
 
             return service;

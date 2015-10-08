@@ -14,6 +14,9 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="body" ng-show="form">
+                    <ul>
+                        <li ng-repeat="friend in currentFriendsAdded" style="display: inline;">{{friend}}, </li>
+                    </ul>
                     <div class="form-group">
                         <div class="input-group">
                             <label class="sr-only" for="nickname">Nickname</label>
@@ -27,7 +30,7 @@
                         <div class="input-group">
                             <label class="sr-only" for="msg-body">Message Body</label>
                             <textarea class="form-control" rows="5" id="msg-body" ng-model="message"></textarea>
-                            <span type="submit" class="input-group-addon" id="postMessage"><span class="glyphicon glyphicon-share-alt"></span></span>
+                            <span type="submit" class="input-group-addon" id="postMessage" ng-click="createThread()"><span class="glyphicon glyphicon-share-alt"></span></span>
                         </div>
                     </div>
                 </div>
@@ -46,6 +49,7 @@
                         <p class="summary-text">{{thread.message}}</p>
                     </div>
                     <div class="msg-open-thread"><a href="#/message/{{thread.threadId}}"><span class="glyphicon glyphicon-chevron-right"></span></a></div>
+                    <br/><br/><span class="label label-danger" ng-click="removeThread(thread.threadId)">Delete Thread</span>
                     <div class="clearfix"></div>
                 </div>
             </div>

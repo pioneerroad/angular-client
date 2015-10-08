@@ -13,7 +13,7 @@
             var thread = {};
             $scope.threads = [];
             $scope.form = false;
-            var friendsAdded = [];
+            var friendsAdded = []; //friend id's to send to api
             var AllFriends = [];
             $scope.message = null;
             $scope.currFriend = null; //the email/nick name of the current friend
@@ -24,9 +24,9 @@
             var getThreads = function () {
                 messagesService.getThread()
                         .success(function (response) {
+                             $scope.threads = [];
                             for (i = 0; i < response.length; i++) { // for each request
                                 thread = response[i];
-                                console.log(thread);
                                 if (response[i].profilePhoto === null) {
                                     thread.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/ui-images/user-profile-default-img.svg";
                                 }
@@ -40,12 +40,23 @@
                         })
                         .error(function (error) {
                             console.log(error);
-                            threads = [];
+                            $scope.threads = [];
                         });
             };
 
             $scope.createThread = function () {
-
+                if ($scope.message === null || friendsAdded.length === 0) {
+                    return;
+                }
+                messagesService.createThread(friendsAdded, $scope.message)
+                        .success(function (response) {
+                            $scope.addNewThreadform();
+                            console.log("thread created");
+                            getThreads();
+                        })
+                        .error(function (error) {
+                            console.log(error);
+                        });
             };
 
             $scope.addNewThreadform = function () {
@@ -65,6 +76,7 @@
             $scope.searchForFriends = function () {
 
                 if ($scope.currFriend.length > 3) {
+                    //do a search for friends like and return that
                     $scope.friendList = AllFriends;
                 }
                 else {
@@ -96,6 +108,18 @@
                 $scope.message = null;
                 friendsAdded = [];
                 $scope.currentFriendsAdded = [];
+            };
+
+            $scope.removeThread = function (id) {
+                messagesService.unSubscribe(id)
+                        .success(function (response) {
+                            console.log("thread removed");
+                            console.log(response);
+                            getThreads();
+                        })
+                        .error(function (error) {
+                            console.log(error);
+                        });
             };
 
             getThreads();

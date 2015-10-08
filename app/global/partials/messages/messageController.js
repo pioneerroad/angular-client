@@ -7,7 +7,8 @@
                 $location.path("/login");
             }
             var threadId = $routeParams.id;
-
+            $rootScope.Title = $sce.trustAsHtml("Todo add nickname");
+            $rootScope.Link = $sce.trustAsHtml("");
             $scope.messages = [];
             $scope.reply = null;
             var message = {};
