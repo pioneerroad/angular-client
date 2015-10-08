@@ -1,80 +1,23 @@
 <div id="msg-thread-panel" class="msg-panel">
     <section>
-        <div class="msg-container from-them">
-            <div class="message">
-                <p>Hey John and June, we're having a great time up here at the Sunshine Coast. Thanks for all your tips about places to stay along the way.</p>
+        <div ng-repeat="message in messages" ng-cloak>
+            <div ng-class="message.class">
+                <div class="message">
+                    <p>{{message.message}}</p>
+                </div>
+                <img src=""/>
+                <div class="clearfix"></div>
+                <p class="msg-status"> {{message.timestamp| timeFilter}}</p>
+                <div class="clearfix"></div>
             </div>
-            <img src=""/>
-            <div class="clearfix"></div>
-            <p class="msg-status"><strong>Read</strong> 10 Aug 2015 09:15</p>
-            <div class="clearfix"></div>
-        </div>
-        <div class="msg-container from-me">
-            <div class="message">
-                <p>You're welcome. We on our way to Mt Isa now. Weather is lovely out here.</p>
-            </div>
-            <img src=""/>
-            <div class="clearfix"></div>
-            <p class="msg-status"><strong>Read</strong> 10 Aug 2015 09:15</p>
-            <div class="clearfix"></div>
-        </div>
-        <div class="clear"></div>
-        <div class="clear"></div>
-        <div class="msg-container from-me">
-            <div class="message">
-                <p>Is it sunny?</p>
-            </div>
-            <img src=""/>
-            <div class="clearfix"></div>
-            <p class="msg-status"><strong>Read</strong> 10 Aug 2015 09:15</p>
-            <div class="clearfix"></div>
-        </div>
-        <div class="msg-container from-me">
-            <div class="message">
-                <p>Yes!</p>
-            </div>
-            <img src=""/>
-            <div class="clearfix"></div>
-            <p class="msg-status"><strong>Read</strong> 10 Aug 2015 09:15</p>
-            <div class="clearfix"></div>
-        </div>
-        <div class="clear"></div>
-        <div class="msg-container from-them">
-            <div class="message">
-                <p>That's nice. It's raining really heavily over here on the coast.</p>
-            </div>
-            <img src=""/>
-            <div class="clearfix"></div>
-            <p class="msg-status"><strong>Read</strong> 10 Aug 2015 09:15</p>
-            <div class="clearfix"></div>
-        </div>
-        <div class="clear"></div>
-        <div class="msg-container from-me">
-            <div class="message">
-                <p>I heard that. We think it will probably move inland in the next couple of days so we better enjoy this sunshine while it lasts.</p>
-            </div>
-            <div class="clearfix"></div>
-            <img src=""/>
-            <p class="msg-status"><strong>Read</strong> 10 Aug 2015 09:15</p>
-            <div class="clearfix"></div>
-        </div>
-        <div class="clear"></div>
-        <div class="msg-container from-them">
-            <div class="message">
-                <p>Careful out there in the rain. Some of those dirt tracks turn to clay when it's wet.</p>
-            </div>
-            <div class="clearfix"></div>
-            <img src=""/>
-            <p class="msg-status"><strong>Read</strong> 10 Aug 2015 09:15</p>
-            <div class="clearfix"></div>
         </div>
     </section>
-    <div class="well well-orange msg-reply">
+    <div class="well well-orange msg-reply" style="position: fixed; bottom: 0px;">
         <div class="form-group">
             <label class="sr-only" for="msgReply">Write your reply</label>
             <div class="input-group">
-                <input type="text" class="form-control" id="msgReply">
-                <div class="input-group-addon"><span class="glyphicon glyphicon-share-alt"></span></div>
+                <input type="text" class="form-control" id="msgReply" ng-model="reply">
+                <div class="input-group-addon" ng-click="sendMessage()"><span class="glyphicon glyphicon-share-alt"></span></div>
             </div>
         </div>
     </div>

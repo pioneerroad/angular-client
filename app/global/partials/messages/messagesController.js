@@ -9,17 +9,24 @@
 
             $rootScope.Title = $sce.trustAsHtml("Messages");
             $rootScope.Link = $sce.trustAsHtml("");
-            
+
             var thread = {};
             $scope.threads = [];
+            $scope.form = false;
+            var friendsAdded = [];
+            var AllFriends = [];
+            $scope.message = null;
+            $scope.currFriend = null; //the email/nick name of the current friend
+            $scope.friendList = []; //drop down list to choose from
+            var friendSelected = null;
+            $scope.currentFriendsAdded = []; //displays to the user the friends who will be apart of the thread
 
             var getThreads = function () {
                 messagesService.getThread()
                         .success(function (response) {
-                            console.log(response);
                             for (i = 0; i < response.length; i++) { // for each request
-                               thread = response[i];
-                               console.log(thread);
+                                thread = response[i];
+                                console.log(thread);
                                 if (response[i].profilePhoto === null) {
                                     thread.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/ui-images/user-profile-default-img.svg";
                                 }
@@ -36,6 +43,61 @@
                             threads = [];
                         });
             };
+
+            $scope.createThread = function () {
+
+            };
+
+            $scope.addNewThreadform = function () {
+                if ($scope.form) {
+                    resetForm();
+                }
+                $scope.form = !$scope.form;
+                messagesService.getFriendList()
+                        .success(function (response) {
+                            AllFriends = response;
+                        })
+                        .error(function (error) {
+                            console.log(error);
+                        });
+            };
+
+            $scope.searchForFriends = function () {
+
+                if ($scope.currFriend.length > 3) {
+                    $scope.friendList = AllFriends;
+                }
+                else {
+                    $scope.friendList = [];
+                }
+            };
+
+            $scope.addFriend = function (Friend) {
+                $scope.friendList = [];
+                friendSelected = Friend;
+                $scope.currFriend = Friend.nickname;
+            };
+
+            $scope.appendFriend = function () {
+                if (friendSelected === null) {
+                    return;
+                }
+                friendsAdded.push(friendSelected.friend);
+                $scope.currentFriendsAdded.push(friendSelected.nickname);
+                $scope.currFriend = null;
+                friendSelected = null;
+            };
+
+            var resetForm = function () {
+                $scope.friendList = [];
+                $scope.message = null;
+                $scope.currFriend = null;
+                friendSelected = null;
+                $scope.message = null;
+                friendsAdded = [];
+                $scope.currentFriendsAdded = [];
+            };
+
             getThreads();
         }]);
 }());
