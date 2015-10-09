@@ -1,16 +1,16 @@
 (function () {
     var app = angular.module("pioneerRoad.RelationShips");
-    app.controller('addFriendController', ['$scope', '$rootScope', 'relationshipsService', '$localStorage', '$sce','$location' , 'loginRedirect', function ($scope,$rootScope, relationshipsService, $localStorage, $sce, $location ,loginRedirect) {
-            
+    app.controller('addFriendController', ['$scope', '$rootScope', 'relationshipsService', '$localStorage', '$sce', '$location', 'loginRedirect', function ($scope, $rootScope, relationshipsService, $localStorage, $sce, $location, loginRedirect) {
+
             if (!loginRedirect.checkLogin()) {
                 $location.path("/login");
             }
-            
+
             $rootScope.Title = $sce.trustAsHtml("Add Friend");
             $rootScope.Link = $sce.trustAsHtml("");
-            
+
             $scope.showFriendConfirmationModal = false;
-            
+
             $scope.friendName = ""; //friend to find
             $scope.addFriendNew = []; //lists all people matching searched name
             var friendId = ""; //id returned from findFriends() function in service
@@ -21,35 +21,42 @@
             $scope.success = false;
 
             $scope.findFriend = function () {
+                
+                if($scope.friendName.length < 3){
+                    return;
+                }
                 $scope.addFriendNew = [];
                 $scope.error = false;
                 $scope.success = false;
                 $scope.showFriendConfirmationModal = false;
                 if ($scope.friendName === "") {
-                    friend.error = "Please enter a friends email!";
+                    friend.error = "Please enter a friends email, nickname or mobile!";
                     $scope.addFriendNew.push(friend);
                     friend = {};
                 }
                 else {
-                    relationshipsService.findFriend($scope.friendName)
+                    relationshipsService.searchForFriend($scope.friendName)
                             .success(function (response) {
                                 if (response.error === "NO_MATCHING_USER") { //no people found
-                                    friend.error = "Could not find any users by that email!";
+                                    friend.error = "Could not find any users by that search!";
                                     $scope.addFriendNew.push(friend);
                                     friend = {};
                                     return;
                                 }
-                                getFriendProfile(response.id);
+                                console.log(response);
+                                for (var i = 0; i < response.user.length; i++)
+                                    getFriendProfile(response.user[i].id);
+                                
                             })
                             .error(function (error) {
                                 console.log(error);
                                 if (error.error === "NO_MATCHING_USER") { //no people found
-                                    friend.error = "Could not find any users by that email!";
+                                    friend.error = "Could not find any users by that search!";
                                     $scope.addFriendNew.push(friend);
                                     friend = {};
                                 }
                                 else { //unknown error
-                                    friend.error = "Could not find any users by that email!";
+                                    friend.error = "Could not find any users by that search!";
                                     $scope.addFriendNew.push(friend);
                                     friend = {};
                                 }
@@ -100,9 +107,9 @@
 
             var getFriendProfile = function (friendId) {
                 if (friendId === "") {
-                    console.log("friend id is undefined");
+                    console.log("friend is undefined");
                 }
-                else {
+                else { //change to extra data from
                     relationshipsService.getFriendProfile(friendId)
                             .success(function (response) {
                                 friend = response;

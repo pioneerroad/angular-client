@@ -1,7 +1,7 @@
 (function () {
     var app = angular.module("pioneerRoad");
 
-    app.controller('messagesController', ['$scope', '$rootScope', '$location', '$sce', 'messagesService', 'loginRedirect', '$localStorage', function ($scope, $rootScope, $location, $sce, messagesService, loginRedirect, $localStorage) {
+    app.controller('messagesController', ['$scope', '$rootScope', '$location', '$sce', 'messagesService', 'loginRedirect', '$localStorage','relationshipsService', function ($scope, $rootScope, $location, $sce, messagesService, loginRedirect, $localStorage, relationshipsService) {
 
             if (!loginRedirect.checkLogin()) {
                 $location.path("/login");
@@ -77,7 +77,7 @@
                     resetForm();
                 }
                 $scope.form = !$scope.form;
-                messagesService.getFriendList()
+                relationshipsService.getFriendList()
                         .success(function (response) {
                             AllFriends = response;
                         })

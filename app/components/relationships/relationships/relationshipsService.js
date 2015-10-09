@@ -16,7 +16,7 @@
                     };
 
                     service.findFriend = function (reciver) {
-                        reciver = reciver.toLowerCase()
+                        reciver = reciver.toLowerCase();
                         return $http.post('http://pioneerroad.com.au:8081/api/v1/user/' + $localStorage.token.id + '/friends/find', data = {username: reciver}
                         );
                     };
@@ -28,6 +28,12 @@
                     
                     service.blockFriend = function (uid) {
                         return $http.put('http://pioneerroad.com.au:8081/api/v1/user/' + $localStorage.token.id + '/friends/block', data = {blockId: uid}
+                        );
+                    };
+                    
+                    service.searchForFriend = function(friend){
+                        friend = friend.toLowerCase();
+                        return $http.post('http://pioneerroad.com.au:8081/api/v1/user/' + $localStorage.token.id + '/friends/find', data = {username: friend}
                         );
                     };
 

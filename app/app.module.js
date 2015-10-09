@@ -5,7 +5,6 @@
         $rootScope.messageNum = 0;
         $rootScope.messages = []; // holds messages of current thread, not good but only way to appened message without reloading all of them
         $rootScope.messageNoti = [];
-        $rootScope.participants = []; //hold uid, nickname. remove this once messages api returns this data
         if ($localStorage.Notification !== undefined) {
             $rootScope.messageNoti = $localStorage.Notification; //will store the thread id's of threads with new messages
         }

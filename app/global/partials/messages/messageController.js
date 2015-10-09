@@ -50,10 +50,10 @@
                 if ($scope.reply === null) {
                     return; //no message entered
                 }
-                console.log("about to send");
                 messagesService.createMessage(threadId, $scope.reply)
                         .success(function (response) {
                             $scope.reply = null;
+                            console.log("sent");
                         })
                         .error(function (error) {
                             console.log(error);

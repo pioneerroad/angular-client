@@ -10,9 +10,7 @@
                         );
             };
 
-            service.createThread = function (recipient, message) {
-                console.log(recipient);
-                
+            service.createThread = function (recipient, message) {           
                 var body = {
                     recipients: JSON.stringify(recipient),
                     content: message
@@ -32,11 +30,6 @@
 
             service.readThread = function (threadId) {
                 return $http.get('http://pioneerroad.com.au:8081/api/v1/message/user/' + $localStorage.token.id + '/thread/' + threadId + '/read-thread'
-                        );
-            };
-
-            service.getFriendList = function () {
-                return $http.get('http://pioneerroad.com.au:8081/api/v1/user/' + $localStorage.token.id + '/friends/active'
                         );
             };
             
