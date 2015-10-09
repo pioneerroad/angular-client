@@ -21,8 +21,9 @@
             $scope.success = false;
 
             $scope.findFriend = function () {
-                
-                if($scope.friendName.length < 3){
+
+                if ($scope.friendName.length < 3) {
+                    $scope.addFriendNew = [];
                     return;
                 }
                 $scope.addFriendNew = [];
@@ -43,10 +44,9 @@
                                     friend = {};
                                     return;
                                 }
-                               // console.log(response);
-                              //  for (var i = 0; i < response.user.length; i++)
-                                    getFriendProfile(response.id);
-                                
+                                for (var i = 0; i < response.length; i++)
+                                    getFriendProfile(response[i]);
+
                             })
                             .error(function (error) {
                                 console.log(error);
@@ -90,6 +90,7 @@
                             $scope.success = true;
                             friendAddId = null;
                             $scope.friends = [];
+                            $scope.friendName = "";
                         })
                         .error(function (error) {
                             if (error.message === "Validation error") {
@@ -102,6 +103,7 @@
                                 $scope.message = "could not send request";
                                 friendAddId = null;
                             }
+                            $scope.friendName = "";
                         });
             };
 
@@ -110,21 +112,15 @@
                     console.log("friend is undefined");
                 }
                 else { //change to extra data from
-                    relationshipsService.getFriendProfile(friendId)
-                            .success(function (response) {
-                                friend = response;
-                                if (response.profilePhoto === null) {
-                                    friend.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/ui-images/user-profile-default-img.svg";
-                                }
-                                else {
-                                    friend.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/user-photos/" + response.userAccountId + "/profile-photo/" + response.profilePhoto.medium;
-                                }
-                                $scope.addFriendNew.push(friend);
-                                friend = {};
-                            })
-                            .error(function (error) {
-                                console.log(error);
-                            });
+                    friend = friendId;
+                    if (friendId.profilePhoto === null) {
+                        friend.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/ui-images/user-profile-default-img.svg";
+                    }
+                    else {
+                        friend.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/user-photos/" + friendId.userAccountId + "/profile-photo/" + friendId.profilePhoto.small;
+                    }
+                    $scope.addFriendNew.push(friend);
+                    friend = {};
                 }
             };
 

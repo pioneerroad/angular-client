@@ -1,7 +1,7 @@
 (function () {
     var app = angular.module("pioneerRoad");
 
-    app.controller('messagesController', ['$scope', '$rootScope', '$location', '$sce', 'messagesService', 'loginRedirect', '$localStorage','relationshipsService', function ($scope, $rootScope, $location, $sce, messagesService, loginRedirect, $localStorage, relationshipsService) {
+    app.controller('messagesController', ['$scope', '$rootScope', '$location', '$sce', 'messagesService', 'loginRedirect', '$localStorage', 'relationshipsService', function ($scope, $rootScope, $location, $sce, messagesService, loginRedirect, $localStorage, relationshipsService) {
 
             if (!loginRedirect.checkLogin()) {
                 $location.path("/login");
@@ -89,8 +89,24 @@
             $scope.searchForFriends = function () {
 
                 if ($scope.currFriend.length > 3) {
-                    //do a search for friends like and return that
-                    $scope.friendList = AllFriends;
+                    relationshipsService.searchForFriend($scope.currFriend)
+                            .success(function (response) {
+                                for (var i = 0; i < response.length; i++) {
+                                    if (response[i].profilePhoto === null) {
+                                        response[i].profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/ui-images/user-profile-default-img.svg";
+                                    }
+                                    else {
+                                        response[i].profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/user-photos/" + friendId.userAccountId + "/profile-photo/" + friendId.profilePhoto.small;
+                                    }
+                                    $scope.friendList.push(response[i]);
+
+                                }
+
+                            })
+                            .error(function (error) {
+                                console.log(error);
+                            });
+
                 }
                 else {
                     $scope.friendList = [];
@@ -131,7 +147,7 @@
                                 $rootScope.messageNoti.splice(index, 1);
                                 $localStorage.Notification = $rootScope.messageNoti;
                             } //remove any notifications to do with this thread
-                            
+
                             console.log("thread removed");
                             console.log(response);
                             $rootScope.getThreads();

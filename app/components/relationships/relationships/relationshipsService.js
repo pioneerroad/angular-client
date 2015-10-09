@@ -17,7 +17,7 @@
 
                     service.findFriend = function (reciver) {
                         reciver = reciver.toLowerCase();
-                        return $http.post($rootScope.Api + '/user/' + $localStorage.token.id + '/friends/find', data = {username: reciver}
+                        return $http.get($rootScope.Api + '/user/' + $localStorage.token.id + '/friend-query/%25'+reciver + "%25"
                         );
                     };
                     
@@ -33,7 +33,7 @@
                     
                     service.searchForFriend = function(friend){
                         friend = friend.toLowerCase();
-                        return $http.post($rootScope.Api + '/user/' + $localStorage.token.id + '/friends/find', data = {username: friend}
+                        return $http.get($rootScope.Api + '/user/' + $localStorage.token.id + '/friends/%25' + friend + '%25'
                         );
                     };
 
