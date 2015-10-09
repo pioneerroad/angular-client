@@ -91,15 +91,10 @@
                 if ($scope.currFriend.length > 3) {
                     relationshipsService.searchForFriend($scope.currFriend)
                             .success(function (response) {
+                                $scope.friendList = [];
                                 for (var i = 0; i < response.length; i++) {
-                                    if (response[i].profilePhoto === null) {
-                                        response[i].profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/ui-images/user-profile-default-img.svg";
-                                    }
-                                    else {
-                                        response[i].profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/user-photos/" + friendId.userAccountId + "/profile-photo/" + friendId.profilePhoto.small;
-                                    }
+                                    console.log(response[i]);
                                     $scope.friendList.push(response[i]);
-
                                 }
 
                             })

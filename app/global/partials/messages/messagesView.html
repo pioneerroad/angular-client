@@ -24,7 +24,7 @@
                             <span class="input-group-addon" id="addRecipient" ng-click="appendFriend()"><span class="glyphicon glyphicon-plus"></span></span>
                         </div>
                         <ul class="list-group">
-                            <li class="list-group-item" ng-repeat="friend in friendList" ng-click="addFriend(friend)">{{friend.nickname}}</li>
+                            <li class="list-group-item" ng-repeat="friend in friendList | limitTo:5" ng-click="addFriend(friend)">{{friend.nickName}}</li>
                         </ul>
                         <div class="msg-recipient-list"><ul></ul><!-- Visual indicator of msg recipients; User Ids also need to be added to an array and sent to server--> </div>
                         <div class="input-group">
