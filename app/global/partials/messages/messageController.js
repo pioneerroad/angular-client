@@ -13,6 +13,7 @@
             $rootScope.Link = $sce.trustAsHtml("");
             $rootScope.messages = [];
             $scope.reply = null;
+            $rootScope.participants = [];
             var message = {};
             
             var index = $rootScope.messageNoti.indexOf(parseInt(threadId)); //convert to int as array is ints not string

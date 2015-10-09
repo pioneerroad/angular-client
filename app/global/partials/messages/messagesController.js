@@ -31,7 +31,7 @@
                                     thread.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/ui-images/user-profile-default-img.svg";
                                 }
                                 else {
-                                    thread.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/user-photos/" + response[i].subscriberid + "/profile-photo/" + response[i].photo.medium;
+                                    thread.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/user-photos/" + response[i].subscriberId + "/profile-photo/" + response[i].photo.medium;
                                 }
 
                                 $scope.threads.push(thread);
@@ -65,7 +65,7 @@
                 messagesService.createThread(friendsAdded, $scope.message)
                         .success(function (response) {
                             $scope.addNewThreadform();
-                            getThreads();
+                            $rootScope.getThreads();
                         })
                         .error(function (error) {
                             console.log(error);

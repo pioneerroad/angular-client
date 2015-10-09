@@ -20,7 +20,6 @@
                 viewProfileService.getData()
                         .success(function (response) {
                             if (response) {
-                                console.log(response);
                                 $scope.profile = response;
                                 setImages(response);
                                 setNick(response);
@@ -71,7 +70,6 @@
             var getCurrentLocation = function () {
                 geoLocationService.returnLocation()
                         .success(function (data, response) {
-                            console.log(data[0]);
                             $scope.location = data[0]; //location data
                         })
                         .error(function (error) {
