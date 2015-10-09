@@ -93,7 +93,6 @@
                             .success(function (response) {
                                 $scope.friendList = [];
                                 for (var i = 0; i < response.length; i++) {
-                                    console.log(response[i]);
                                     $scope.friendList.push(response[i]);
                                 }
 
@@ -111,15 +110,15 @@
             $scope.addFriend = function (Friend) {
                 $scope.friendList = [];
                 friendSelected = Friend;
-                $scope.currFriend = Friend.nickname;
+                $scope.currFriend = Friend.nickName;
             };
 
             $scope.appendFriend = function () {
                 if (friendSelected === null) {
                     return;
                 }
-                friendsAdded.push(friendSelected.friend);
-                $scope.currentFriendsAdded.push(friendSelected.nickname);
+                friendsAdded.push(friendSelected.userAccountId);
+                $scope.currentFriendsAdded.push(friendSelected.nickName);
                 $scope.currFriend = null;
                 friendSelected = null;
             };
