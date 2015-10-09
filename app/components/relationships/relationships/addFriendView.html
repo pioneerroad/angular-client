@@ -29,7 +29,7 @@
                 <span class="input-group-addon" id="executeSearch"><span ng-click="findFriend()" class="glyphicon glyphicon-search"></span></span>
             </div>
             <!-- Returned result of friend search -->
-            <div class="well panel-list friends-list" ng-repeat="friend in addFriendNew" ng-cloak>
+            <div class="well panel-list friends-list" ng-repeat="friend in addFriendNew | limitTo:5" ng-cloak>
                 {{friend.error}} 
                 <div id="user-profile-photo-inner-container">
                     <img ng-src="{{friend.profilePic}}" class="profile-photo" /></div>

@@ -1,12 +1,12 @@
 (function () {
     var app = angular.module("pioneerRoad");
 
-    app.factory('messagesService', ['$http', '$localStorage',
-        function ($http, $localStorage) {
+    app.factory('messagesService', ['$http', '$localStorage', '$rootScope',
+        function ($http, $localStorage, $rootScope) {
             var service = {};
 
             service.getThread = function () {
-                return $http.get('http://pioneerroad.com.au:8081/api/v1/message/user/' + $localStorage.token.id + '/active-threads'
+                return $http.get($rootScope.Api + '/message/user/' + $localStorage.token.id + '/active-threads'
                         );
             };
 
@@ -15,7 +15,7 @@
                     recipients: JSON.stringify(recipient),
                     content: message
                 };
-                return $http.post('http://pioneerroad.com.au:8081/api/v1/message/user/' + $localStorage.token.id + '/new-thread', body
+                return $http.post($rootScope.Api+ '/message/user/' + $localStorage.token.id + '/new-thread', body
                         );
             };
 
@@ -24,17 +24,17 @@
                 var body = {
                     content: message
                 };
-                return $http.put('http://pioneerroad.com.au:8081/api/v1/message/user/' + $localStorage.token.id + '/thread/' + threadId + '/new-message', body
+                return $http.put($rootScope.Api + '/message/user/' + $localStorage.token.id + '/thread/' + threadId + '/new-message', body
                         );
             };
 
             service.readThread = function (threadId) {
-                return $http.get('http://pioneerroad.com.au:8081/api/v1/message/user/' + $localStorage.token.id + '/thread/' + threadId + '/read-thread'
+                return $http.get($rootScope.Api + '/message/user/' + $localStorage.token.id + '/thread/' + threadId + '/read-thread'
                         );
             };
             
             service.unSubscribe = function (threadId) {
-                return $http.put('http://pioneerroad.com.au:8081/api/v1/message/user/' + $localStorage.token.id + '/thread/' + threadId + '/unsubscribe'
+                return $http.put($rootScope.Api + '/message/user/' + $localStorage.token.id + '/thread/' + threadId + '/unsubscribe'
                         );
             };
 

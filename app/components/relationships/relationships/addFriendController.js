@@ -43,9 +43,9 @@
                                     friend = {};
                                     return;
                                 }
-                                console.log(response);
-                                for (var i = 0; i < response.user.length; i++)
-                                    getFriendProfile(response.user[i].id);
+                               // console.log(response);
+                              //  for (var i = 0; i < response.user.length; i++)
+                                    getFriendProfile(response.id);
                                 
                             })
                             .error(function (error) {
