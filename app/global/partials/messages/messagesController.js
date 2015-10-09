@@ -1,7 +1,7 @@
 (function () {
     var app = angular.module("pioneerRoad");
 
-    app.controller('messagesController', ['$scope', '$rootScope', '$location', '$sce', 'messagesService', 'loginRedirect', function ($scope, $rootScope, $location, $sce, messagesService, loginRedirect) {
+    app.controller('messagesController', ['$scope', '$rootScope', '$location', '$sce', 'messagesService', 'loginRedirect', '$localStorage', function ($scope, $rootScope, $location, $sce, messagesService, loginRedirect, $localStorage) {
 
             if (!loginRedirect.checkLogin()) {
                 $location.path("/login");
@@ -24,7 +24,7 @@
             $rootScope.getThreads = function () {
                 messagesService.getThread()
                         .success(function (response) {
-                             $scope.threads = [];
+                            $scope.threads = [];
                             for (i = 0; i < response.length; i++) { // for each request
                                 thread = response[i];
                                 if (response[i].profilePhoto === null) {
@@ -37,6 +37,20 @@
                                 $scope.threads.push(thread);
                                 thread = {};
                             }
+                            //sort the thread
+                            $scope.threads.sort(function (a, b) {
+                                var d1 = new Date(a.lastmessagetime);
+                                var d2 = new Date(b.lastmessagetime);
+                                if (d1 === d2) {
+                                    return 0;
+                                }
+                                else if (d1 < d2) {
+                                    return 1;
+                                }
+                                else {
+                                    return -1;
+                                }
+                            });
                         })
                         .error(function (error) {
                             console.log(error);
@@ -51,7 +65,6 @@
                 messagesService.createThread(friendsAdded, $scope.message)
                         .success(function (response) {
                             $scope.addNewThreadform();
-                            console.log("thread created");
                             getThreads();
                         })
                         .error(function (error) {
@@ -113,20 +126,26 @@
             $scope.removeThread = function (id) {
                 messagesService.unSubscribe(id)
                         .success(function (response) {
+                            var index = $rootScope.messageNoti.indexOf(id);
+                            if (index > -1) {
+                                $rootScope.messageNoti.splice(index, 1);
+                                $localStorage.Notification = $rootScope.messageNoti;
+                            } //remove any notifications to do with this thread
+                            
                             console.log("thread removed");
                             console.log(response);
-                            getThreads();
+                            $rootScope.getThreads();
                         })
                         .error(function (error) {
                             console.log(error);
                         });
             };
-            
-            $scope.hasNewMessages = function(threadid){
+
+            $scope.hasNewMessages = function (threadid) {
                 var show = false;
-               if($rootScope.messageNoti.indexOf(threadid) > -1){
-                   show = true;
-               } 
+                if ($rootScope.messageNoti.indexOf(threadid) > -1) {
+                    show = true;
+                }
                 return show;
             };
 

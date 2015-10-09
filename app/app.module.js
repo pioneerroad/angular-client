@@ -7,7 +7,6 @@
         $rootScope.messageNoti = [];
         if ($localStorage.Notification !== undefined) {
             $rootScope.messageNoti = $localStorage.Notification; //will store the thread id's of threads with new messages
-            console.log("not here");
         }
       
 
