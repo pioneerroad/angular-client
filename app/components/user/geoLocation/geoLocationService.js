@@ -13,12 +13,12 @@
                     };
                     
                     service.returnLocation = function(){
-                        return $http.get('http://pioneerroad.com.au:8081/api/v1/user/' + $localStorage.token.id + '/current-location'
+                        return $http.get($rootScope.Api + '/user/' + $localStorage.token.id + '/current-location'
                          );
                     };
                     
                     function updateLocation(){
-                       $http.put('http://pioneerroad.com.au:8081/api/v1/user/' + $localStorage.token.id + '/profile/update/current-location',
+                       $http.put($rootScope.Api + '/user/' + $localStorage.token.id + '/profile/update/current-location',
                          locationData
                         ).success(function(response){console.log("location updated");}).error(function(error){console.log(error);});
                     }

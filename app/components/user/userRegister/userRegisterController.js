@@ -1,6 +1,6 @@
 (function () {
     var app = angular.module("pioneerRoad.UserRegister", []);
-    var userRegisterController = function ($scope, $http, $localStorage, loginRedirect, $location) { //handels all of the functionality for creating users including error checking 
+    var userRegisterController = function ($scope, $http, $localStorage, loginRedirect, $location, $rootScope) { //handels all of the functionality for creating users including error checking 
 
         if (loginRedirect.checkLogin()) {
             $location.path("/home");
@@ -33,7 +33,7 @@
                     password: $scope.password,
                     mobile: $scope.mobile
                 };
-                $http.post('http://pioneerroad.com.au:8081/api/v1/user/create', data).
+                $http.post($rootScope.Api + '/user/create', data).
                         success(function (response, status, headers, config) {
                             $scope.ShowModal = true; // shows the success modal
 
@@ -128,5 +128,5 @@
         $scope.errors = [];
     };
     app.controller("userRegisterController", userRegisterController);
-    userRegisterController.$inject = ['$scope', '$http', '$localStorage', 'loginRedirect', '$location'];
+    userRegisterController.$inject = ['$scope', '$http', '$localStorage', 'loginRedirect', '$location', '$rootScope'];
 }());

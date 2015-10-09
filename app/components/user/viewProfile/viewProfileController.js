@@ -70,7 +70,7 @@
             var getCurrentLocation = function () {
                 geoLocationService.returnLocation()
                         .success(function (data, response) {
-                            $scope.location = data; //location data
+                            $scope.location = data[0]; //location data
                         })
                         .error(function (error) {
                             console.log(error);

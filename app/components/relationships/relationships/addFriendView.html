@@ -25,35 +25,17 @@
         <div class="form-group">
             <div class="input-group">
                 <label class="sr-only" for="searchUsers">Email Address</label>
-                <input type="text" class="form-control" id="searchUsers" ng-model="friendName"/>
+                <input type="text" class="form-control" id="searchUsers" ng-model="friendName" ng-keyUp="findFriend()"/>
                 <span class="input-group-addon" id="executeSearch"><span ng-click="findFriend()" class="glyphicon glyphicon-search"></span></span>
             </div>
             <!-- Returned result of friend search -->
-            <div class="well panel-list friends-list" ng-repeat="friend in addFriendNew" ng-cloak>
+            <div class="well panel-list friends-list" ng-repeat="friend in addFriendNew | limitTo:5" ng-cloak>
                 {{friend.error}} 
                 <div id="user-profile-photo-inner-container">
                     <img ng-src="{{friend.profilePic}}" class="profile-photo" /></div>
 
                 <div class="panel" ng-show="friend.nickName">
                     <h5>{{friend.nickName}}</h5>
-                    <div class="hometown">
-                        <div class="details left">
-                            <span class="glyphicon glyphicon-home"></span>
-                        </div>
-                        <div >
-                            <p class="town">{{friend.dataSet_town.location}}</p>
-                            <p class="region">{{friend.dataSet_town.tourism_region}} {{friend.dataSet_town.state}}</p>
-                        </div>
-                    </div>
-                    <div class="current-location" ng-show="friend.currentLocation.nearestTown">
-                        <div class="details left">
-                            <span class="glyphicon glyphicon-map-marker"></span>
-                        </div>
-                        <div class="details right" >
-                            <p class="town">{{friend.currentLocation.nearestTown}}</p>
-                            <p class="region">{{friend.currentLocation.tourismRegion}}</p>
-                        </div>
-                    </div>
                     <button ng-show="friend.userAccountId" class="btn btn-default" ng-click="addFriendbtn(friend.userAccountId)"><span class="glyphicon glyphicon-plus"></span> Add Friend</button>
                 </div>
                 <div class="clearfix"></div>

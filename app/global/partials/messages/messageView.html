@@ -1,0 +1,25 @@
+<div id="msg-thread-panel" class="msg-panel">
+    <section>
+        <div ng-repeat="message in messages" ng-cloak>
+            <div ng-class="message.class">
+                <div class="message">
+                    <p>{{message.message}}</p>
+                </div>
+                <img src=""/>
+                <div class="clearfix"></div>
+                <p class="msg-status"> {{message.timestamp| timeFilter}}</p>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        
+    </section>
+    <div class="well well-orange msg-reply" style="position: fixed; bottom: 0px;">
+        <div class="form-group">
+            <label class="sr-only" for="msgReply">Write your reply</label>
+            <div class="input-group">
+                <input type="text" class="form-control" id="msgReply" ng-model="reply">
+                <div class="input-group-addon" ng-click="sendMessage()"><span class="glyphicon glyphicon-share-alt"></span></div>
+            </div>
+        </div>
+    </div>
+</div>

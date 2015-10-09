@@ -57,6 +57,10 @@
                     templateUrl: "app/global/partials/messages/messagesView.html",
                     controller: "messagesController"
                 })
+                .when("/message/:id", {
+                    templateUrl: "app/global/partials/messages/messageView.html",
+                    controller: "messageController"
+                })
                 .when("/places", {
                     templateUrl: "app/components/user/viewProfile/viewProfileView.html" //redirect to places page
 

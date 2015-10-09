@@ -21,8 +21,8 @@
                     <input type="text" class="form-control" id="editHometownInput" placeholder="{{profile.dataSet_town.location}}" name="hometown"  ng-model="hometown" ng-keyup="getHomeTownSug()" disabled>
                     <div class="input-group-addon toggle-field-edit" ng-click="updateHomeTown()" ><span id="homeGly" class="glyphicon glyphicon-pencil"></span></div>
                 </div>
-                <ul>
-                    <li ng-repeat="town in homeTownSuggestions| limitTo:5" ng-model="town" ng-click="chosenTown(town)">{{town.label}}</li>
+                <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="town in homeTownSuggestions| limitTo:5" ng-model="town" ng-click="chosenTown(town)">{{town.label}}</li>
                 </ul>
             </div>
         </div>

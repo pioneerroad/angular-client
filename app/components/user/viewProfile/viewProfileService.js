@@ -1,13 +1,13 @@
 (function () {
 
     angular.module("pioneerRoad.Profile")
-            .factory('viewProfileService', ['$http', '$localStorage',
-                function ($http, $localStorage) {
+            .factory('viewProfileService', ['$http', '$localStorage', '$rootScope',
+                function ($http, $localStorage, $rootScope) {
                     var service = {};
 
                     service.getData = function () {
                         
-                        return $http.post('http://pioneerroad.com.au:8081/api/v1/user/'+$localStorage.token.id+'/profile/fetch'
+                        return $http.post($rootScope.Api + '/user/'+$localStorage.token.id+'/profile/fetch'
                                 );
                     };
 
