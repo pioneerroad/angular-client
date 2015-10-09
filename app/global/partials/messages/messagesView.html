@@ -42,6 +42,9 @@
                         {{thread.qty}}
                         <div class="msg-date">{{thread.time| timeFilter}}</div>
                     </div>
+                    <div ng-show="hasNewMessages(thread.threadId)">
+                       <span class="label label-success">New Message</span>
+                    </div>
                     <div class="msg-status unread"><span class="glyphicon glyphicon-asterisk"></span></div>
                     <div class="msg-user-profile-photo online"><img ng-src="{{thread.profilePic}}"/></div>
                     <div class="msg-summary">

@@ -1,17 +1,26 @@
 (function () {
     var app = angular.module("pioneerRoad");
 
-    app.controller('messageController', ['$scope', '$rootScope', '$location', '$sce', 'messagesService', 'loginRedirect', '$routeParams', '$localStorage', function ($scope, $rootScope, $location, $sce, messagesService, loginRedirect, $routeParams, $localStorage) {
+    app.controller('messageController', ['$scope', '$rootScope', '$location', '$sce', 'messagesService', 'loginRedirect', '$routeParams', '$localStorage', '$anchorScroll', function ($scope, $rootScope, $location, $sce, messagesService, loginRedirect, $routeParams, $localStorage, $anchorScroll) {
 
             if (!loginRedirect.checkLogin()) {
                 $location.path("/login");
             }
+           
+            
             var threadId = $routeParams.id;
             $rootScope.Title = $sce.trustAsHtml("Todo add nickname");
             $rootScope.Link = $sce.trustAsHtml("");
             $rootScope.messages = [];
             $scope.reply = null;
             var message = {};
+            
+            var index = $rootScope.messageNoti.indexOf(parseInt(threadId)); //convert to int as array is ints not string
+            if (index > -1) {
+                $rootScope.messageNoti.splice(index, 1);
+                $localStorage.Notifications = $rootScope.messageNoti;
+            } //remove any notifications to do with this thread
+            
 
             var getMessages = function () {
                 messagesService.readThread(threadId)
@@ -28,7 +37,6 @@
                                 $rootScope.messages.push(message);
                                 message = {};
                             }
-
                         })
                         .error(function (error) {
                             console.log(error);
@@ -44,12 +52,10 @@
                 console.log("about to send");
                 messagesService.createMessage(threadId, $scope.reply)
                         .success(function (response) {
-                            console.log("success");
-                            getMessages();
                             $scope.reply = null;
                         })
                         .error(function (error) {
-                            console.log(error + " bad");
+                            console.log(error);
                             $scope.reply = null;
                         });
                 $scope.reply = null;

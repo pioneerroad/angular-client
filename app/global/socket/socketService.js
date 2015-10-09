@@ -26,13 +26,13 @@
             socket.on('new message', function (data) {
                 var index;
                 if (("/message/" + data.threadId) === $location.path()) {
-                    
-                    index = $rootScope.messages.indexOf(data.threadId);
+
+                    index = $rootScope.messageNoti.indexOf(data.threadId);
                     if (index > -1) {
-                        $rootScope.messages.splice(index, 1);
-                        console.log("removed");
+                        $rootScope.messageNoti.splice(index, 1);
+                        $localStorage.Notification = $rootScope.messageNoti;
                     } //remove any notifications to do with this thread
-                    
+
                     //add message to the rootscope messages var.
                     if (data.userId === $localStorage.token.id.toString()) {
                         data.class = "msg-container from-me";
@@ -47,11 +47,13 @@
                     //check if threadid is in messageNoti
                     //if it is do nothing
                     //else add to array
-                    if ($rootScope.messageNoti.indexOf(data.threadId) === -1)
+                    if ($rootScope.messageNoti.indexOf(data.threadId) === -1) {
                         $rootScope.messageNoti.push(data.threadId);
+                        $localStorage.Notification = $rootScope.messageNoti;
+                    }
 
                     if ("/messages" === $location.path()) {
-                        //update the thread list
+                        $rootScope.getThreads();
                     }
 
                 }

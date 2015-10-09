@@ -21,7 +21,7 @@
             var friendSelected = null;
             $scope.currentFriendsAdded = []; //displays to the user the friends who will be apart of the thread
 
-            var getThreads = function () {
+            $rootScope.getThreads = function () {
                 messagesService.getThread()
                         .success(function (response) {
                              $scope.threads = [];
@@ -121,7 +121,15 @@
                             console.log(error);
                         });
             };
+            
+            $scope.hasNewMessages = function(threadid){
+                var show = false;
+               if($rootScope.messageNoti.indexOf(threadid) > -1){
+                   show = true;
+               } 
+                return show;
+            };
 
-            getThreads();
+            $rootScope.getThreads();
         }]);
 }());
