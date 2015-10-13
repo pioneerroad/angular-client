@@ -77,8 +77,8 @@
 
     <body>
         <main class="page-height-container">
-            <span ng-if="user.token" id="topBar">
-                <div ng-include="'/app/global/partials/notificationBar/notificationBar.html'"></div>
+            <span ng-if="user.token" >
+                <div id="topBar" ng-include="'/app/global/partials/notificationBar/notificationBar.html'"></div>
             </span>
             <!--[if lt IE 8]>
                 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
