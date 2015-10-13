@@ -54,7 +54,8 @@
                     controller: "friendRequestController"
                 })
                 .when("/messages", {
-                    templateUrl: "app/global/partials/messages/messagesView.html",
+                   // templateUrl: "app/global/partials/messages/messagesView.html",
+                    templateUrl: "notAvaliable.html",
                     controller: "messagesController"
                 })
                 .when("/message/:id", {
@@ -62,8 +63,9 @@
                     controller: "messageController"
                 })
                 .when("/places", {
-                    templateUrl: "app/components/user/viewProfile/viewProfileView.html" //redirect to places page
-
+                    //templateUrl: "app/components/user/viewProfile/viewProfileView.html" //redirect to places page
+                    templateUrl: "notAvaliable.html",
+                    controller: "placesController"
 
                 })
                 .when("/logout", {
