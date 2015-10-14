@@ -6,25 +6,23 @@
             var service = {};
 
             service.getThread = function () {
-                return $http.get($rootScope.Api + '/message/user/' + $localStorage.token.id + '/active-threads'
+                return $http.get($rootScope.Api + '/messages/user/' + $localStorage.token.id + '/active-threads'
                         );
             };
 
-            service.createThread = function (recipient, message) {           
+            service.createThread = function (recipient) {           
                 var body = {
-                    recipients: JSON.stringify(recipient),
-                    content: message
+                    recipients: JSON.stringify(recipient)
                 };
-                return $http.post($rootScope.Api+ '/message/user/' + $localStorage.token.id + '/new-thread', body
+                return $http.post($rootScope.Api+ '/messages/user/' + $localStorage.token.id + '/create-thread', body
                         );
             };
 
-            service.createMessage = function (threadId, message) {
-
+            service.createMessage = function (threadId, message1) {
                 var body = {
-                    content: message
+                    message: message1
                 };
-                return $http.put($rootScope.Api + '/message/user/' + $localStorage.token.id + '/thread/' + threadId + '/new-message', body
+                return $http.post($rootScope.Api + '/messages/user/' + $localStorage.token.id + '/thread/' + threadId + '/new-message', body
                         );
             };
 

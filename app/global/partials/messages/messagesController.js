@@ -62,12 +62,16 @@
                 if ($scope.message === null || friendsAdded.length === 0) {
                     return;
                 }
-                messagesService.createThread(friendsAdded, $scope.message) //only post uid's
-                        .success(function (response) {
-                            $scope.addNewThreadform();
-                            //post the message here with thread id;
-                                //on success call getThreads
-                            $rootScope.getThreads();
+                messagesService.createThread(friendsAdded) //only post uid's
+                        .success(function (response) {                
+                            messagesService.createMessage(response.threadId, $scope.message)
+                                    .success(function (response2) {                            
+                                        $rootScope.getThreads();
+                                    })
+                                    .error(function (error) {
+                                        console.log(error);
+                                    });        
+                                    $scope.addNewThreadform();
                         })
                         .error(function (error) {
                             console.log(error);

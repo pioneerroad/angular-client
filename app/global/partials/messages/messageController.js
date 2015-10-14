@@ -1,7 +1,7 @@
 (function () {
     var app = angular.module("pioneerRoad");
 
-    app.controller('messageController', ['$scope', '$rootScope', '$location', '$sce', 'messagesService', 'loginRedirect', '$routeParams', '$localStorage', '$anchorScroll', function ($scope, $rootScope, $location, $sce, messagesService, loginRedirect, $routeParams, $localStorage, $anchorScroll) {
+    app.controller('messageController', ['$scope', '$rootScope', '$location', '$sce', 'messagesService', 'loginRedirect', '$routeParams', '$localStorage', function ($scope, $rootScope, $location, $sce, messagesService, loginRedirect, $routeParams, $localStorage) {
 
             if (!loginRedirect.checkLogin()) {
                 $location.path("/login");
@@ -38,6 +38,8 @@
                                 $rootScope.messages.push(message);
                                 message = {};
                             }
+                            var objDiv = document.getElementById("section");
+                            objDiv.scrollTop = objDiv.scrollHeight;
                         })
                         .error(function (error) {
                             console.log(error);
