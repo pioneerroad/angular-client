@@ -5,10 +5,6 @@
         if (loginRedirect.checkLogin()) {
             $location.path("/home");
         }
-        else{
-            $("#topBar").css("display","none");
-            console.log("here " + $("#topBar").get());
-        }
 
         $scope.check_pwd_match = function () { //checks if both passwords match
             if ($scope.password !== $scope.password2) {

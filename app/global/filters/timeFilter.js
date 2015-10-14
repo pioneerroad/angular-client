@@ -1,8 +1,8 @@
 (function () {
 
     angular.module('pioneerRoad').filter('timeFilter', function () {
-        return function (date) {
 
+        return function (date) {
             if (date === undefined) {
                 return " ";
             }
@@ -10,19 +10,19 @@
 
             var interval = Math.floor(seconds / 31536000);
 
-            if (interval > 1) {
+            if (interval >= 1) {
                 return interval + " years ago";
             }
             interval = Math.floor(seconds / 2592000);
-            if (interval > 1) {
+            if (interval >= 1) {
                 return interval + " months ago";
             }
             interval = Math.floor(seconds / 86400);
-            if (interval > 2) {
+            if (interval >= 2) {
                 return interval + " days ago";
             }
             interval = Math.floor(seconds / 3600);
-            if (interval > 1 && interval < 24) {
+            if (interval >= 1 && interval < 24) {
                 return interval + " hours ago";
             }
             if (interval >= 24 && interval <= 48) {
@@ -35,8 +35,6 @@
                 return interval + " minutes ago";
             }
             return "Just now";
-
-
         };
     });
 

@@ -2,10 +2,6 @@
 <div>
     <!-- ********* Messages Panel ***************** --> 
     <div class="overlay-panel" id="messages-panel" >
-        <div class="title-panel">
-            <div class="title"><h3>Messages</h3></div>
-            <div class="clearfix"></div>
-        </div>
         <div id="msg-list-panel" class="msg-panel">
             <div class="well well-orange" id="msg-new-conversation">
                 <div class="heading">
@@ -38,20 +34,23 @@
             <div class="msg-conversation-list">
                 <div class="well well-blue" data-thread-id="425" ng-repeat="thread in threads"> <!-- data-thread-id value is msg thread ID --> 
                     <div class="row">
-                        <div class="msg-user">{{thread.subscriber_nickname}}</div>
-                        {{thread.qty}}
+                        <div class="msg-user"> 
+                            <div ng-if="thread.qty > 2"> {{thread.subscriber_nickname}} and {{thread.qty}} others </div> 
+                            <div ng-if="thread.qty <= 2"> {{thread.subscriber_list}} </div> 
+                        </div>
+                        
                         <div class="msg-date">{{thread.time| timeFilter}}</div>
                     </div>
                     <div ng-show="hasNewMessages(thread.threadId)">
                        <span class="label label-success">New Message</span>
                     </div>
-                    <div class="msg-status unread"><span class="glyphicon glyphicon-asterisk"></span></div>
+                    <!-- <div class="msg-status unread"><span class="glyphicon glyphicon-asterisk"></span></div> -->
                     <div class="msg-user-profile-photo online"><img ng-src="{{thread.profilePic}}"/></div>
                     <div class="msg-summary">
 
                         <p class="summary-text">{{thread.message}}</p>
                     </div>
-                    <div class="msg-open-thread"><a href="#/message/{{thread.threadId}}"><span class="glyphicon glyphicon-chevron-right"></span></a></div>
+                    <div class="msg-open-thread">View Message<a href="#/message/{{thread.threadId}}"><span class="glyphicon glyphicon-chevron-right"></span></a></div>
                     <br/><br/><span class="label label-danger" ng-click="removeThread(thread.threadId)">Delete Thread</span>
                     <div class="clearfix"></div>
                 </div>

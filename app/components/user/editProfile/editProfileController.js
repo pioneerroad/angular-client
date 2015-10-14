@@ -31,6 +31,17 @@
                 , hwaccel: false // Whether to use hardware acceleration
                 , position: 'absolute' // Element positioning
             };
+            
+            var intialImageLoadP = true; //stops the onloaded image for the intial images
+            var intialImageLoadB = true;
+            $scope.tmpNickName = "";
+            $scope.chosenHomeTown = ""; //the data that is used to set/update the home town on server
+            $scope.homeTownSuggestions = [];
+            $scope.nickname = "";
+            $scope.hometown = "";
+            $scope.bio = "";
+            $scope.maxChar = 150; //max number of chars in input
+            $scope.charsLeft = $scope.maxChar; //number of chars left in bio
 
             var profileTarget = document.getElementById('editProfilePhoto'); //a position of releative needs to be applied to divs using spinners
             var backgroundTarget = document.getElementById('editBackgroundPhoto');
@@ -118,12 +129,12 @@
                 if ($scope.homeTownSuggestions.length === 0) {
                     return;
                 }
-                var id;
 
                 editProfileService.setHomeTown($scope.chosenHomeTown.id)
                         .success(function (response) {
                             $('#home').removeClass('hidden');
                             tearDown();
+                            $scope.homeTownSuggestions = [];
                         })
                         .error(function (error) {
                             console.log(error);
@@ -207,7 +218,7 @@
 
             //reset all input fields 
             var tearDown = function () {
-                $scope.homeTownSuggestions = [];
+                $scope.homeTownSuggestions = null;
                 $scope.chosenHomeTown = "";
                 $scope.hometown = "";
                 $scope.nickname = "";
@@ -228,17 +239,6 @@
                     $("#BGError").removeClass('hidden');
                 }
             };
-
-            var intialImageLoadP = true; //stops the onloaded image for the intial images
-            var intialImageLoadB = true;
-            $scope.tmpNickName = "";
-            $scope.chosenHomeTown = ""; //the data that is used to set/update the home town on server
-            $scope.homeTownSuggestions = [];
-            $scope.nickname = "";
-            $scope.hometown = "";
-            $scope.bio = "";
-            $scope.maxChar = 150; //max number of chars in input
-            $scope.charsLeft = $scope.maxChar; //number of chars left in bio
 
 
             $('#editProfilePhoto').cropit({AllowCrossOrigin: true, onImageLoaded: function () {

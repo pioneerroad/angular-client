@@ -33,7 +33,7 @@
                                 else {
                                     thread.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/user-photos/" + response[i].subscriberId + "/profile-photo/" + response[i].photo.medium;
                                 }
-
+                                console.log(thread);
                                 $scope.threads.push(thread);
                                 thread = {};
                             }
@@ -62,9 +62,11 @@
                 if ($scope.message === null || friendsAdded.length === 0) {
                     return;
                 }
-                messagesService.createThread(friendsAdded, $scope.message)
+                messagesService.createThread(friendsAdded, $scope.message) //only post uid's
                         .success(function (response) {
                             $scope.addNewThreadform();
+                            //post the message here with thread id;
+                                //on success call getThreads
                             $rootScope.getThreads();
                         })
                         .error(function (error) {

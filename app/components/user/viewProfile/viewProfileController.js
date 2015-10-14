@@ -5,7 +5,7 @@
             $scope.nickName = false;
             $scope.location = " ";
 
-            
+
             if ($location.path() === "/home") {
                 $rootScope.Title = $sce.trustAsHtml("Home");
                 $rootScope.Link = $sce.trustAsHtml("");
@@ -58,24 +58,28 @@
                 }
             };
 
+            var getCurrentLocation = function () {
+                geoLocationService.returnLocation()
+                        .success(function (data, response) {
+                            $scope.location = data[0]; //location data
+                            getProfile();
+                        })
+                        .error(function (error) {
+                            console.log(error);
+                            getProfile();
+                        });
+            };
 
             if (!loginRedirect.checkLogin()) {
                 $location.path("/login");
                 console.log("i'm not logged in");
             }
             else {
-                getProfile();
+                geoLocationService.begin(); //update location
+                getCurrentLocation();
             }
 
-            var getCurrentLocation = function () {
-                geoLocationService.returnLocation()
-                        .success(function (data, response) {
-                            $scope.location = data[0]; //location data
-                        })
-                        .error(function (error) {
-                            console.log(error);
-                        });
-            };
+
 
         }]);
 }());

@@ -5,6 +5,6 @@
             
             $rootScope.Title = $sce.trustAsHtml("Home");
             $rootScope.Link = $sce.trustAsHtml("");
-           geoLocationService.begin(); //update location
+           //geoLocationService.begin(); //update location
     }]);
 }());
