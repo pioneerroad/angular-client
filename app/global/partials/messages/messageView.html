@@ -2,7 +2,7 @@
 
 <div id="msg-thread-panel" class="msg-panel" >
     <div>
-        <section scroll-glue style="padding-bottom:88px; overflow-y: scroll;">     
+        <section scroll-glue style="height:100%; padding-bottom:88px; overflow-y: scroll;">     
                 <div ng-repeat="message in messages">
                     <div ng-class="message.class">                                                
                         <div class="message">
@@ -16,7 +16,7 @@
                     </div>
                 </div> 
         </section>
-        <div class="well well-orange msg-reply">
+        <div class="well well-orange msg-reply" style="position: fixed; bottom: 0px;">
             <div class="form-group">
                 <label class="sr-only" for="msgReply">Write your reply</label>
                 <div class="input-group">
