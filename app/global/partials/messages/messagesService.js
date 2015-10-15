@@ -27,7 +27,7 @@
             };
 
             service.readThread = function (threadId) {
-                return $http.get($rootScope.Api + '/message/user/' + $localStorage.token.id + '/thread/' + threadId + '/read-thread'
+                return $http.get($rootScope.Api + '/messages/user/' + $localStorage.token.id + '/thread/' + threadId + '/view-thread'
                         );
             };
             
