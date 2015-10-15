@@ -25,16 +25,17 @@
 
             socket.on('new message', function (data) {
                 var index;
+                data = data.fulfillmentValue;
+                console.log(data);
                 if (("/message/" + data.threadId) === $location.path()) {
 
                     index = $rootScope.messageNoti.indexOf(data.threadId);
                     if (index > -1) {
-                        $rootScope.messageNoti.splice(index, 1);
-                        $localStorage.Notification = $rootScope.messageNoti;
+                        $rootScope.messageNoti.splice(index, 1);                       
                     } //remove any notifications to do with this thread
 
                     //add message to the rootscope messages var.
-                    if (data.userId === $localStorage.token.id.toString()) {
+                    if (data.senderId === $localStorage.token.id) {
                         data.class = "msg-container from-me";
                     }
                     else {
@@ -49,7 +50,6 @@
                     //else add to array
                     if ($rootScope.messageNoti.indexOf(data.threadId) === -1) {
                         $rootScope.messageNoti.push(data.threadId);
-                        $localStorage.Notification = $rootScope.messageNoti;
                     }
 
                     if ("/messages" === $location.path()) {

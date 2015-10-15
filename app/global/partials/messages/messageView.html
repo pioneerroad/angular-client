@@ -4,11 +4,11 @@
         <div ng-repeat="message in messages">
             <div ng-class="message.class">
                 <div class="message">
-                    <p>{{message.message}}</p>
+                    <p>{{message.content}}</p>
                 </div>
                 <img src=""/>
                 <div class="clearfix"></div>
-                <p class="msg-status"> {{message.timestamp| timeFilter}}</p>
+                <p class="msg-status"> {{message.createdAt| timeFilter}}</p>
                 <div class="clearfix"></div>
             </div>
         </div>       

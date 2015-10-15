@@ -31,7 +31,7 @@
                                     thread.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/ui-images/user-profile-default-img.svg";
                                 }
                                 else {
-                                    thread.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/user-photos/" + response[i].subscriberId + "/profile-photo/" + response[i].photo.medium;
+                                    thread.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/user-photos/" + response[i].senderId + "/profile-photo/" + response[i].profilePhoto.medium;
                                 }
                                 console.log(thread);
                                 $scope.threads.push(thread);
@@ -39,8 +39,8 @@
                             }
                             //sort the thread
                             $scope.threads.sort(function (a, b) {
-                                var d1 = new Date(a.lastmessagetime);
-                                var d2 = new Date(b.lastmessagetime);
+                                var d1 = new Date(a.date);
+                                var d2 = new Date(b.date);
                                 if (d1 === d2) {
                                     return 0;
                                 }

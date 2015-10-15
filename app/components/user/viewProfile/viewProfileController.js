@@ -23,7 +23,6 @@
                                 $scope.profile = response;
                                 setImages(response);
                                 setNick(response);
-                                getCurrentLocation();
                             }
                         })
                         .error(function (error) {
@@ -69,7 +68,6 @@
                             getProfile();
                         });
             };
-
             if (!loginRedirect.checkLogin()) {
                 $location.path("/login");
                 console.log("i'm not logged in");

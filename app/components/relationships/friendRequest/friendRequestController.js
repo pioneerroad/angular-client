@@ -20,7 +20,6 @@
                                     else {
                                         friend.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/user-photos/" + response[i].userAccountId + "/profile-photo/" + response[i].profilePhoto.medium;
                                     }
-
                                     $scope.friends.push(friend);
                                     friend = {};
                                 }

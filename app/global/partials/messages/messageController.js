@@ -29,17 +29,16 @@
                             $rootScope.messages = [];
                             for (i = 0; i < response.threadContent.length; i++) { // for each request
                                 var message = response.threadContent[i];
-                                if (message.userId === $localStorage.token.id.toString()) {
+                                if (message.senderId === $localStorage.token.id.toString()) {
                                     message.class = "msg-container from-me";
                                 }
                                 else {
                                     message.class = "msg-container from-them";
                                 }
+                                console.log(message);
                                 $rootScope.messages.push(message);
                                 message = {};
                             }
-                            var objDiv = document.getElementById("section");
-                            objDiv.scrollTop = objDiv.scrollHeight;
                         })
                         .error(function (error) {
                             console.log(error);
@@ -63,8 +62,6 @@
                         });
                 $scope.reply = null;
             };
-
             getMessages();
-
         }]);
 }());
