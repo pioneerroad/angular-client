@@ -45,9 +45,9 @@
         <script src="app/components/user/editProfile/editProfileService.js"></script>
         <script src="app/components/user/geoLocation/geoLocationService.js"></script>
         <script src="app/components/user/logOut/logOutController.js"></script>
-        
+
         <script src="app/components/places/placesController.js"></script>
-        
+
         <script src="app/components/relationships/friendsNearMe/friendsNearMeController.js"></script>
         <script src="app/components/relationships/friendsNearMe/friendsNearMeService.js"></script>
         <script src="app/components/home/homePageController.js"></script>
@@ -58,7 +58,7 @@
         <script src="app/components/relationships/relationships/relationshipsController.js"></script>
         <script src="app/components/relationships/relationships/addFriendController.js"></script>
         <script src="app/components/relationships/relationships/relationshipsService.js"></script>
-        
+
         <script src="app/components/relationships/friendsProfile/viewFriendProfileController.js"></script>
         <script src="app/components/relationships/friendsProfile/viewFriendProfileService.js"></script>
 
@@ -75,8 +75,28 @@
         <script src="app/global/partials/messages/messagesService.js"></script>
         <script src="app/global/partials/messages/messagesController.js"></script>
         <script src="app/global/partials/messages/messageController.js"></script>
-        
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            (function (b, o, i, l, e, r) {
+                b.GoogleAnalyticsObject = l;
+                b[l] || (b[l] =
+                        function () {
+                            (b[l].q = b[l].q || []).push(arguments)
+                        });
+                b[l].l = +new Date;
+                e = o.createElement(i);
+                r = o.getElementsByTagName(i)[0];
+                e.src = 'https://www.google-analytics.com/analytics.js';
+                r.parentNode.insertBefore(e, r)
+            }(window, document, 'script', 'ga'));
+            ga('create', 'UA-68892441-1', 'auto');
+            ga('send', 'pageview');
+        </script>
+
     </head>
+
+
 
     <body>
         <main class="page-height-container">
@@ -123,7 +143,6 @@
         <script src="/assets/js/plugins.js"></script>
         <script src="/assets/js/main.js"></script>
         <script src="/assets/libs/bootstrap/modal.js"></script>
-
     </body>
 
 </html>
