@@ -21,6 +21,9 @@
 
             socket.on('friend request', function () {
                 friendRequestService.updateNum();
+                if("/notifications" === $location.path()){
+                    $rootScope.getFriendRequests();
+                }
             });
 
             socket.on('new message', function (data) {
