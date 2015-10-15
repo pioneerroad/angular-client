@@ -22,8 +22,11 @@
                 return interval + " days ago";
             }
             interval = Math.floor(seconds / 3600);
-            if (interval >= 1 && interval < 24) {
+            if (interval >1 && interval < 24) {
                 return interval + " hours ago";
+            }
+            if(interval === 1){
+                return interval + " hour ago";
             }
             if (interval >= 24 && interval <= 48) {
                 return "Yesterday";

@@ -44,6 +44,8 @@
                                     message.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/user-photos/" + response[i].senderId + "/profile-photo/" + response[i].sender.profilePhoto.medium;
                                 }
                                 //console.log(message);
+                                var d = new Date(message.createdAt); //convert to epoch
+                                message.time = d.valueOf();
                                 $rootScope.messages.push(message);
                                 message = {};
                             }
