@@ -9,12 +9,13 @@
 
 
             var threadId = $routeParams.id;
-            $rootScope.Title = $sce.trustAsHtml("Todo add nickname");
+            
             $rootScope.Link = $sce.trustAsHtml("");
             $rootScope.messages = [];
             $scope.reply = null;
             $rootScope.participants = [];
             $scope.curId = $localStorage.token.id;
+            var nicknames = []; //nicknames of all friends in message
             var message = {};
 
             var index = $rootScope.messageNoti.indexOf(parseInt(threadId)); //convert to int as array is ints not string
@@ -36,6 +37,8 @@
                                 }
                                 else {
                                     message.class = "msg-container from-them";
+                                    if(nicknames.indexOf(message.sender.nickName) === -1)
+                                        nicknames.push(message.sender.nickName);
                                 }
                                 if (response[i].sender.profilePhoto === null) {
                                     message.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/ui-images/user-profile-default-img.svg";
@@ -49,6 +52,18 @@
                                 $rootScope.messages.push(message);
                                 message = {};
                             }
+                            $rootScope.Title = $sce.trustAsHtml(nicknames[0]);
+                            $rootScope.messages.sort(function (a, b) {
+                                if (a.time === b.time) {
+                                    return 0;
+                                }
+                                else if (a.time > b.time) {
+                                    return 1;
+                                }
+                                else {
+                                    return -1;
+                                }
+                            });
                         })
                         .error(function (error) {
                             console.log(error);

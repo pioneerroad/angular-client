@@ -69,7 +69,7 @@
                 //if the message returned threadid matches that of the message/:uid then appended message (will have to use route scope,not good)
 
 
-            });
+            }); 
             return socket;
         }]);
 }());
