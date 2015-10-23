@@ -1,30 +1,29 @@
 
 
 <div id="msg-thread-panel" class="msg-panel" >
-    <div>
-        <section > 
-            <div id="scroll" >
-                <div ng-repeat="message in messages" id='{{message.messageId}}'>
-                    <div ng-class="message.class">                                                
-                        <div class="message">
-                            <p>{{message.content}}</p>
-                        </div>
-                        <img ng-src=""/>
-                        <div class="clearfix"></div>
-                        <p class="msg-status" ng-if="curId !== message.senderId">From {{message.sender.nickName}}</p>             
-                        <p class="msg-status"> {{message.time | timeFilter}}</p>
-                        <div class="clearfix"></div>
-                    </div>
-                </div> 
-            </div>
-        </section>
-        <div class="well well-orange msg-reply" id='bottom' >
-            <div class="form-group">
-                <label class="sr-only" for="msgReply">Write your reply</label>
-                <div class="input-group">
-                    <input type="text" class="form-control" id="msgReply" ng-model="reply">
-                    <div class="input-group-addon" ng-click="sendMessage()"><span class="glyphicon glyphicon-share-alt"></span></div>
+    <section scroll-glue="glued" style="height: 100%; padding-bottom: 88px; overflow-y: scroll;"> 
+
+        <div ng-repeat="message in messages" id='{{message.messageId}}'>
+            <div ng-class="message.class">                                                
+                <div class="message">
+                    <p>{{message.content}}</p>
                 </div>
+                <img ng-src=""/>
+                <div class="clearfix"></div>
+                <p class="msg-status" ng-if="curId !== message.senderId">From {{message.sender.nickName}}</p>             
+                <p class="msg-status"> {{message.time| timeFilter}}</p>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+    </section>
+    <div class="well well-orange msg-reply" style="position: fixed; bottom: 0px; z-index: 1000" >
+        <div class="form-group">
+            <label class="sr-only" for="msgReply">Write your reply</label>
+            <div class="input-group">
+                <input type="text" class="form-control" id="msgReply" ng-model="reply">
+                <div class="input-group-addon" ng-click="sendMessage()"><span class="glyphicon glyphicon-share-alt"></span></div>
             </div>
         </div>
     </div>
+</div>

@@ -33,7 +33,6 @@
                                 else {
                                     thread.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/user-photos/" + response[i].senderId + "/profile-photo/" + response[i].profilePhoto.medium;
                                 }
-                               // console.log(thread);
                                 $scope.threads.push(thread);
                                 thread = {};
                             }

@@ -1,12 +1,11 @@
 (function () {
     var app = angular.module("pioneerRoad");
 
-    app.controller('messageController', ['$scope', '$rootScope', '$location', '$sce', 'messagesService', 'loginRedirect', '$routeParams', '$localStorage', '$anchorScroll', '$timeout', function ($scope, $rootScope, $location, $sce, messagesService, loginRedirect, $routeParams, $localStorage, $anchorScroll, $timeout) {
-            //$('#scroll').animate({scrollTop: $("#scroll")[0].scrollHeight}, 300);
+    app.controller('messageController', ['$scope', '$rootScope', '$location', '$sce', 'messagesService', 'loginRedirect', '$routeParams', '$localStorage', function ($scope, $rootScope, $location, $sce, messagesService, loginRedirect, $routeParams, $localStorage) {
+            
             if (!loginRedirect.checkLogin()) {
                 $location.path("/login");
             }
-
             var threadId = $routeParams.id;
 
             $rootScope.Link = $sce.trustAsHtml("");
@@ -14,6 +13,7 @@
             $scope.reply = null;
             $rootScope.participants = [];
             var lastMessageId = null;
+            $scope.glued = false;
             $scope.curId = $localStorage.token.id;
             var nicknames = []; //nicknames of all friends in message
             var message = {};
@@ -50,15 +50,11 @@
                                 var d = new Date(message.createdAt); //convert to epoch
                                 message.time = d.valueOf();
                                 $rootScope.messages.push(message);
-                                lastMessageId = message.messageId.toString();
                                 message = {};
+                                $scope.glued = true;
                             }
 
                             $rootScope.Title = $sce.trustAsHtml(nicknames[0]);
-                            $timeout(function () {
-                                console.log(lastMessageId);
-                                $('#bottom').animate({scrollTop: $('#bottom').offset().top}, 2000);
-                            });
                         })
                         .error(function (error) {
                             console.log(error);

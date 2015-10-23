@@ -36,6 +36,10 @@
                         );
             };
 
+            service.threadRead = function (threadId) {
+                return $http.put($rootScope.Api + '/messages/user/' + $localStorage.token.id + '/thread/' + threadId + '/update-status'
+                        );
+            };
 
             return service;
         }]);
