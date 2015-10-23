@@ -7,8 +7,8 @@
         $rootScope.messages = []; // holds messages of current thread, not good but only way to appened message without reloading all of them
         $rootScope.messageNoti = [];
         $rootScope.user = {};
-        $rootScope.showNav = false;
         $rootScope.friends = [];
+        $rootScope.friendList = [];
 
     });
 }());

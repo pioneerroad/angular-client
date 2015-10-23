@@ -159,6 +159,13 @@
                 }
                 return show;
             };
+            
+            $scope.openThread = function(threadP){
+                $rootScope.friendList = threadP.other_subscribers_list.split(", ");
+                console.log(threadP.threadId);
+                $location.path("/message/"+ threadP.threadId);
+                
+            };
 
             $rootScope.getThreads();
         }]);

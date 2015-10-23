@@ -49,7 +49,7 @@
                     <div class="msg-summary">
                         <p class="summary-text">{{thread.content}}</p>
                     </div>
-                    <div class="msg-open-thread">View Message<a href="#/message/{{thread.threadId}}"><span class="glyphicon glyphicon-chevron-right"></span></a></div>
+                    <div class="msg-open-thread" ng-click="openThread(thread)">View Message<span class="glyphicon glyphicon-chevron-right"></span></div>
                     <br/><br/><span class="label label-danger" ng-click="removeThread(thread.threadId)">Delete Thread</span>
                     <div class="clearfix"></div>
                 </div>
