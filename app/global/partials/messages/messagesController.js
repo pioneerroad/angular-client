@@ -14,7 +14,6 @@
             $scope.threads = [];
             $scope.form = false;
             var friendsAdded = []; //friend id's to send to api
-            var AllFriends = [];
             $scope.message = null;
             $scope.currFriend = null; //the email/nick name of the current friend
             $scope.friendList = []; //drop down list to choose from
@@ -84,7 +83,6 @@
                 $scope.form = !$scope.form;
                 relationshipsService.getFriendList()
                         .success(function (response) {
-                            AllFriends = response;
                         })
                         .error(function (error) {
                             console.log(error);
@@ -146,9 +144,7 @@
                                 $rootScope.messageNoti.splice(index, 1);
                                 $localStorage.Notification = $rootScope.messageNoti;
                             } //remove any notifications to do with this thread
-
-                            console.log("thread removed");
-                            console.log(response);
+                          
                             $rootScope.getThreads();
                         })
                         .error(function (error) {

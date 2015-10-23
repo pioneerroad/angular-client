@@ -46,15 +46,26 @@
                                 else {
                                     message.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/user-photos/" + response[i].senderId + "/profile-photo/" + response[i].sender.profilePhoto.medium;
                                 }
-                                // console.log(message);
+                               
                                 var d = new Date(message.createdAt); //convert to epoch
                                 message.time = d.valueOf();
                                 $rootScope.messages.push(message);
                                 message = {};
                                 $scope.glued = true;
                             }
-
-                            $rootScope.Title = $sce.trustAsHtml(nicknames[0]);
+                            if(nicknames.length > 2){
+                                var string = nicknames[0] + " and " + (nicknames.length-1) + " others";
+                                $rootScope.Title = $sce.trustAsHtml(string);
+                            }
+                            else if(nicknames.length > 1){
+                                var string = nicknames[0] + ", " + nicknames[1];
+                                $rootScope.Title = $sce.trustAsHtml(string);
+                            }
+                            else{
+                                $rootScope.Title = $sce.trustAsHtml(nicknames[0]);
+                            }
+                            
+                            
                         })
                         .error(function (error) {
                             console.log(error);
@@ -70,7 +81,6 @@
                 messagesService.createMessage(threadId, $scope.reply) //should still be the same
                         .success(function (response) {
                             $scope.reply = null;
-                            console.log("sent");
                         })
                         .error(function (error) {
                             console.log(error);

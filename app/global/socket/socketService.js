@@ -29,11 +29,8 @@
 
             socket.on('new message', function (data) {
                 var index;
-                data = data.fulfillmentValue;
-                console.log(data);
-                $rootScope.$broadcast("hi");
                 if (("/message/" + data.threadId) === $location.path()) {
-                    //call update thread
+                    
                     messagesService.threadRead(data.threadId)
                             .success(function (response) {
 
@@ -41,6 +38,7 @@
                             .error(function (error) {
                                 console.log(error);
                             });
+                            
                     index = $rootScope.messageNoti.indexOf(data.threadId);
                     if (index > -1) {
                         $rootScope.messageNoti.splice(index, 1);
@@ -49,6 +47,8 @@
                     //add message to the rootscope messages var.
                     var d = new Date(data.createdAt); //convert to epoch
                     data.time = d.valueOf();
+                    data.sender = {}; // data does not contain field nickname so i have to add it 
+                    data.sender.nickName = data.senderName;
                     if (data.senderId === $localStorage.token.id) {
                         data.class = "msg-container from-me";
                     }

@@ -32,7 +32,7 @@
             };
             
             service.unSubscribe = function (threadId) {
-                return $http.put($rootScope.Api + '/message/user/' + $localStorage.token.id + '/thread/' + threadId + '/unsubscribe'
+                return $http.put($rootScope.Api + '/messages/user/' + $localStorage.token.id + '/thread/' + threadId + '/unsubscribe'
                         );
             };
 
