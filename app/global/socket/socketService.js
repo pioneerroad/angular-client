@@ -29,8 +29,8 @@
 
             socket.on('new message', function (data) {
                 var index;
+                console.log(data);
                 if (("/message/" + data.threadId) === $location.path()) {
-                    
                     messagesService.threadRead(data.threadId)
                             .success(function (response) {
 

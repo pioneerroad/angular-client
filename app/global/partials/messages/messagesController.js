@@ -10,21 +10,22 @@
             $rootScope.Title = $sce.trustAsHtml("Messages");
             $rootScope.Link = $sce.trustAsHtml("");
 
-            var thread = {};
-            $scope.threads = [];
-            $scope.form = false;
+            var thread = {}; //current thread got from API response
+            $scope.threads = []; //list of threads to display
+            $scope.form = false; //display new thread form
             var friendsAdded = []; //friend id's to send to api
-            $scope.message = null;
+            $scope.message = null; //the message to send
             $scope.currFriend = null; //the email/nick name of the current friend
             $scope.friendList = []; //drop down list to choose from
             var friendSelected = null;
             $scope.currentFriendsAdded = []; //displays to the user the friends who will be apart of the thread
 
+            //get list of thread from api
             $rootScope.getThreads = function () {
                 messagesService.getThread()
                         .success(function (response) {
                             $scope.threads = [];
-                            for (i = 0; i < response.length; i++) { // for each request
+                            for (i = 0; i < response.length; i++) { // for each thread
                                 thread = response[i];
                                 if (response[i].profilePhoto === null) {
                                     thread.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/ui-images/user-profile-default-img.svg";

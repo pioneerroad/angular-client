@@ -9,7 +9,7 @@
             var threadId = $routeParams.id;
 
             $rootScope.Link = $sce.trustAsHtml("");
-            $rootScope.messages = [];
+            $rootScope.messages = []; //holds all current messages for the thread
             $scope.reply = null;
             $scope.curId = $localStorage.token.id;
             var nicknames = $localStorage.friendList; //nicknames of all friends in message
@@ -39,7 +39,7 @@
                 $localStorage.Notifications = $rootScope.messageNoti;
             } //remove any notifications to do with this thread
 
-
+            //get the messages from the API store in messages array
             var getMessages = function () {
                 messagesService.readThread(threadId)
                         .success(function (response) {
@@ -47,28 +47,27 @@
                             $rootScope.messages = [];
                             for (i = 0; i < response.length; i++) { // for each request                    
                                 message = response[i];
-                                if (message.senderId === $localStorage.token.id) {
+                                 
+                                if (message.senderId === $localStorage.token.id) { //determines what class to apply for display of message
                                     message.class = "msg-container from-me";
                                 }
                                 else {
                                     message.class = "msg-container from-them";
                                 }
+                                //setting the image
                                 if (response[i].sender.profilePhoto === null) {
                                     message.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/ui-images/user-profile-default-img.svg";
                                 }
                                 else {
                                     message.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/user-photos/" + response[i].senderId + "/profile-photo/" + response[i].sender.profilePhoto.medium;
                                 }
-
+                                //working out the time sent
                                 var d = new Date(message.createdAt); //convert to epoch
                                 message.time = d.valueOf();
                                 $rootScope.messages.push(message);
                                 message = {};
                                 $scope.glued = true;
                             }
-
-
-
                         })
                         .error(function (error) {
                             console.log(error);
