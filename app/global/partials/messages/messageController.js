@@ -2,7 +2,7 @@
     var app = angular.module("pioneerRoad");
 
     app.controller('messageController', ['$scope', '$rootScope', '$location', '$sce', 'messagesService', 'loginRedirect', '$routeParams', '$localStorage', function ($scope, $rootScope, $location, $sce, messagesService, loginRedirect, $routeParams, $localStorage) {
-            
+
             if (!loginRedirect.checkLogin()) {
                 $location.path("/login");
             }
@@ -11,12 +11,27 @@
             $rootScope.Link = $sce.trustAsHtml("");
             $rootScope.messages = [];
             $scope.reply = null;
-            $rootScope.participants = [];
-            var lastMessageId = null;
-            $scope.glued = false;
             $scope.curId = $localStorage.token.id;
-            var nicknames = []; //nicknames of all friends in message
+            var nicknames = $localStorage.friendList; //nicknames of all friends in message
             var message = {};
+
+            //set title of nav bar to be subscribers names
+            if (nicknames !== null) {
+                if (nicknames.length > 2) {
+                    var string = nicknames[0] + " and " + (nicknames.length - 1) + " others";
+                    $rootScope.Title = $sce.trustAsHtml(string);
+                }
+                else if (nicknames.length > 1) {
+                    var string = nicknames[0] + ", " + nicknames[1];
+                    $rootScope.Title = $sce.trustAsHtml(string);
+                }
+                else {
+                    $rootScope.Title = $sce.trustAsHtml(nicknames[0]);
+                }
+            }
+            else{
+                $rootScope.Title = $sce.trustAsHtml("No one in thread!");
+            }
 
             var index = $rootScope.messageNoti.indexOf(parseInt(threadId)); //convert to int as array is ints not string
             if (index > -1) {
@@ -37,8 +52,6 @@
                                 }
                                 else {
                                     message.class = "msg-container from-them";
-                                    if (nicknames.indexOf(message.sender.nickName) === -1)
-                                        nicknames.push(message.sender.nickName);
                                 }
                                 if (response[i].sender.profilePhoto === null) {
                                     message.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/ui-images/user-profile-default-img.svg";
@@ -46,26 +59,16 @@
                                 else {
                                     message.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/user-photos/" + response[i].senderId + "/profile-photo/" + response[i].sender.profilePhoto.medium;
                                 }
-                               
+
                                 var d = new Date(message.createdAt); //convert to epoch
                                 message.time = d.valueOf();
                                 $rootScope.messages.push(message);
                                 message = {};
                                 $scope.glued = true;
                             }
-                            if(nicknames.length > 2){
-                                var string = nicknames[0] + " and " + (nicknames.length-1) + " others";
-                                $rootScope.Title = $sce.trustAsHtml(string);
-                            }
-                            else if(nicknames.length > 1){
-                                var string = nicknames[0] + ", " + nicknames[1];
-                                $rootScope.Title = $sce.trustAsHtml(string);
-                            }
-                            else{
-                                $rootScope.Title = $sce.trustAsHtml(nicknames[0]);
-                            }
-                            
-                            
+
+
+
                         })
                         .error(function (error) {
                             console.log(error);

@@ -142,7 +142,6 @@
                             var index = $rootScope.messageNoti.indexOf(id);
                             if (index > -1) {
                                 $rootScope.messageNoti.splice(index, 1);
-                                $localStorage.Notification = $rootScope.messageNoti;
                             } //remove any notifications to do with this thread
                           
                             $rootScope.getThreads();
@@ -161,8 +160,11 @@
             };
             
             $scope.openThread = function(threadP){
-                $rootScope.friendList = threadP.other_subscribers_list.split(", ");
-                console.log(threadP.threadId);
+                if(threadP.other_subscribers_list !== null)
+                    $localStorage.friendList = threadP.other_subscribers_list.split(", ");
+                else
+                    $localStorage.friendList = null;
+                
                 $location.path("/message/"+ threadP.threadId);
                 
             };

@@ -1,11 +1,13 @@
 (function () {
     var app = angular.module("pioneerRoad");
 
-    app.controller('notificationBarController', ['$scope', '$rootScope', 'NotificationService', 'messagesService', function ($scope, $rootScope, NotificationService, messagesService) {
+    app.controller('notificationBarController', ['$scope', '$rootScope', 'NotificationService', 'messagesService', '$sce', '$location', function ($scope, $rootScope, NotificationService, messagesService, $sce, $location) {
             $scope.showHideNav = function () {
                 $('main').toggleClass('menu-active');
             };
-
+            if($location.path() === "/notifications")
+                $rootScope.Title = $sce.trustAsHtml("Notifications");
+            
             var getMessageNotif = function () {
                 messagesService.getThread()
                         .success(function (response) {

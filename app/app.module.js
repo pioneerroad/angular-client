@@ -8,7 +8,7 @@
         $rootScope.messageNoti = [];
         $rootScope.user = {};
         $rootScope.friends = [];
-        $rootScope.friendList = [];
+       // $localStorage.friendList;
 
     });
 }());
