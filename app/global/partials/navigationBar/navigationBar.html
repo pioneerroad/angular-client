@@ -2,8 +2,8 @@
 
     <div class="sitewide-navigation slide-menu page-height-container" id="drawerMenu">
         <ul class="sitewide-nav">
-            <li class="menu-item menu-item-messages" aria-label="Messages" id="messagesPanelCtrl"><a href="#/messages"><span class="badge">{{messageNoti.length}}</span></a></li>
-            <li class="menu-item menu-item-notifications" aria-label="Notifications" id="notificationPanelCtrl"><a href="#/notifications"></a><span class="badge">{{numfriendRequest}}</span></li>
+            <li class="menu-item menu-item-messages" aria-label="Messages" id="messagesPanelCtrl"><a href="#/messages"><span class="badge" ng-if="messageNoti.length !==0">{{messageNoti.length}}</span></a></li>
+            <li class="menu-item menu-item-notifications" aria-label="Notifications" id="notificationPanelCtrl"><a href="#/notifications"></a><span class="badge" ng-if="numfriendRequest !==0">{{numfriendRequest}}</span></li>
             <li class="divider" aria-hidden="true"></li>
             <li class="menu-item menu-item-home" aria-label="Home" id='home'><a href="#/home"></a></li>
             <li class="menu-item menu-item-social" aria-label="Social Connections" id="community-menu"><a href="#/communityMenu"></a></li>

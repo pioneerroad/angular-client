@@ -1,8 +1,9 @@
 (function () {
     var app = angular.module("pioneerRoad");
 
-    app.factory('NotificationService', ['socketFactory', '$localStorage', '$rootScope', 'friendRequestService', '$location', function (socketFactory, $localStorage, $rootScope, friendRequestService, $location) {
+    app.factory('NotificationService', ['socketFactory', '$localStorage', '$rootScope', 'friendRequestService', '$location', 'messagesService', function (socketFactory, $localStorage, $rootScope, friendRequestService, $location, messagesService) {
 
+            // var mysocket = io("https://app-server.pioneerroad.com.au:8090");
             var mysocket = io("http://pioneerroad.com.au:8081");
             var socket = socketFactory({
                 ioSocket: mysocket
@@ -21,20 +22,34 @@
 
             socket.on('friend request', function () {
                 friendRequestService.updateNum();
+                if ("/notifications" === $location.path()) {
+                    $rootScope.getFriendRequests();
+                }
             });
 
             socket.on('new message', function (data) {
                 var index;
+                console.log(data);
                 if (("/message/" + data.threadId) === $location.path()) {
+                    messagesService.threadRead(data.threadId)
+                            .success(function (response) {
 
+                            })
+                            .error(function (error) {
+                                console.log(error);
+                            });
+                            
                     index = $rootScope.messageNoti.indexOf(data.threadId);
                     if (index > -1) {
                         $rootScope.messageNoti.splice(index, 1);
-                        $localStorage.Notification = $rootScope.messageNoti;
                     } //remove any notifications to do with this thread
 
                     //add message to the rootscope messages var.
-                    if (data.userId === $localStorage.token.id.toString()) {
+                    var d = new Date(data.createdAt); //convert to epoch
+                    data.time = d.valueOf();
+                    data.sender = {}; // data does not contain field nickname so i have to add it 
+                    data.sender.nickName = data.senderName;
+                    if (data.senderId === $localStorage.token.id) {
                         data.class = "msg-container from-me";
                     }
                     else {
@@ -44,28 +59,13 @@
                 }
 
                 else {
-                    //check if threadid is in messageNoti
-                    //if it is do nothing
-                    //else add to array
                     if ($rootScope.messageNoti.indexOf(data.threadId) === -1) {
                         $rootScope.messageNoti.push(data.threadId);
-                        $localStorage.Notification = $rootScope.messageNoti;
                     }
-
                     if ("/messages" === $location.path()) {
                         $rootScope.getThreads();
                     }
-
                 }
-
-                //check route
-                // if on other page increase notification count
-
-                //if on thread page, call get threads again :-( (need a better way so threads arnt reloading) increase notification count
-
-                //if the message returned threadid matches that of the message/:uid then appended message (will have to use route scope,not good)
-
-
             });
             return socket;
         }]);

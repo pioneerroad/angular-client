@@ -1,13 +1,9 @@
 (function () {
     var app = angular.module("pioneerRoad.UserRegister", []);
-    var userRegisterController = function ($scope, $http, $localStorage, loginRedirect, $location, $rootScope) { //handels all of the functionality for creating users including error checking 
+    var userRegisterController = function ($scope, $http, $localStorage, loginRedirect, $location, $rootScope, userLoginService) { //handels all of the functionality for creating users including error checking 
 
         if (loginRedirect.checkLogin()) {
             $location.path("/home");
-        }
-        else{
-            $("#topBar").css("display","none");
-            console.log("here " + $("#topBar").get());
         }
 
         $scope.check_pwd_match = function () { //checks if both passwords match
@@ -21,8 +17,27 @@
 
         $scope.goToLogin = function () {
             $scope.closeModal();
-            $location.path("/login");
+            userLoginService.Login($scope.email.toLowerCase(), $scope.password)
+                    .success(function (response) {
+                        if (response) {
+                            // add to the location storage
+                            $rootScope.token = response;
+                            $localStorage.token = {
+                                token: response.token,
+                                id: response.user.id,
+                                username: response.user.username
+                            };
+                            console.log("logged in");
+                            $rootScope.navbar = true;
+                            $location.path("/home");
+
+                        }
+                    })
+                    .error(function (error) {
+                        $location.path("/login");
+                    });
         };
+
 
         $scope.create_user = function () { //creates the structure in which the form data is loaded and post's it to the server
             $scope.closeModal();
@@ -58,7 +73,7 @@
 
         };
         $scope.closeModal = function () { // as data-dismissed stopped working because of the modal element
-             // use this function to close modal's
+            // use this function to close modal's
             $scope.ShowModal = false;
             $scope.IncorrectFeilds = false;
             $scope.errors = [];
@@ -128,5 +143,5 @@
         $scope.errors = [];
     };
     app.controller("userRegisterController", userRegisterController);
-    userRegisterController.$inject = ['$scope', '$http', '$localStorage', 'loginRedirect', '$location', '$rootScope'];
+    userRegisterController.$inject = ['$scope', '$http', '$localStorage', 'loginRedirect', '$location', '$rootScope', 'userLoginService'];
 }());

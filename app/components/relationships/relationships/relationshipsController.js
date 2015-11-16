@@ -11,7 +11,6 @@
 
             $scope.showblockFriendConfirmationModal = false;
             $scope.friends = []; //array to hold list of friends
-            var friendId = ""; //id returned from findFriends() function in service
             var friend = {}; //used to hold each friend object and doubles as an error message store
             $scope.message = "";
             $scope.okay = true;

@@ -10,37 +10,36 @@
             $rootScope.Title = $sce.trustAsHtml("Messages");
             $rootScope.Link = $sce.trustAsHtml("");
 
-            var thread = {};
-            $scope.threads = [];
-            $scope.form = false;
+            var thread = {}; //current thread got from API response
+            $scope.threads = []; //list of threads to display
+            $scope.form = false; //display new thread form
             var friendsAdded = []; //friend id's to send to api
-            var AllFriends = [];
-            $scope.message = null;
+            $scope.message = null; //the message to send
             $scope.currFriend = null; //the email/nick name of the current friend
             $scope.friendList = []; //drop down list to choose from
             var friendSelected = null;
             $scope.currentFriendsAdded = []; //displays to the user the friends who will be apart of the thread
 
+            //get list of thread from api
             $rootScope.getThreads = function () {
                 messagesService.getThread()
                         .success(function (response) {
                             $scope.threads = [];
-                            for (i = 0; i < response.length; i++) { // for each request
+                            for (i = 0; i < response.length; i++) { // for each thread
                                 thread = response[i];
                                 if (response[i].profilePhoto === null) {
                                     thread.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/ui-images/user-profile-default-img.svg";
                                 }
                                 else {
-                                    thread.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/user-photos/" + response[i].subscriberId + "/profile-photo/" + response[i].photo.medium;
+                                    thread.profilePic = "https://s3-ap-southeast-2.amazonaws.com/images.pioneerroad.com.au/user-photos/" + response[i].senderId + "/profile-photo/" + response[i].profilePhoto.medium;
                                 }
-
                                 $scope.threads.push(thread);
                                 thread = {};
                             }
                             //sort the thread
                             $scope.threads.sort(function (a, b) {
-                                var d1 = new Date(a.lastmessagetime);
-                                var d2 = new Date(b.lastmessagetime);
+                                var d1 = new Date(a.date);
+                                var d2 = new Date(b.date);
                                 if (d1 === d2) {
                                     return 0;
                                 }
@@ -62,10 +61,16 @@
                 if ($scope.message === null || friendsAdded.length === 0) {
                     return;
                 }
-                messagesService.createThread(friendsAdded, $scope.message)
-                        .success(function (response) {
-                            $scope.addNewThreadform();
-                            $rootScope.getThreads();
+                messagesService.createThread(friendsAdded) //only post uid's
+                        .success(function (response) {                
+                            messagesService.createMessage(response.threadId, $scope.message)
+                                    .success(function (response2) {                            
+                                        $rootScope.getThreads();
+                                    })
+                                    .error(function (error) {
+                                        console.log(error);
+                                    });        
+                                    $scope.addNewThreadform();
                         })
                         .error(function (error) {
                             console.log(error);
@@ -79,7 +84,6 @@
                 $scope.form = !$scope.form;
                 relationshipsService.getFriendList()
                         .success(function (response) {
-                            AllFriends = response;
                         })
                         .error(function (error) {
                             console.log(error);
@@ -139,11 +143,8 @@
                             var index = $rootScope.messageNoti.indexOf(id);
                             if (index > -1) {
                                 $rootScope.messageNoti.splice(index, 1);
-                                $localStorage.Notification = $rootScope.messageNoti;
                             } //remove any notifications to do with this thread
-
-                            console.log("thread removed");
-                            console.log(response);
+                          
                             $rootScope.getThreads();
                         })
                         .error(function (error) {
@@ -157,6 +158,16 @@
                     show = true;
                 }
                 return show;
+            };
+            
+            $scope.openThread = function(threadP){
+                if(threadP.other_subscribers_list !== null)
+                    $localStorage.friendList = threadP.other_subscribers_list.split(", ");
+                else
+                    $localStorage.friendList = null;
+                
+                $location.path("/message/"+ threadP.threadId);
+                
             };
 
             $rootScope.getThreads();

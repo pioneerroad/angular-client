@@ -54,8 +54,8 @@
                     controller: "friendRequestController"
                 })
                 .when("/messages", {
-                   // templateUrl: "app/global/partials/messages/messagesView.html",
-                    templateUrl: "notAvaliable.html",
+                    templateUrl: "app/global/partials/messages/messagesView.html",
+                   // templateUrl: "notAvaliable.html"
                     controller: "messagesController"
                 })
                 .when("/message/:id", {
