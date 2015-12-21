@@ -2,9 +2,8 @@
     var app = angular.module("pioneerRoad");
 
     app.factory('NotificationService', ['socketFactory', '$localStorage', '$rootScope', 'friendRequestService', '$location', 'messagesService', function (socketFactory, $localStorage, $rootScope, friendRequestService, $location, messagesService) {
-
             // var mysocket = io("https://app-server.pioneerroad.com.au:8090");
-            var mysocket = io("http://pioneerroad.com.au:8081");
+            var mysocket = io("http://app-server.pioneerroad.com.au:8081");
             var socket = socketFactory({
                 ioSocket: mysocket
             });
